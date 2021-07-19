@@ -21,10 +21,11 @@ class App extends React.Component {
   //     endpoint: [string] api url endpoint (i.e. 'products', 'reviews', etc.),
   //     params: [object] api uri parameters (i.e. {page: 2, count: 5})
   //   }
-  fetch(requestInfo, successCB = () => { console.log('request successful'); }, errorCB = (error) => { throw error; }) {
+  fetch(requestInfo, successCB = (data) => { console.log('[App] data recieved: ', data); }, errorCB = (error) => { throw error; }) {
+    console.log('[App] initiating direct query');
     $.ajax({
-      url: '/',
-      type: 'POST',
+      url: '/direct-query',
+      type: 'GET',
       data: JSON.stringify(requestInfo),
       contentType: 'application/json',
       success: successCB,
@@ -33,7 +34,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    this.fetch({endpoint: 'test', params: {page: 2, count: 5}});
+    this.fetch({endpoint: 'products', params: {page: 2, count: 10}});
   }
 
   render() {
