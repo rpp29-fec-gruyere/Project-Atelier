@@ -5,7 +5,6 @@ const axios = require('axios');
 // PARAMS: [object] i.e. {page: 1, count: 5}
 // OUTPUT: [object] an axios request object
 const buildGetRequest = (path, params) => {
-  console.log(`[API Helper] Creating get request. path: ${path}, params: ${JSON.stringify(params)}`);
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${path}`;
   const queryString = Object.keys(params)
     .map(key => `${key}=${params[key]}`)
@@ -42,6 +41,7 @@ const buildPostRequest = (path, params) => {
 const fetch = (body) => {
   let query = buildGetRequest(body.endpoint, body.params);
   console.log('[API Helper] axios query created: ', query);
+  console.log('[API Helper] Initiating API query');
   return axios(query);
 };
 

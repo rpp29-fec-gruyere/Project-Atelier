@@ -19,9 +19,9 @@ app.get('/direct-query', (req, res, next) => {
       res.send(404, {error: 'API unable to fulfill request as written'});
     })
     .then((data) => {
+      console.log('[Server] API retrieval successful');
       res.send(data.data);
     });
-
 });
 
 app.listen(PORT, () => { console.log('Now listening on port 1235...'); });
