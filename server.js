@@ -15,3 +15,8 @@ app.post('/', (req, res, next) => {
 });
 
 app.listen(PORT, () => { console.log('Now listening on port 1235...'); });
+
+
+module.exports = {
+  app
+};
