@@ -1,6 +1,11 @@
 module.exports = (req, res, next) => {
   if (req.method === 'GET') {
-    req.body = JSON.parse(Object.keys(req.query)[0]);
+    req.body = {params: {}};
+    req.body.endpoint = req.query.endpoint;
+    delete req.query.endpoint;
+    for (let key in req.query) {
+      req.body.params[key] = req.query[key];
+    }
   }
   next();
 };

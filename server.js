@@ -4,6 +4,7 @@ const postBodyParser = bodyParser.json();
 const getBodyParser = require('./helpers/getBodyParser');
 const api = require('./helpers/apiHelper');
 
+//
 const app = express();
 const PORT = 1235;
 
@@ -11,8 +12,8 @@ app.use(express.static('./client/dist'));
 app.use(postBodyParser);
 app.use(getBodyParser);
 
-app.get('/direct-query', (req, res, next) => {
-  console.log('[Server] Get request recieved.\nreq body:\n', req.body);
+app.get('/direct-query', (req, res) => {
+  console.log('[Server] GET request recieved at \'/direct-query\'.\nreq body:\n', req.body);
   api.fetch(req.body)
     .catch((error) => {
       console.log('[Server] API retrieval failed\n', error);
@@ -24,4 +25,17 @@ app.get('/direct-query', (req, res, next) => {
     });
 });
 
-app.listen(PORT, () => { console.log('Now listening on port 1235...'); });
+app.get('/page-data', (req, res) => {
+  console.log('[Server] GET request recieved at \'/page-data\'.\nreq body:\n', req.body);
+  api.fetchAllData(req.body.params.id)
+    .catch((error) => {
+      console.log('[Server] API retrieval failed\n', error);
+      res.send(404, {error: 'API unable to fulfill request as written'});
+    })
+    .then((data) => {
+      console.log('[Server] API retrieval successful');
+      res.send(data);
+    });
+});
+
+app.listen(PORT, () => { console.log(`Now listening on port ${PORT}...`); });
