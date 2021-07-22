@@ -1,10 +1,9 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import ProductOverview from './components/ProductOverview.jsx';
-import AdditionalProducts from './components/AdditionalProducts.jsx';
-import QuestionsAndAnswers from './components/QuestionsAndAnswers.jsx';
-import Reviews from './components/Reviews.jsx';
+import ProductOverview from './ProductOverview.jsx';
+import AdditionalProducts from './AdditionalProducts.jsx';
+import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
+import Reviews from './Reviews.jsx';
 
 
 class App extends React.Component {
@@ -32,7 +31,7 @@ class App extends React.Component {
     const queryString = Object.keys(query)
       .map(key => `${key}=${query[key]}`)
       .join('&');
-    console.log('[App] initiating direct query');
+    // console.log('[App] initiating direct query');
     $.ajax({
       url: `/direct-query/?${queryString}`,
       type: 'GET',
@@ -83,7 +82,7 @@ class App extends React.Component {
 
   render() {
     return (
-      <div className="app">
+      <div className="app" data-testid="app">
         <header>
           <span className="title">Atelier</span>
         </header>
@@ -96,9 +95,4 @@ class App extends React.Component {
   }
 }
 
-
-module.exports = {
-  App
-};
-
-ReactDOM.render(<App />, document.getElementById('root'));
+export default App;

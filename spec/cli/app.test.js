@@ -1,11 +1,19 @@
-import { App } from '../../client/src/App';
-import ReactDOM from 'react-dom';
-import { JSDOM } from '../../node_modules/jsdom';
+import App from '../../client/src/components/App';
+import '@testing-library/jest-dom/extend-expect';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 
-describe('Tests Main React App', () => {
-  it('successfully renders', () => {
-    const dom = new JSDOM('<div id="root"></div>');
-    ReactDOM.render(<App></ App>, dom.window.document.getElementById('root'));
+
+describe('App', () => {
+
+  const { getByTestId } = render(<App />);
+  let app = getByTestId('app');
+
+  test('renders App component', () => {
+    expect(app).toBeInTheDocument();
+  });
+
+  test('renders header and 4 React components (5 elements)', () => {
+    expect(app.children.length).toBe(5);
   });
 });

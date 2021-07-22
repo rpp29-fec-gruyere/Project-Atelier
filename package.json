@@ -26,6 +26,7 @@
     }
   },
   "dependencies": {
+    "@testing-library/react": "^12.0.0",
     "axios": "^0.21.1",
     "bluebird": "^3.7.2",
     "body-parser": "^1.19.0",
@@ -41,6 +42,7 @@
     "@babel/core": "^7.14.6",
     "@babel/preset-env": "^7.14.7",
     "@babel/preset-react": "^7.14.5",
+    "@testing-library/jest-dom": "^5.14.1",
     "babel": "^6.23.0",
     "babel-cli": "^6.26.0",
     "babel-loader": "^8.2.2",

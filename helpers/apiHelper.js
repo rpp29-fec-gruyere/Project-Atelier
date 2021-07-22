@@ -41,8 +41,8 @@ const buildPostRequest = (path, params) => {
 // OUTPUT: a promise that resolves to the api result (object | array | error)
 const fetch = (body) => {
   let query = buildGetRequest(body.endpoint, body.params);
-  console.log('[API Helper] axios query created: ', query);
-  console.log('[API Helper] Initiating API query');
+  // console.log('[API Helper] axios query created: ', query);
+  // console.log('[API Helper] Initiating API query');
   return axios(query);
 };
 
@@ -124,7 +124,7 @@ const fetchAllData = (productId) => {
     })
     .then((itemsInCart) => {
       fullDataSet.cart = itemsInCart.data;
-      console.log('full data set: ', fullDataSet);
+      // console.log('full data set: ', fullDataSet);
       return fullDataSet;
     })
     .catch((error) => {

@@ -1,7 +1,7 @@
 import React from 'react';
 
 const ProductOverview = () => (
-  <div>
+  <div data-testid="ProductOverview">
     ProductOverview
   </div>
 );
