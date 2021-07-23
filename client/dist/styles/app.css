@@ -24,10 +24,11 @@ header {
     width: 100%;
     background-color: darkgrey;
     display: flex;
-
+    align-items: center;
 }
 
 .title {
     color: white;
+    font-size: 42px;
+    margin: 0 10px;
 }
-

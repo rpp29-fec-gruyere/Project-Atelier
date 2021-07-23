@@ -2,8 +2,8 @@ import React from 'react';
 
 const Reviews = () => {
   return (
-    <div data-testid="Reviews">
-      <h1>Reviews</h1>
+    <div data-testid="reviewsSection" className="reviewsSection">
+      <span id="">Ratings &#38; Reviews</span>
     </div>
   );
 };
