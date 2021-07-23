@@ -1,7 +1,6 @@
 import React from 'react';
-import QandAForm from 'QandAForm';
 
-const QuestionsAndAnswers = ({questionsAndAnswers}) => {
+const QandAForm = () => {
   return (
     <div data-testid='QuestionsAndAnswer'>
       <h1 className='q-and-a-title'>Questions And Answers</h1>
@@ -10,4 +9,4 @@ const QuestionsAndAnswers = ({questionsAndAnswers}) => {
   );
 };
 
-export default QuestionsAndAnswers;
+export default QandAForm;
