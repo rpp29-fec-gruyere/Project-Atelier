@@ -12,23 +12,63 @@ body, .root{
 
 .app {
     height: 100%;
-    width: 70%;
-    /* min-width: 700px; */
+    width: 80%;
+    min-width: 700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
 }
 
 header {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+
+#mainHeader {
     height: 70px;
     width: 100%;
-    background-color: darkgrey;
     display: flex;
+    justify-content: space-between;
     align-items: center;
+    background-color: rgb(73, 72, 72);
+}
+
+
+#headerSearchBar input{
+    height: 30px;
+    width: 125px;
+    padding: 0 10px;
+    border: none;
+    border-bottom: 1px solid white;
+    color: white;
+    background-color: rgb(73, 72, 72);
+}
+
+#headerSearchBar input:focus {
+    outline: none;
+}
+
+#headerSearchBar button {
+    background-color: rgb(73, 72, 72);
+    border: none;
 }
 
 .title {
+    width: 125px;
+    height: 50px;
     color: white;
     font-size: 42px;
-    margin: 0 10px;
+    padding: 0 10px;
+}
+
+#promo {
+    height: 40px;
+    width: 100%;
+    font-size: 14px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
