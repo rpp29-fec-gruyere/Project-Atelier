@@ -42,6 +42,50 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
+/***/ "./client/src/components/QandAButtons.jsx":
+/*!************************************************!*\
+  !*** ./client/src/components/QandAButtons.jsx ***!
+  \************************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nvar QandAButtons = function QandAButtons() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"q-and-a-buttons\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", null, \"MORE ANSWERED QUESTIONS\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", null, \"ADD A QUESTION\"));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QandAButtons);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QandAButtons.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/QandAForm.jsx":
+/*!*********************************************!*\
+  !*** ./client/src/components/QandAForm.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nvar QandAForm = function QandAForm() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"form\", null, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"input\", {\n    type: \"text\",\n    placeholder: \"HAVE A QUESTION? SEARCH FOR ANSWERS... (search icon here)\",\n    className: \"q-and-a-form\"\n  })));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QandAForm);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QandAForm.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/QandAItem.jsx":
+/*!*********************************************!*\
+  !*** ./client/src/components/QandAItem.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n\n\nvar QandAItem = function QandAItem() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"q-and-a-item\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Q and A #1\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Q and A #2\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Q and A #3\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", null, \"Q and A #4\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"button\", null, \"LOAD MORE ANSWERS\"));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QandAItem);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QandAItem.jsx?");
+
+/***/ }),
+
+/***/ "./client/src/components/QandAList.jsx":
+/*!*********************************************!*\
+  !*** ./client/src/components/QandAList.jsx ***!
+  \*********************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+"use strict";
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _QandAItem_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QandAItem.jsx */ \"./client/src/components/QandAItem.jsx\");\n\n\n\nvar QandAlist = function QandAlist() {\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    className: \"q-and-a-list\"\n  }, \"Q and A list\", /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QandAItem_jsx__WEBPACK_IMPORTED_MODULE_1__.default, null));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QandAlist);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QandAList.jsx?");
+
+/***/ }),
+
 /***/ "./client/src/components/QuestionsAndAnswers.jsx":
 /*!*******************************************************!*\
   !*** ./client/src/components/QuestionsAndAnswers.jsx ***!
@@ -49,7 +93,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
 "use strict";
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\nObject(function webpackMissingModule() { var e = new Error(\"Cannot find module 'QandAForm'\"); e.code = 'MODULE_NOT_FOUND'; throw e; }());\n\n\n\nvar QuestionsAndAnswers = function QuestionsAndAnswers(_ref) {\n  var questionsAndAnswers = _ref.questionsAndAnswers;\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    \"data-testid\": \"QuestionsAndAnswer\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"h1\", {\n    className: \"q-and-a-title\"\n  }, \"Questions And Answers\"));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QuestionsAndAnswers);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QuestionsAndAnswers.jsx?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpack_require__.d(__webpack_exports__, {\n/* harmony export */   \"default\": () => (__WEBPACK_DEFAULT_EXPORT__)\n/* harmony export */ });\n/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ \"./node_modules/react/index.js\");\n/* harmony import */ var _QandAForm_jsx__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./QandAForm.jsx */ \"./client/src/components/QandAForm.jsx\");\n/* harmony import */ var _QandAList_jsx__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./QandAList.jsx */ \"./client/src/components/QandAList.jsx\");\n/* harmony import */ var _QandAButtons_jsx__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./QandAButtons.jsx */ \"./client/src/components/QandAButtons.jsx\");\n\n\n\n\n\nvar QuestionsAndAnswers = function QuestionsAndAnswers(_ref) {\n  var questionsAndAnswers = _ref.questionsAndAnswers;\n  return /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"div\", {\n    \"data-testid\": \"QuestionsAndAnswer\",\n    className: \"q-and-a-container\"\n  }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(\"span\", {\n    className: \"q-and-a-title\"\n  }, \"QUESTIONS AND ANSWERS\"), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QandAForm_jsx__WEBPACK_IMPORTED_MODULE_1__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QandAList_jsx__WEBPACK_IMPORTED_MODULE_2__.default, null), /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_0__.createElement(_QandAButtons_jsx__WEBPACK_IMPORTED_MODULE_3__.default, null));\n};\n\n/* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (QuestionsAndAnswers);\n\n//# sourceURL=webpack://project-atelier/./client/src/components/QuestionsAndAnswers.jsx?");
 
 /***/ }),
 

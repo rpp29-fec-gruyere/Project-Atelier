@@ -1,10 +1,15 @@
 import React from 'react';
-import QandAForm from 'QandAForm';
+import QandAForm from './QandAForm.jsx';
+import QandAList from './QandAList.jsx';
+import QandAButtons from './QandAButtons.jsx';
 
-const QuestionsAndAnswers = ({questionsAndAnswers}) => {
+const QuestionsAndAnswers = ({ questionsAndAnswers }) => {
   return (
-    <div data-testid='QuestionsAndAnswer'>
-      <h1 className='q-and-a-title'>Questions And Answers</h1>
+    <div data-testid='QuestionsAndAnswer' className='q-and-a-container'>
+      <span className='q-and-a-title'>QUESTIONS AND ANSWERS</span>
+      <QandAForm />
+      <QandAList />
+      <QandAButtons />
 
     </div>
   );

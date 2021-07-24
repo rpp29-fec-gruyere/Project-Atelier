@@ -1,0 +1,13 @@
+.q-and-a-form {
+  font-size: 14pt;
+  width: 700px;
+}
+
+.q-and-a-title {
+  font-size: 20px;
+}
+
+.q-and-a-container {
+  /* display: flex; */
+  background-color: red;
+}
