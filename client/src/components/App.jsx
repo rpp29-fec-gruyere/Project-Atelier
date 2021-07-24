@@ -84,7 +84,18 @@ class App extends React.Component {
     return (
       <div className="app" data-testid="app">
         <header>
-          <span className="title">Atelier</span>
+          <div id="mainHeader">
+            <span className="title">Atelier</span>
+            <div id="headerSearchBar">
+              <input type="text"></input>
+              <button>
+                <span className="glyphicon glyphicon-search"></span>
+              </button>
+            </div>
+          </div>
+          <div id="promo">
+            <span>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT <strong>OFFER</strong> - <a>NEW PRODUCT HIGHLIGHT</a></span>
+          </div>
         </header>
         <ProductOverview />
         <AdditionalProducts />
