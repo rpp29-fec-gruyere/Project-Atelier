@@ -6,7 +6,8 @@ import React from 'react';
 
 describe('AdditionalProducts', () => {
 
-  const { getByTestId } = render(<AdditionalProducts/>);
+  const mockItems = [{id: 0, name: 'testing', default_price: 999.99}]
+  const { getByTestId } = render(<AdditionalProducts relatedItems={mockItems}/>);
   const additionalProducts = getByTestId('AdditionalProducts');
 
   test('renders AdditionalProducts component', () => {
