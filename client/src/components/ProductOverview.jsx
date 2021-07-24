@@ -3,7 +3,7 @@ import Stars from './Stars.jsx';
 
 const ProductOverview = () => (
   <div data-testid="ProductOverview">
-    <Stars starId={'test-star'} rating={3.81342} />
+    ProductOverview
   </div>
 );
 
