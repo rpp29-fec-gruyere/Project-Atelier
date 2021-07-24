@@ -87,7 +87,7 @@ class App extends React.Component {
           <span className="title">Atelier</span>
         </header>
         <ProductOverview />
-        <AdditionalProducts />
+        <AdditionalProducts relatedItems={this.state.relatedItems}/>
         <QuestionsAndAnswers />
         <Reviews />
       </div>
