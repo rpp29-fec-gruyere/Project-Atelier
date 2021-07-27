@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 const Carousel = (props) => {
   const {children, show} = props;
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [length, setLength] = useState(children.length)
+  const [length, setLength] = useState(children.length);
 
   useEffect(() => {
     setLength(children.length);
@@ -40,9 +40,18 @@ const Carousel = (props) => {
           </div>
           <div className="content">
             {props.content && props.content[0] !== undefined ? props.content.map(item => {
+              const { id, category, name, default_price, features } = item;
               return (
-                <div className="content-details">
-                  {item.id}, {item.name}, {item.default_price}
+                <div className="content-details" key={id}>
+                  <div>
+                    {category}
+                  </div>
+                  <div>
+                    {name}
+                  </div>
+                  <div>
+                    {default_price}
+                  </div>
                 </div>
               );
             }) : null }
