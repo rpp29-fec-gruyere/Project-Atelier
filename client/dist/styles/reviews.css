@@ -1,0 +1,61 @@
+#mainReviewSection {
+    display: flex;
+    height: 100%;
+    margin: 10px 0;
+}
+
+.ratingsBreakdown {
+    width: fit-content;
+    height: 400px;
+    font-size: 14px;
+}
+
+.reviewList {
+    width: 80%;
+    height: 800px;
+}
+
+#ratingRepresentations {
+    display: flex;
+    align-items: flex-start;
+}
+
+#ratingRepresentations span {
+    font-size: 48px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#recommended {
+    font-size: 14px;
+}
+
+.ratingBar.component {
+    height: 20px;
+    width: 100%;
+    min-width: 245px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.ratingBar.title {
+    height: 100%;
+    text-decoration: underline;
+}
+
+.ratingBar.container {
+    height: 30%;
+    width: 175px;
+    background-color: rgb(182, 182, 182);
+    margin: 0 5px;
+}
+
+.ratingBar.fill {
+    height: 100%;
+    background-color: darkgreen;
+    width: 0%;
+}
+
+.ratingBar.count {
+}
