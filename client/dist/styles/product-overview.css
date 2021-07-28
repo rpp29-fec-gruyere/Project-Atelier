@@ -1,0 +1,88 @@
+#overview {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  font-family: Helvetica;
+}
+
+  #overview-main {
+    width: 100%;
+    height: 80vh;
+    display: grid;
+    grid-template-columns: auto 400px;
+    font-family: inherit;
+  }
+
+    #controls {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-start;
+      font-family: inherit;
+      font-weight: 800;
+    }
+
+      #overview-reviews {
+        display: flex;
+        flex-direction: row;
+        align-content: flex-start;
+        column-gap: 5px;
+      }
+
+        #link-to-reviews {
+          color: black;
+          padding-top: 3px;
+          font-weight: 400;
+        }
+
+      #overview-category {
+        font-weight: 300;
+        font-size: 16pt;
+      }
+
+      #overview-product-title {
+        font-size: 40pt;
+      }
+
+      #overview-price {
+        font-size: 16pt;
+      }
+
+      #style-indicator {
+        display: flex;
+        flex-direction: row;
+        column-gap: 8px;;
+      }
+
+        #overview-style {
+          font-size: 16pt;
+        }
+
+        #selected-style {
+          font-size:  16pt;
+          font-weight: 300;
+        }
+
+      #style-selector {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        row-gap: 10px;
+      }
+
+        .style-outline {
+          border: 2px solid rgb(159, 173, 187);
+          border-radius: 100%;
+          width: 80px;
+          height: 80px;
+        }
+
+        .style-icon {
+          width: 70px;
+          height: 70px;
+          object-fit: cover;
+          border: 3px solid rgb(159, 173, 187);
+          border-radius: 100%;
+          margin: 2px;
+        }
