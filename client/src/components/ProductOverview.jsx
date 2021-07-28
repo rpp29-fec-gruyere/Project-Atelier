@@ -1,4 +1,5 @@
 import React from 'react';
+import Stars from './Stars.jsx';
 
 const ProductOverview = (props) => {
   // if (Object.keys(props.item).length > 0) {
