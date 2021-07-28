@@ -24,35 +24,35 @@ describe('Tests root path', () => {
   });
 });
 
-describe('Tests /direct-query path', () => {
+// describe('Tests /direct-query path', () => {
 
-  const url = '/direct-query/?endpoint=products&count=1';
+//   const url = '/direct-query/?endpoint=products&count=1';
 
-  it('gets successful response from GET request w/ queryString', () => {
-    return request(app)
-      .get(url)
-      .then(res => {
-        expect(res.statusCode).toBe(200);
-      });
-  });
+//   it('gets successful response from GET request w/ queryString', () => {
+//     return request(app)
+//       .get(url)
+//       .then(res => {
+//         expect(res.statusCode).toBe(200);
+//       });
+//   });
 
-  it('returns all necessary initial product data', () => {
-    return request(app)
-      .get(url)
-      .then(res => {
-        let data = res.body[0];
-        expect(data.id).not.toBe(null);
-        expect(data.campus).not.toBe(null);
-        expect(data.name).not.toBe(null);
-        expect(data.slogan).not.toBe(null);
-        expect(data.description).not.toBe(null);
-        expect(data.category).not.toBe(null);
-        expect(data.default_price).not.toBe(null);
-        expect(data.created_at).not.toBe(null);
-        expect(data.updated_at).not.toBe(null);
-      });
-  });
-});
+//   it('returns all necessary initial product data', () => {
+//     return request(app)
+//       .get(url)
+//       .then(res => {
+//         let data = res.body[0];
+//         expect(data.id).not.toBe(null);
+//         expect(data.campus).not.toBe(null);
+//         expect(data.name).not.toBe(null);
+//         expect(data.slogan).not.toBe(null);
+//         expect(data.description).not.toBe(null);
+//         expect(data.category).not.toBe(null);
+//         expect(data.default_price).not.toBe(null);
+//         expect(data.created_at).not.toBe(null);
+//         expect(data.updated_at).not.toBe(null);
+//       });
+//   });
+// });
 
 
 describe('Tests /page-data path', () => {
