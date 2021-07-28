@@ -89,7 +89,7 @@ class App extends React.Component {
         </header>
         <ProductOverview />
         <AdditionalProducts />
-        <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers} />
+        <QuestionsAndAnswers />
         <Reviews />
       </div>
     );

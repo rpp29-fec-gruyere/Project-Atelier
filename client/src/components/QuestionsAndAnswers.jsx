@@ -14,7 +14,7 @@ class QuestionsAndAnswers extends React.Component {
 
   render() {
     return (
-      <div data-testid='QuestionsAndAnswer' className='q-and-a-container'>
+      <div data-testid='QuestionsAndAnswers'>
         <span className='q-and-a-title'>QUESTIONS AND ANSWERS</span>
         <QandAForm />
         <QandAList />
