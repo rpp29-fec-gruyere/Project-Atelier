@@ -72,3 +72,10 @@ header {
     justify-content: center;
     align-items: center;
 }
+
+.star {
+  width: 25px;
+  height: auto;
+  padding: 0px;
+  margin: -2px;
+}
