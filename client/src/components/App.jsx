@@ -67,7 +67,7 @@ class App extends React.Component {
     this.fetch({endpoint: 'products', params: {count: 1}},
       (data) => {
         console.log('[App] data recieved: ', data);
-        this.loadPage(data[0].id);
+        this.loadPage(28611);
       },
       (error) => {
         throw error;
