@@ -12,13 +12,40 @@ const ratingParser = (ratingsObj) => {
   return cumulativeStars / numberOfRatings;
 };
 
+const sizeOptionsGenerator = (skus) => {
+  let options = [];
+  for (let sku in skus) {
+    let size = skus[sku];
+    if (size.quantity < 1) {
+      options.push(<option className="size-option" key={sku} >{`${size.size.toUpperCase()} (SOLD OUT)`}</option>);
+    } else if (size.quantity <= 10) {
+      options.push(<option className="size-option" key={sku} value={sku}>{`${size.size.toUpperCase()} (ALMOST GONE)`}</option>);
+    } else {
+      options.push(<option className="size-option" key={sku} value={sku}>{size.size.toUpperCase()}</option>);
+    }
+  }
+  return options;
+};
+
+const quantityOptionsGenerator = (max) => {
+  let options = [];
+  for (let i = 2; i <= max && i <= 15; i++) {
+    options.push(<option className="quantity-option" key={`quantity${i}`} value="i">{String(i)}</option>);
+  }
+  return options;
+};
+
+//PRODUCT OVERVIEW COMPONENT
 class ProductOverview extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       item: {},
       rating: 0,
-      styleIndex: 0
+      numberOfReviews: 0,
+      styleIndex: 0,
+      sku: 956686,
+      quantity: 1
     };
   }
 
@@ -34,7 +61,11 @@ class ProductOverview extends React.Component {
     newState.item.description = props.item.description;
     newState.item.features = props.item.features;
     newState.item.styles = props.item.styles;
-    newState.rating = ratingParser(props.reviews.meta === undefined ? {0: 1} : props.reviews.meta.ratings);
+    if (JSON.stringify(props.reviews) !== '{}') {
+      newState.rating = ratingParser(props.reviews.meta === undefined ? {0: 1} : props.reviews.meta.ratings);
+      newState.numberOfReviews = props.reviews.allReviews.length;
+    }
+
     return newState;
   }
 
@@ -55,6 +86,7 @@ class ProductOverview extends React.Component {
       let styleIndex = this.state.styleIndex;
       let price = styles[styleIndex].original_price;
       let rating = this.state.rating;
+      let numberOfReviews = this.state.numberOfReviews;
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
           <div id="carousel">
@@ -62,17 +94,21 @@ class ProductOverview extends React.Component {
           <div id="controls">
             <div id="overview-reviews">
               <Stars starsId={'overview-stars'} rating={rating} />
-              <a id="link-to-reviews" href="#reviewSection">Read all reviews</a>
+              <a id="link-to-reviews" href="#reviewSection">
+                {
+                  numberOfReviews > 1 ? `Read all ${numberOfReviews} reviews` : numberOfReviews = 1 ? 'Read review' : 'Be the first to leave a review'
+                }
+              </a>
             </div>
             <br></br>
             <div id="overview-category">{category.toUpperCase()}</div>
             <div id="overview-product-title">{name}</div>
             <br></br>
-            <div id="overview-price">${styles[0].original_price}</div>
+            <div id="overview-price">${styles[styleIndex].original_price}</div>
             <br></br>
             <div id="style-indicator">
               <div id="overview-style">STYLE:</div>
-              <div id="selected-style">{styles[0].name.toUpperCase()}</div>
+              <div id="selected-style">{styles[styleIndex].name.toUpperCase()}</div>
             </div>
             <br></br>
             <div id="style-selector">
@@ -86,23 +122,28 @@ class ProductOverview extends React.Component {
                 })
               }
             </div>
+            <br></br>
             <div id="control-line-1">
-              <select id="size-selector" name="SELECT SIZE">
+              <select id="size-selector" name="size" defaultValue="">
+                <option value="" disabled hidden>SELECT SIZE</option>
                 {
-
+                  sizeOptionsGenerator(styles[styleIndex].skus)
                 }
               </select>
-              <div id="quantity-selector"></div>
+              <select id="quantity-selector" name="quantity" defaultValue="1">
+                <option className="quantity-option" key="quantity1" value="1">1</option>
+                {
+                  quantityOptionsGenerator(styles[styleIndex].skus[this.state.sku].quantity)
+                }
+              </select>
             </div>
-            <div id="control-line-2">
-              <div id="add-to-bag"></div>
-              <div id="favorite"></div>
-            </div>
+            <button id="add-to-cart">ADD TO CART</button>
           </div>
         </div>
         <div id="overview-details">
           <div id="overview-description">
             <div id="product-tagline">{slogan}</div>
+            <br></br>
             <div id="description-body">{description}</div>
           </div>
           <div id="details-divide"></div>
