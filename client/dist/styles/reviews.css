@@ -1,18 +1,19 @@
 #mainReviewSection {
-    display: flex;
+    display: grid;
+    grid: "ratingsBreakdown reviewList" 1fr / 250px 1fr;
+    gap: 0 40px;
     height: 100%;
     margin: 10px 0;
 }
 
 .ratingsBreakdown {
     width: fit-content;
-    height: 400px;
     font-size: 14px;
+    grid-area: ratingsBreakdown;
 }
 
 .reviewList {
-    width: 80%;
-    height: 800px;
+    grid-area: reviewList;
 }
 
 #ratingRepresentations {
@@ -57,5 +58,40 @@
     width: 0%;
 }
 
-.ratingBar.count {
+#sortOptions {
+    margin-bottom: 30px;
+}
+
+.review {
+    height: fit-content;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid rgb(148, 146, 146);
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewUser {
+    font-size: 14px;
+    color: rgb(148, 146, 146);
+}
+
+.response {
+    background-color: rgb(139, 137, 137);
+}
+
+.helpful {
+    border-right: 1px solid rgb(148, 146, 146);
+    padding-right: 10px;
+}
+
+.helpfulResponse {
+    text-decoration: underline;
+}
+
+.report {
+    padding-left: 10px;
 }

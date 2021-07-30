@@ -2,9 +2,9 @@ import React from 'react';
 import Stars from './Stars.jsx';
 
 const RatingsBreakdown = props => {
+
   let metaData = props.metaData ? props.metaData : null;
-  metaData ? console.log('Meta true') : console.log('Meta false');
-  let rating = 0;
+  let averageRating = 0;
   let recommendedPercentage = 0;
   let percentageOfEachRating = {
     1: 0,
@@ -22,20 +22,19 @@ const RatingsBreakdown = props => {
       count += parseInt(metaData.ratings[rating]);
       percentageOfEachRating[rating] = parseInt(metaData.ratings[rating]);
     }
-    rating = sum / count;
-    for (let ratingValue in percentageOfEachRating) {
-      percentageOfEachRating[ratingValue] = (percentageOfEachRating[ratingValue] / count) * 100;
+    averageRating = sum / count;
+    for (let rating in percentageOfEachRating) {
+      percentageOfEachRating[rating] = (percentageOfEachRating[rating] / count) * 100;
     }
-
-    recommendedPercentage = (parseInt(metaData.recommended.true) / (parseInt(metaData.recommended.true) + parseInt(metaData.recommended.false))) * 100;
-
+    recommendedPercentage = (parseInt(props.metaData.recommended.true) / (parseInt(props.metaData.recommended.true) + parseInt(props.metaData.recommended.false))) * 100;
   }
+
   
   return (
     <div data-testid="ratingsBreakdown" className="ratingsBreakdown">
       <div id="ratingRepresentations">
-        <span>{rating}</span>
-        <Stars rating={rating}/>
+        <span>{averageRating}</span>
+        <Stars rating={averageRating}/>
       </div>
       <span id="recommended">{recommendedPercentage}% of reviews recommended this product</span>
       <div id="ratingBarGraph">
@@ -65,6 +64,7 @@ const RatingsBreakdown = props => {
           <span className="ratingBar count">({metaData && metaData.ratings[1] ? parseInt(metaData.ratings[2]) : 0})</span>
         </div>
       </div>
+      <div id="factorsSection"></div>
     </div>
   );
 };

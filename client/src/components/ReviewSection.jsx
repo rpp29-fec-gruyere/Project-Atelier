@@ -8,7 +8,7 @@ const ReviewSection = props => {
       <span className="widgetHeader">Ratings &#38; Reviews</span>
       <div id="mainReviewSection">
         <RatingsBreakdown metaData={props.reviewData ? props.reviewData.meta : {}}/>
-        <ReviewList />
+        <ReviewList reviews={props.reviewData ? props.reviewData.allReviews : []}/>
       </div>
     </div>
   );
