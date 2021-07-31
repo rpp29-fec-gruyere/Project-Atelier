@@ -34,7 +34,7 @@ const RatingsBreakdown = props => {
 
   
   return (
-    <div data-testid="ratingsBreakdown" className="ratingsBreakdown">
+    <div data-testid="ratingsBreakdown" className="ratingsBreakdown" id="ratingBreakdown">
       <div id="ratingRepresentations">
         <span>{averageRating}</span>
         <Stars rating={averageRating}/>

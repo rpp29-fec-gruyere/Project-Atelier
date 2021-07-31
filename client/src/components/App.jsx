@@ -4,7 +4,6 @@ import ProductOverview from './ProductOverview.jsx';
 import AdditionalProducts from './AdditionalProducts.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import ReviewSection from './ReviewSection.jsx';
-import AddReviewModal from './AddReviewModal.jsx';
 
 
 class App extends React.Component {
@@ -15,8 +14,7 @@ class App extends React.Component {
       relatedItems: {},
       questionsAndAnswers: {},
       reviews: {},
-      cart: [],
-      showAddReviewModal: false
+      cart: []
     };
 
   }
@@ -64,18 +62,13 @@ class App extends React.Component {
     });
   }
 
-  // For showing Add Review Modal over product page
-  showAddReviewModal(e) {
-    this.setState({showAddReviewModal: true});
-  }
-
 
   componentDidMount() {
     let initialFetchAttempts = 0;
     this.fetch({endpoint: 'products', params: {count: 1}},
       (data) => {
         console.log('[App] data recieved: ', data);
-        this.loadPage(data[0].id);
+        this.loadPage(28616);
       },
       (error) => {
         throw error;
@@ -89,7 +82,6 @@ class App extends React.Component {
   render() {
     return (
       <div className="app" data-testid="app">
-        <AddReviewModal show={this.state.showAddReviewModal} itemName={this.state.item.name}></AddReviewModal>
         <header>
           <div id="mainHeader">
             <span id="headerTitle">Atelier</span>
@@ -107,7 +99,7 @@ class App extends React.Component {
         <ProductOverview />
         <AdditionalProducts />
         <QuestionsAndAnswers />
-        <ReviewSection reviewData={this.state.reviews} showAddReviewModal={this.showAddReviewModal.bind(this)}/>
+        <ReviewSection reviewData={this.state.reviews}/>
       </div>
     );
   }
