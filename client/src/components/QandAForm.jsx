@@ -5,7 +5,7 @@ const QandAForm = () => {
     <div>
       <form>
 
-        <input type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...' className='q-and-a-form' />
+        <input type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...' className='q-and-a-form' data-testid='QAndAForms' />
       </form>
 
     </div>

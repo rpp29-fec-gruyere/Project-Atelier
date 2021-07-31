@@ -13,14 +13,62 @@
 
   font-size: 13px;
   color: grey;
-  font-family: arial;
+  font-family: "adobe-clean", sans-serif;
+  padding-bottom: 1em;
+}
 
+.q-and-a-item-question-detail {
+  float: right;
+  color: grey
 }
 
 .q-and-a-container {
-  margin-top: 30px;
   display: grid;
+  margin-top: 30px;
   grid-template-columns: auto;
   grid-template-rows: auto;
   grid-template-areas: none
 }
+
+.q-and-a-list {
+  padding-top: 1em;
+  font-family: "adobe-clean", sans-serif;
+}
+
+.q-and-a-more-answers {
+  padding-top: 1em;
+  padding-bottom: 1em;
+}
+
+.q-and-a-item-question {
+  font-weight: bold;
+  padding-bottom: 1em;
+}
+
+.q-and-a-item-answer {
+  padding-bottom: 1em;
+}
+
+.q-and-a-item-user {
+  color: grey;
+  padding-bottom: 1em;
+}
+
+/*
+--- Button ---
+*/
+
+.q-and-a-more-answered-questions {
+  margin-top: 10px;
+
+
+}
+
+.q-and-a-add-a-question {
+ margin-left: 20px;
+}
+
+/*
+--- Buttons ---
+*/
+

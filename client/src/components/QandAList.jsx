@@ -2,10 +2,9 @@ import React from 'react';
 import QandAItem from './QandAItem.jsx';
 
 
-const QandAlist = () => (
-  <div className='q-and-a-list'>
-    Q and A list
-    <QandAItem />
+const QandAlist = ( {questionsAndAnswers} ) => (
+  <div className='q-and-a-list' data-testid='QAndAList'>
+    <QandAItem questionsAndAnswers={questionsAndAnswers}/>
   </div>
 );
 
