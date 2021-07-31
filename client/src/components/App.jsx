@@ -80,13 +80,21 @@ class App extends React.Component {
   }
 
   render() {
+    if (JSON.stringify(this.state.item) !== '{}') {
+      $(document).prop('title', this.state.item.name);
+    }
     return (
       <div className="app" data-testid="app">
         <header>
           <span className="title">Atelier</span>
         </header>
+<<<<<<< HEAD
         <ProductOverview />
         <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
+=======
+        <ProductOverview item={this.state.item} reviews={this.state.reviews} />
+        <AdditionalProducts />
+>>>>>>> main
         <QuestionsAndAnswers />
         <Reviews />
       </div>

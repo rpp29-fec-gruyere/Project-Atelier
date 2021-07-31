@@ -4,3 +4,4 @@
 **/lib
 bundle.js
 .eslintrc.js
+spec/cli/testData.js
