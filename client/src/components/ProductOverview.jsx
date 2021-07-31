@@ -35,14 +35,6 @@ const quantityOptionsGenerator = (max) => {
   return options;
 };
 
-const determineIfHidden = (a, b) => {
-  if (a !== b) {
-    return 'hidden';
-  } else {
-    return '';
-  }
-};
-
 //PRODUCT OVERVIEW COMPONENT
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -52,11 +44,13 @@ class ProductOverview extends React.Component {
       rating: 0,
       numberOfReviews: 0,
       styleIndex: 0,
-      sku: 956686,
-      quantity: 1
+      sku: '956686',
+      quantity: 1,
+      sizeSelected: false
     };
 
     this.selectStyle = this.selectStyle.bind(this);
+    this.selectSize = this.selectSize.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -76,12 +70,28 @@ class ProductOverview extends React.Component {
 
   selectStyle(event) {
     let stateUpdate = (state, props) => {
-      state.styleIndex = Number(event.target.id.slice(event.target.id.indexOf('-') + 1));
-      state.sku = Number(Object.keys(state.item.styles[state.styleIndex].skus)[0]);
+      let currentSelectedSize = state.item.styles[state.styleIndex].skus[state.sku].size;
+      let newState = state;
+      newState.styleIndex = Number(event.target.id.slice(event.target.id.indexOf('-') + 1));
+      let skuFound = false;
+      for (let sku in state.item.styles[newState.styleIndex].skus) {
+        if (state.item.styles[newState.styleIndex].skus[sku].size === currentSelectedSize) {
+          newState.sku = sku;
+          skuFound = true;
+          break;
+        }
+      }
+      if (!skuFound) {
+        newState.sku = Object.keys(state.item.styles[state.styleIndex].skus)[0];
+      }
       console.log('next state: ', state);
       return state;
     };
     this.setState(stateUpdate);
+  }
+
+  selectSize(event) {
+    this.setState({sku: event.target.value, sizeSelected: true});
   }
 
   render() {
@@ -96,11 +106,12 @@ class ProductOverview extends React.Component {
     } else {
       console.log('state recieved in render: ', this.state);
       let {category, name, slogan, description, features, styles} = this.state.item;
-      let {styleIndex, rating, numberOfReviews, sku} = this.state;
+      let {styleIndex, rating, numberOfReviews, sku, sizeSelected} = this.state;
       let price = styles[styleIndex].original_price;
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
           <div id="carousel">
+
           </div>
           <div id="controls">
             <div id="overview-reviews">
@@ -140,7 +151,7 @@ class ProductOverview extends React.Component {
             </div>
             <br></br>
             <div id="control-line-1">
-              <select id="size-selector" name="size" defaultValue="">
+              <select id="size-selector" name="size" value={sizeSelected ? sku : ''} onChange={this.selectSize}>
                 <option value="" disabled hidden>SELECT SIZE</option>
                 {
                   sizeOptionsGenerator(styles[styleIndex].skus)
