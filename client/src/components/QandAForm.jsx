@@ -4,8 +4,10 @@ const QandAForm = () => {
   return (
     <div>
       <form>
-        <input type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS... (search icon here)' className='q-and-a-form' />
+
+        <input type='text' placeholder='HAVE A QUESTION? SEARCH FOR ANSWERS...' className='q-and-a-form' />
       </form>
+
     </div>
   );
 };

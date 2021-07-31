@@ -12,10 +12,12 @@ class QuestionsAndAnswers extends React.Component {
     };
   }
 
+
+
   render() {
     return (
-      <div data-testid='QuestionsAndAnswers'>
-        <span className='q-and-a-title'>QUESTIONS AND ANSWERS</span>
+      <div data-testid='QuestionsAndAnswers' className='q-and-a-container'>
+        <span className='q-and-a-title'>QUESTIONS &#38; ANSWERS</span>
         <QandAForm />
         <QandAList />
         <QandAButtons />
