@@ -52,6 +52,7 @@
       }
       #overview-product-title {
         font-size: 40pt;
+        margin-left: -2px;
       }
       #overview-price {
         font-size: 16pt;
@@ -88,9 +89,18 @@
           border-color: inherit;
           border-radius: 100%;
           margin: 2px;
+          z-index: 0;
         }
         .current-style {
           border-color: black;
+        }
+        .style-checkmark {
+          z-index: 1;
+          transform:translate(2px, -82px);
+          width: 70px;
+          height: 70px;
+          border-radius: 100%;
+          border: 3px solid black;
         }
       #control-line-1 {
         display: grid;

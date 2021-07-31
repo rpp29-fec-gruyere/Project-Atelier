@@ -35,6 +35,14 @@ const quantityOptionsGenerator = (max) => {
   return options;
 };
 
+const determineIfHidden = (a, b) => {
+  if (a !== b) {
+    return 'hidden';
+  } else {
+    return '';
+  }
+};
+
 //PRODUCT OVERVIEW COMPONENT
 class ProductOverview extends React.Component {
   constructor(props) {
@@ -47,14 +55,12 @@ class ProductOverview extends React.Component {
       sku: 956686,
       quantity: 1
     };
+
+    this.selectStyle = this.selectStyle.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
-    let newState = {
-      item: {},
-      rating: 0,
-      styleIndex: 0
-    };
+    let newState = {item: {}};
     newState.item.category = props.item.category;
     newState.item.name = props.item.name;
     newState.item.slogan = props.item.slogan;
@@ -65,11 +71,18 @@ class ProductOverview extends React.Component {
       newState.rating = ratingParser(props.reviews.meta === undefined ? {0: 1} : props.reviews.meta.ratings);
       newState.numberOfReviews = props.reviews.allReviews.length;
     }
-
     return newState;
   }
 
-
+  selectStyle(event) {
+    let stateUpdate = (state, props) => {
+      state.styleIndex = Number(event.target.id.slice(event.target.id.indexOf('-') + 1));
+      state.sku = Number(Object.keys(state.item.styles[state.styleIndex].skus)[0]);
+      console.log('next state: ', state);
+      return state;
+    };
+    this.setState(stateUpdate);
+  }
 
   render() {
     if (JSON.stringify(this.state.item) === '{}') {
@@ -81,12 +94,10 @@ class ProductOverview extends React.Component {
         </div>
       );
     } else {
-
+      console.log('state recieved in render: ', this.state);
       let {category, name, slogan, description, features, styles} = this.state.item;
-      let styleIndex = this.state.styleIndex;
+      let {styleIndex, rating, numberOfReviews, sku} = this.state;
       let price = styles[styleIndex].original_price;
-      let rating = this.state.rating;
-      let numberOfReviews = this.state.numberOfReviews;
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
           <div id="carousel">
@@ -115,8 +126,13 @@ class ProductOverview extends React.Component {
               {
                 styles.map((style, i) => {
                   return (
-                    <div className="style-outline" id={`style-${i}`} key={`style-${i}`}>
-                      <img className="style-icon" id={`style-${i}`} key={`style-${i}`} src={style.photos[0].thumbnail_url} onClick={() => { alert('click'); }}></img>
+                    <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
+                      <img className="style-icon" id={`style-${i}`} key={`style-${i}`} src={style.photos[0].thumbnail_url} onClick={this.selectStyle}></img>
+                      {
+                        styleIndex !== i ?
+                          (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png" hidden></img>) :
+                          (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png"></img>)
+                      }
                     </div>
                   );
                 })
@@ -133,7 +149,7 @@ class ProductOverview extends React.Component {
               <select id="quantity-selector" name="quantity" defaultValue="1">
                 <option className="quantity-option" key="quantity1" value="1">1</option>
                 {
-                  quantityOptionsGenerator(styles[styleIndex].skus[this.state.sku].quantity)
+                  quantityOptionsGenerator(styles[styleIndex].skus[sku].quantity)
                 }
               </select>
             </div>
@@ -161,6 +177,5 @@ class ProductOverview extends React.Component {
     }
   }
 }
-
 
 export default ProductOverview;
