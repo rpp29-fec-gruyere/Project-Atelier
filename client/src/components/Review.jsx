@@ -2,7 +2,6 @@ import React from 'react';
 import Stars from './Stars.jsx';
 
 const Review = props => {
-  console.log(props);
   let reviewDate = new Date(props.reviewInfo.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   let response = undefined;
   if (props.reviewInfo.response) {

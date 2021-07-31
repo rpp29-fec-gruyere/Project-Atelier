@@ -58,6 +58,56 @@
     width: 0%;
 }
 
+.characteristicsSection {
+    height:fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.characteristic {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.characteristicBar {
+    height: 5px;
+    width: 100%;
+    background-color: rgb(182, 182, 182);
+    justify-self: center;
+    margin: 5px 0;
+}
+
+.indicator {
+    height: 5px;
+    border-right: 3px solid black;
+}
+.characteristicDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.characteristicDetail {
+    height: fit-content;
+    width: 30%;
+}
+
+.characteristicDetail.first {
+    text-align: left;
+}
+
+.characteristicDetail.middle {
+    text-align: center;
+}
+
+.characteristicDetail.last {
+    text-align: right;
+}
+
+
 #sortOptions {
     margin-bottom: 30px;
 }
@@ -94,4 +144,30 @@
 
 .report {
     padding-left: 10px;
+}
+
+#reviewButtons {
+    height: fit-content;
+    width: 100%;
+    padding: 5% 0;
+}
+
+.reviewBtn {
+    height: 60px;
+    width: 140px;
+    background-color: white;
+    border-radius: 0%;
+    border: 1px solid rgb(148, 146, 146);
+}
+
+#addReviewModal {
+    position: fixed;
+    z-index: 1;
+    height: 60%;
+    width: 30%;
+    bottom: 25%;
+    left: 35%;
+    border: 1px solid rgb(148, 146, 146);
+    text-align: center;
+    background-color: white;
 }

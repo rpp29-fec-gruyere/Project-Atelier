@@ -7,15 +7,22 @@ import React from 'react';
 describe('Review Section', () => {
 
   const { getByTestId } = render(<ReviewSection />);
-  const reviews = getByTestId('reviewSection');
-  
+  const reviewSection = getByTestId('reviewSection');
 
   
-  test('renders Review component', () => {
-    expect(reviews).toBeInTheDocument();
+  test('renders ReviewSection component', () => {
+    expect(getByTestId('reviewSection')).toBeInTheDocument();
   });
 
   test('renders Review component text', () => {
-    expect(reviews).toHaveTextContent('Ratings & Reviews');
+    expect(reviewSection).toHaveTextContent('Ratings & Reviews');
+  });
+
+  test('renders Ratingsbreakdown component', () => {
+    expect(getByTestId('ratingsBreakdown')).toBeInTheDocument();
+  });
+
+  test('renders ReviewList component', () => {
+    expect(getByTestId('reviewList')).toBeInTheDocument();
   });
 });

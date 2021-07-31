@@ -9,6 +9,10 @@ const ReviewList = props => {
         <span>{reviewCount} reviews, sorted by relevance</span>
       </div>
       <div>{props.reviews ? props.reviews.map(review => <Review key={review.review_id} reviewInfo={review}/>) : null}</div>
+      <div id="reviewButtons">
+        <button className="reviewBtn">MORE REVIEWS</button>
+        <button className="reviewBtn" onClick={e => props.showAddReviewModal()}>ADD REVIEW</button>
+      </div>
     </div>
   );
 };
