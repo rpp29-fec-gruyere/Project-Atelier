@@ -44,9 +44,10 @@ class ProductOverview extends React.Component {
       rating: 0,
       numberOfReviews: 0,
       styleIndex: 0,
-      sku: '956686',
+      sku: null,
       quantity: 1,
-      sizeSelected: false
+      sizeSelected: false,
+      currentPhoto: 0
     };
 
     this.selectStyle = this.selectStyle.bind(this);
@@ -64,6 +65,9 @@ class ProductOverview extends React.Component {
     if (JSON.stringify(props.reviews) !== '{}') {
       newState.rating = ratingParser(props.reviews.meta === undefined ? {0: 1} : props.reviews.meta.ratings);
       newState.numberOfReviews = props.reviews.allReviews.length;
+      if (state.sku === null) {
+        newState.sku = Object.keys(props.item.styles[0].skus)[0];
+      }
     }
     return newState;
   }
@@ -106,12 +110,13 @@ class ProductOverview extends React.Component {
     } else {
       console.log('state recieved in render: ', this.state);
       let {category, name, slogan, description, features, styles} = this.state.item;
-      let {styleIndex, rating, numberOfReviews, sku, sizeSelected} = this.state;
+      let {styleIndex, rating, numberOfReviews, sku, sizeSelected, currentPhoto} = this.state;
       let price = styles[styleIndex].original_price;
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
-          <div id="carousel">
-
+          <div id="overview-carousel">
+            <div id="alignment-helper"></div>
+            <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
           </div>
           <div id="controls">
             <div id="overview-reviews">
@@ -167,6 +172,7 @@ class ProductOverview extends React.Component {
             <button id="add-to-cart">ADD TO CART</button>
           </div>
         </div>
+        <br></br>
         <div id="overview-details">
           <div id="overview-description">
             <div id="product-tagline">{slogan}</div>
