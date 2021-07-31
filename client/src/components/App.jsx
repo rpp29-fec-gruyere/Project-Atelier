@@ -16,7 +16,8 @@ class App extends React.Component {
       reviews: {},
       cart: []
     };
-
+    this.fetch = this.fetch.bind(this)
+    this.loadPage = this.loadPage.bind(this)
   }
 
   // For directly querying the API
@@ -62,11 +63,9 @@ class App extends React.Component {
     });
   }
 
-
-
   componentDidMount() {
     let initialFetchAttempts = 0;
-    this.fetch({endpoint: 'products', params: {count: 1}},
+    this.fetch({endpoint: 'products', params: {count: 5}},
       (data) => {
         console.log('[App] data recieved: ', data);
         this.loadPage(data[0].id);
@@ -84,21 +83,10 @@ class App extends React.Component {
     return (
       <div className="app" data-testid="app">
         <header>
-          <div id="mainHeader">
-            <span className="title">Atelier</span>
-            <div id="headerSearchBar">
-              <input type="text"></input>
-              <button>
-                <span className="glyphicon glyphicon-search"></span>
-              </button>
-            </div>
-          </div>
-          <div id="promo">
-            <span>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT <strong>OFFER</strong> - <a>NEW PRODUCT HIGHLIGHT</a></span>
-          </div>
+          <span className="title">Atelier</span>
         </header>
         <ProductOverview />
-        <AdditionalProducts relatedItems={this.state.relatedItems}/>
+        <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
         <QuestionsAndAnswers />
         <Reviews />
       </div>
