@@ -119,7 +119,19 @@ class ProductOverview extends React.Component {
               <div id="alignment-helper"></div>
               <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
             </div>
-            <div id="carousel-controls"></div>
+            <div id="carousel-controls-outer">
+              <div id="carousel-controls-inner">
+                <div className="arrow-container" key="left-arrow-container">
+
+                </div>
+                <div id="photo-catalog-container">
+
+                </div>
+                <div className="arrow-container" key="right-arrow-container">
+
+                </div>
+              </div>
+            </div>
           </div>
           <div id="controls">
             {
