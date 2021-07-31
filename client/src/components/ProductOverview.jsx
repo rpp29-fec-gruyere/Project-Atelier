@@ -9,7 +9,7 @@ const ratingParser = (ratingsObj) => {
     cumulativeStars += Number(key) * Number(ratingsObj[key]);
     numberOfRatings += Number(ratingsObj[key]);
   }
-  return cumulativeStars / numberOfRatings;
+  return numberOfRatings === 0 ? 0 : cumulativeStars / numberOfRatings;
 };
 
 const sizeOptionsGenerator = (skus) => {
@@ -115,18 +115,24 @@ class ProductOverview extends React.Component {
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
           <div id="overview-carousel">
-            <div id="alignment-helper"></div>
-            <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
+            <div id="image-display">
+              <div id="alignment-helper"></div>
+              <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
+            </div>
+            <div id="carousel-controls"></div>
           </div>
           <div id="controls">
-            <div id="overview-reviews">
-              <Stars starsId={'overview-stars'} rating={rating} />
-              <a id="link-to-reviews" href="#reviewSection">
-                {
-                  numberOfReviews > 1 ? `Read all ${numberOfReviews} reviews` : numberOfReviews = 1 ? 'Read review' : 'Be the first to leave a review'
-                }
-              </a>
-            </div>
+            {
+              numberOfReviews === 0 ? '' :
+                (<div id="overview-reviews">
+                  <Stars starsId={'overview-stars'} rating={rating} />
+                  <a id="link-to-reviews" href="#reviewSection">
+                    {
+                      numberOfReviews > 1 ? `Read all ${numberOfReviews} reviews` : 'Read review'
+                    }
+                  </a>
+                </div>)
+            }
             <br></br>
             <div id="overview-category">{category.toUpperCase()}</div>
             <div id="overview-product-title">{name}</div>
@@ -145,9 +151,7 @@ class ProductOverview extends React.Component {
                     <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
                       <img className="style-icon" id={`style-${i}`} key={`style-${i}`} src={style.photos[0].thumbnail_url} onClick={this.selectStyle}></img>
                       {
-                        styleIndex !== i ?
-                          (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png" hidden></img>) :
-                          (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png"></img>)
+                        styleIndex !== i ? '' : (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png"></img>)
                       }
                     </div>
                   );
@@ -172,7 +176,6 @@ class ProductOverview extends React.Component {
             <button id="add-to-cart">ADD TO CART</button>
           </div>
         </div>
-        <br></br>
         <div id="overview-details">
           <div id="overview-description">
             <div id="product-tagline">{slogan}</div>
