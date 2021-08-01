@@ -88,13 +88,8 @@ class App extends React.Component {
         <header>
           <span className="title">Atelier</span>
         </header>
-<<<<<<< HEAD
-        <ProductOverview />
-        <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
-=======
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
-        <AdditionalProducts />
->>>>>>> main
+        <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
         <QuestionsAndAnswers />
         <Reviews />
       </div>
