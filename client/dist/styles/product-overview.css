@@ -1,3 +1,8 @@
+.alignment-helper {
+  display: inline-block;
+  height: 100%;
+  vertical-align: middle;
+}
 #overview {
   width: 100%;
   display: grid;
@@ -43,11 +48,6 @@
         text-align: center;
         z-index: 11;
       }
-        #alignment-helper {
-          display: inline-block;
-          height: 100%;
-          vertical-align: middle;
-        }
         #spotlight-image {
           max-height: 99%;
           max-width: 99%;
@@ -72,12 +72,35 @@
           display: grid;
           grid-template-columns: 15% auto 15%;
           column-gap: 5%;
+          opacity: 0%;
+        }
+        #carousel-controls-inner:hover {
+          opacity: 100%;
         }
           .arrow-container {
-            display: flex;
-            flex-direction: column;
-            align-content: center;
+            height: 100%;
+            width: 100%;
+            max-width: 100%;
+            max-height: 100%;
+            vertical-align: middle;
           }
+            .arrow-button {
+              border-radius: 100%;
+              background-color: rgba(150, 150, 150, 0);
+              opacity: 70%;
+              margin: auto;
+              width: 90%;
+              max-width: 100px;
+              max-height: 100px;
+              vertical-align: middle;
+            }
+            .arrow-button:hover {
+              opacity: 100%;
+              background-color: rgba(150, 150, 150, 0.7);
+            }
+            #left-arrow-button {
+              padding-left: -200px;
+            }
 
     #controls {
       width: 100%;

@@ -52,6 +52,7 @@ class ProductOverview extends React.Component {
 
     this.selectStyle = this.selectStyle.bind(this);
     this.selectSize = this.selectSize.bind(this);
+    this.rotatePhotos = this.rotatePhotos.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -77,6 +78,7 @@ class ProductOverview extends React.Component {
       let currentSelectedSize = state.item.styles[state.styleIndex].skus[state.sku].size;
       let newState = state;
       newState.styleIndex = Number(event.target.id.slice(event.target.id.indexOf('-') + 1));
+      newState.currentPhoto = 0;
       let skuFound = false;
       for (let sku in state.item.styles[newState.styleIndex].skus) {
         if (state.item.styles[newState.styleIndex].skus[sku].size === currentSelectedSize) {
@@ -88,14 +90,29 @@ class ProductOverview extends React.Component {
       if (!skuFound) {
         newState.sku = Object.keys(state.item.styles[state.styleIndex].skus)[0];
       }
-      console.log('next state: ', state);
-      return state;
+      // console.log('next state: ', state);
+      return newState;
     };
     this.setState(stateUpdate);
   }
 
   selectSize(event) {
     this.setState({sku: event.target.value, sizeSelected: true});
+  }
+
+  rotatePhotos(event) {
+    console.log(event.target);
+    let stateUpdate = (state, props) => {
+      let photoArrayLength = state.item.styles[state.styleIndex].photos.length;
+      let nextPhotoIndex = (state.currentPhoto + (event.target.id.slice(0, 1) === 'r' ? 1 : -1)) % photoArrayLength;
+      if (nextPhotoIndex === -1) {
+        nextPhotoIndex = photoArrayLength - 1;
+      }
+      let newState = state;
+      newState.currentPhoto = nextPhotoIndex;
+      return newState;
+    };
+    this.setState(stateUpdate);
   }
 
   render() {
@@ -116,19 +133,21 @@ class ProductOverview extends React.Component {
         <div id="overview-main">
           <div id="overview-carousel">
             <div id="image-display">
-              <div id="alignment-helper"></div>
+              <div className="alignment-helper"></div>
               <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
             </div>
             <div id="carousel-controls-outer">
               <div id="carousel-controls-inner">
                 <div className="arrow-container" key="left-arrow-container">
-
+                  <div className="alignment-helper"></div>
+                  <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos}></img>
                 </div>
                 <div id="photo-catalog-container">
 
                 </div>
                 <div className="arrow-container" key="right-arrow-container">
-
+                  <div className="alignment-helper"></div>
+                  <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos}></img>
                 </div>
               </div>
             </div>
