@@ -62,11 +62,13 @@ class ProductOverview extends React.Component {
     newState.item.description = props.item.description;
     newState.item.features = props.item.features;
     newState.item.styles = props.item.styles;
+    newState.item.id = props.item.id;
     if (JSON.stringify(props.reviews) !== '{}') {
       newState.rating = ratingParser(props.reviews.meta === undefined ? {0: 1} : props.reviews.meta.ratings);
       newState.numberOfReviews = props.reviews.allReviews.length;
-      if (state.sku === null) {
-        newState.sku = Object.keys(props.item.styles[0].skus)[0];
+      if (state.sku === null || state.item.id !== newState.item.id) {
+        newState.sku = Object.keys(newState.item.styles[0].skus)[0];
+        newState.styleIndex = 0;
       }
     }
     return newState;
