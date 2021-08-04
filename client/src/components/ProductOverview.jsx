@@ -138,17 +138,25 @@ class ProductOverview extends React.Component {
             </div>
             <div id="carousel-controls-outer">
               <div id="carousel-controls-inner">
-                <div className="arrow-container" key="left-arrow-container">
-                  <div className="alignment-helper"></div>
-                  <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos}></img>
-                </div>
+                {
+                  currentPhoto === 0 ? (<div className="filler"></div>) :
+                    <div className="arrow-container" key="left-arrow-container">
+                      <div className="alignment-helper"></div>
+                      <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos}></img>
+                    </div>
+                }
                 <div id="photo-catalog-container">
+                  <div id="photo-catalog">
 
+                  </div>
                 </div>
-                <div className="arrow-container" key="right-arrow-container">
-                  <div className="alignment-helper"></div>
-                  <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos}></img>
-                </div>
+                {
+                  currentPhoto === styles[styleIndex].photos.length - 1 ? (<div className="filler"></div>) :
+                    <div className="arrow-container" key="right-arrow-container">
+                      <div className="alignment-helper"></div>
+                      <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos}></img>
+                    </div>
+                }
               </div>
             </div>
           </div>
