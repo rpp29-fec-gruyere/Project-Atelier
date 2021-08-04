@@ -145,9 +145,13 @@ class ProductOverview extends React.Component {
                       <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos}></img>
                     </div>
                 }
-                <div id="photo-catalog-container">
-                  <div id="photo-catalog">
-
+                <div id="photo-catalog-outer-container">
+                  <div id="photo-catalog-inner-container">
+                    <div id="photo-catalog">
+                      <div className="alignment-helper"></div>
+                      <img className="catalog-scroll" id="left-scroll" key="left" src="./assets/leftarrow.png"></img>
+                      <img className="catalog-scroll" id="right-scroll" key="right" src="./assets/rightarrow.png"></img>
+                    </div>
                   </div>
                 </div>
                 {
