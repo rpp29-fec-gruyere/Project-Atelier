@@ -17,6 +17,7 @@ class App extends React.Component {
       cart: []
     };
 
+    this.loadPage = this.loadPage.bind(this);
   }
 
   // For directly querying the API
@@ -64,10 +65,10 @@ class App extends React.Component {
 
   componentDidMount() {
     let initialFetchAttempts = 0;
-    this.fetch({endpoint: 'products', params: {count: 1}},
+    this.fetch({endpoint: 'products', params: {count: 5}},
       (data) => {
         console.log('[App] data recieved: ', data);
-        this.loadPage(data[0].id);
+        this.loadPage(data[2].id);
       },
       (error) => {
         throw error;
