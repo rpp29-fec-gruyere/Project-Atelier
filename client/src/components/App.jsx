@@ -17,6 +17,7 @@ class App extends React.Component {
       cart: []
     };
 
+    this.loadPage = this.loadPage.bind(this);
   }
 
   // For directly querying the API
