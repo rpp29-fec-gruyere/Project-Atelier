@@ -5,10 +5,9 @@ import React from 'react';
 // optional props:
 //   starId: [string] this will give the stars div its own unique "id" and "key" attributes (i.e. "review-meta-overview")
 //     (a random id is generated if none is provided)
-//   onMouseEnter: [function] this will 
-//     
-//   starId [string] this will give the stars div its own unique "id" and "key" attributes (i.e. "review-meta-overview")
-//     (a random id is generated if none is provided)
+//   handleMouseEnter: [function] this will allow you to supply a function should you want to interect with the star component on hover over
+//   handleMouseLeave: [function] this will allow you to supply a function should you want to interect with the star component on hover out
+//   handleClick: [function] this will allow you to supply a event handler should you want to interact with the star component on click
 const Stars = (props) => {
   let rating = props.rating;
   let starsToBeRendered = [];

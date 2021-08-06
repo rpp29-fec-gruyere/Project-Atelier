@@ -102,7 +102,7 @@ class App extends React.Component {
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
         <AdditionalProducts />
         <QuestionsAndAnswers />
-        <ReviewSection reviewData={this.state.reviews} itemName={this.state.item.name}/>
+        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
       </div>
     );
   }
