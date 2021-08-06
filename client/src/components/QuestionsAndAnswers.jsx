@@ -19,14 +19,8 @@ class QuestionsAndAnswers extends React.Component {
     return newState;
   }
 
-  componentDidUpdate() {
-
-  }
-
-
-
   render() {
-    if (JSON.stringify(this.state.item) === '{}') {
+    if (JSON.stringify(this.state.questionsAndAnswers) === '{}') {
       return (
         <div id="overview">
           <div id="overview-loading-container">
@@ -35,14 +29,15 @@ class QuestionsAndAnswers extends React.Component {
         </div>
       );
     } else {
-      console.log('state', this.state.questionsAndAnswers);
-      <div data-testid='QuestionsAndAnswers' className='q-and-a-container'>
-        {console.log('state', this.state.questionsAndAnswers)}
-        <span className='q-and-a-title'>QUESTIONS &#38; ANSWERS</span>
-        <QandAForm />
-        <QandAList questionsAndAnswers={this.state.questionsAndAnswers} />
-        <QandAButtons />
-      </div>;
+      return (
+        <div data-testid='QuestionsAndAnswers' className='q-and-a-container'>
+          <span className='q-and-a-title'>QUESTIONS &#38; ANSWERS</span>
+          <QandAForm />
+          <QandAList questionsAndAnswers={this.state.questionsAndAnswers} />
+          <QandAButtons />
+        </div>
+
+      );
     }
   }
 }
