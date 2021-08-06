@@ -2,3 +2,11 @@ node_modules
 package-lock.json
 config.js
 client/dist/bundle.js
+<<<<<<< HEAD
+=======
+coverage
+.DS_Store
+client/.DS_Store
+client/dist/.DS_Store
+spec/testData.js
+>>>>>>> main

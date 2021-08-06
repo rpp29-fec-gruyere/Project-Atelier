@@ -1,0 +1,204 @@
+#overview {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 80vh auto;
+  align-items: flex-start;
+  font-family: Helvetica;
+}
+  #overview-loading-container {
+    width: 100%;
+    height: 80vh;
+  }
+    #overview-loading-icon {
+      margin: auto;
+      display: block;
+      padding-top: 25vh;
+    }
+  #overview-main {
+    max-width: 100%;
+    width: 100%;
+    height: 80vh;
+    min-height: 700px;
+    display: grid;
+    grid-template-columns: auto 400px;
+    column-gap: 20px;
+    font-family: inherit;
+  }
+    #overview-carousel {
+      height: 80vh;
+      width: 100%;
+      max-height: 80vh;
+      max-width: 100%;
+      border: 2px solid black;
+      background-color: rgb(241, 242, 243);
+      text-align: center;
+      z-index: 10;
+      position: relative;
+    }
+      #image-display {
+        height: 100%;
+        width: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        text-align: center;
+        z-index: 11;
+      }
+        #alignment-helper {
+          display: inline-block;
+          height: 100%;
+          vertical-align: middle;
+        }
+        #spotlight-image {
+          max-height: 99%;
+          max-width: 99%;
+          object-fit: cover;
+          margin-left: auto;
+          margin-right: auto;
+          vertical-align: middle;
+        }
+      #carousel-controls-outer {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        max-width: 100%;
+        max-height: 100%;
+        top: 0%;
+        z-index: 12;
+      }
+        #carousel-controls-inner {
+          width: 100%;
+          height: 100%;
+          z-index: 13;
+          display: grid;
+          grid-template-columns: 15% auto 15%;
+          column-gap: 5%;
+        }
+          .arrow-container {
+            display: flex;
+            flex-direction: column;
+            align-content: center;
+          }
+
+    #controls {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-content: flex-start;
+      font-family: inherit;
+      font-weight: 800;
+    }
+      #overview-reviews {
+        display: flex;
+        flex-direction: row;
+        align-content: flex-start;
+        column-gap: 5px;
+        font-size: 12pt;
+      }
+        #link-to-reviews {
+          color: black;
+          padding-top: 3px;
+          font-weight: 400;
+        }
+      #overview-category {
+        font-weight: 300;
+        font-size: 16pt;
+        margin-bottom: -5px;
+      }
+      #overview-product-title {
+        font-size: 40pt;
+        margin-left: -2px;
+      }
+      #overview-price {
+        font-size: 16pt;
+      }
+      #style-indicator {
+        display: flex;
+        flex-direction: row;
+        column-gap: 8px;
+      }
+        #overview-style {
+          font-size: 16pt;
+        }
+        #selected-style {
+          font-size:  16pt;
+          font-weight: 300;
+        }
+      #style-selector {
+        width: 100%;
+        display: grid;
+        grid-template-columns: 25% 25% 25% 25%;
+        row-gap: 10px;
+      }
+        .style-outline {
+          border: 2px solid rgb(182, 189, 197);
+          border-radius: 100%;
+          width: 80px;
+          height: 80px;
+        }
+        .style-icon {
+          width: 70px;
+          height: 70px;
+          object-fit: cover;
+          border: 3px solid;
+          border-color: inherit;
+          border-radius: 100%;
+          margin: 2px;
+          z-index: 0;
+          position: absolute;
+        }
+        .current-style {
+          border-color: black;
+        }
+        .style-checkmark {
+          z-index: 1;
+          width: 70px;
+          height: 70px;
+          border-radius: 100%;
+          border: 3px solid black;
+          margin: 2px;
+          position: absolute;
+        }
+      #control-line-1 {
+        display: grid;
+        grid-template-columns: 70% 25%;
+        column-gap: 5%;
+      }
+        #control-line-1 select {
+          width: 100%;
+          height: 50px;
+          border: 2px solid black;
+          padding-left: 4px;
+          font-size: 14pt;
+          font-weight: 300;
+          background-color: white;
+          overflow: auto;
+        }
+      #add-to-cart {
+        margin-top: 20px;
+        width: 100%;
+        height: 50px;
+        text-align: center;
+        font-size: 14pt;
+        border: 2px solid black;
+        background-color: white;
+      }
+      #add-to-cart:hover {
+        background-color: black;
+        color: white;
+      }
+  #overview-details {
+    height: auto;
+    min-height: 200px;
+  }
+    #overview-description {
+      margin-top: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    #product-tagline {
+      font-weight: 800;
+      font-size: 20pt;
+    }
+    #description-body {
+      font-size: 12pt;
+    }
