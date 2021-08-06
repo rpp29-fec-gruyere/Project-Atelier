@@ -17,6 +17,7 @@ class App extends React.Component {
       cart: []
     };
 
+    this.loadPage = this.loadPage.bind(this);
   }
 
   // For directly querying the API
@@ -62,7 +63,6 @@ class App extends React.Component {
     });
   }
 
-
   componentDidMount() {
     let initialFetchAttempts = 0;
     this.fetch({endpoint: 'products', params: {count: 1}},
@@ -80,6 +80,9 @@ class App extends React.Component {
   }
 
   render() {
+    if (JSON.stringify(this.state.item) !== '{}') {
+      $(document).prop('title', this.state.item.name);
+    }
     return (
       <div className="app" data-testid="app">
         <header>
@@ -96,7 +99,7 @@ class App extends React.Component {
             <span>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT <strong>OFFER</strong> - <a>NEW PRODUCT HIGHLIGHT</a></span>
           </div>
         </header>
-        <ProductOverview />
+        <ProductOverview item={this.state.item} reviews={this.state.reviews} />
         <AdditionalProducts />
         <QuestionsAndAnswers />
         <ReviewSection reviewData={this.state.reviews} itemName={this.state.item.name}/>
