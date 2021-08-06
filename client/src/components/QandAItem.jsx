@@ -6,10 +6,10 @@ const QandAItem = ({ questionsAndAnswers }) => (
     {
       questionsAndAnswers.map((item, i) => (
         <div key={i}>
-          <div className='q-and-a-item-question-detail'>Helpful? Yes({item.question_helpfullness}) | Add Answer</div>
+          <div className='q-and-a-item-question-detail'>Helpful? Yes({item.question_helpfulness}) | Add Answer</div>
           <div className='q-and-a-item-question'>Q: {item.question_body}</div>
           <div className='q-and-a-item-answer'><b>A:</b> {item.answers.body}</div>
-          <div className='q-and-a-item-user'> by {item.answers.answerer_name} | Helpful?({item.answers.usefullness}) | Report</div>
+          <div className='q-and-a-item-user'> by {item.answers.answerer_name} | Helpful?({item.answers.helpfulness}) | Report</div>
         </div>
       ))
     }
