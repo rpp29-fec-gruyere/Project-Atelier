@@ -100,6 +100,10 @@ class ProductOverview extends React.Component {
     this.setState({sku: event.target.value, sizeSelected: true});
   }
 
+  selectPhoto(event) {
+
+  }
+
   rotatePhotos(event) {
     console.log(event.target);
     let stateUpdate = (state, props) => {
@@ -150,6 +154,16 @@ class ProductOverview extends React.Component {
                     <div id="photo-catalog">
                       <div className="alignment-helper"></div>
                       <img className="catalog-scroll" id="left-scroll" key="left" src="./assets/leftarrow.png"></img>
+                      {
+                        styles[styleIndex].photos.map((photo, i) => (
+                          <img className={`photo-catalog-item${currentPhoto === i ? ' spotlight-thumbnail' : ''}`}
+                            key={`photo-catalog-item-${i}`}
+                            id={`photo-catalog-item-${i}`}
+                            src={photo.thumbnail_url}
+                            onClick={selectPhoto}>
+                          </img>
+                        ))
+                      }
                       <img className="catalog-scroll" id="right-scroll" key="right" src="./assets/rightarrow.png"></img>
                     </div>
                   </div>

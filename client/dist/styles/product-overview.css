@@ -124,6 +124,19 @@
                   vertical-align: middle;
                   height: 90%
                 }
+                .photo-catalog-item {
+                  vertical-align: middle;
+                  height: 90%;
+                  width: 10%;
+                  object-fit: cover;
+                  margin-left: .5%;
+                  margin-right: .5%;
+                  opacity: 60%;
+                }
+                .spotlight-thumbnail {
+                  opacity: 100%;
+                  border: 1px solid black;
+                }
     #controls {
       width: 100%;
       display: flex;
