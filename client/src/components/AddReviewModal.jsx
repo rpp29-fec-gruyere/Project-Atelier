@@ -42,8 +42,6 @@ class AddReviewModal extends React.Component {
       this.setState({[targetName]: targetValue});
       break;
     }
-    console.log(target.name);
-    console.log(target.value);
 
   }
 
