@@ -1,6 +1,12 @@
 import React from 'react';
-// expected props:
+// required props:
 //   rating: [number] the star rating out of 5 (i.e. 4.31)
+
+// optional props:
+//   starId: [string] this will give the stars div its own unique "id" and "key" attributes (i.e. "review-meta-overview")
+//     (a random id is generated if none is provided)
+//   onMouseEnter: [function] this will 
+//     
 //   starId [string] this will give the stars div its own unique "id" and "key" attributes (i.e. "review-meta-overview")
 //     (a random id is generated if none is provided)
 const Stars = (props) => {
@@ -12,7 +18,8 @@ const Stars = (props) => {
     let star = (<img 
       className="star" 
       key={`${starId}-star${i + 1}`} 
-      data-testid={`${starId}-star${i + 1}`} 
+      data-testid={`${starId}-star${i + 1}`}
+      id={`${starId}-star${i + 1}`}  
       src={starSource}
       onMouseEnter={props.handleMouseEnter ? () => props.handleMouseEnter(i) : null} 
       onMouseLeave={props.handleMouseEnter ? () => props.handleMouseLeave() : null }
