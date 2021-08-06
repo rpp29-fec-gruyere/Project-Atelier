@@ -64,7 +64,7 @@ const RatingsBreakdown = props => {
         <div id="rating1" className="ratingBar component">
           <span className="ratingBar title">1 stars</span>
           <div className="ratingBar container"><div className="ratingBar fill" style={{width: percentageOfEachRating[1] + '%'}}></div></div>
-          <span className="ratingBar count">({metaData ? parseInt(metaData.ratings[2]) : 0})</span>
+          <span className="ratingBar count">({metaData ? parseInt(metaData.ratings[1]) : 0})</span>
         </div>
       </div>
       <CharacteristicSection characteristicsData={metaData ? metaData.characteristics : false}/>

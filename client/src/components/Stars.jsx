@@ -9,7 +9,17 @@ const Stars = (props) => {
   let starId = props.starId !== undefined ? props.starId : String(Math.random()).slice(2);
   for (let i = 0; i < 5; i++) {
     let starSource = `./assets/stars/star${Math.round(Math.min(1, Math.max(0, rating - i)) * 4)}.png`;
-    starsToBeRendered.push((<img className="star" key={`${starId}-star${i + 1}`} data-testid={`${starId}-star${i + 1}`} src={starSource}></img>));
+    let star = (<img 
+      className="star" 
+      key={`${starId}-star${i + 1}`} 
+      data-testid={`${starId}-star${i + 1}`} 
+      src={starSource}
+      onMouseEnter={props.handleMouseEnter ? () => props.handleMouseEnter(i) : null} 
+      onMouseLeave={props.handleMouseEnter ? () => props.handleMouseLeave() : null }
+      onClick={props.handleClick ? () => props.handleClick() : null}
+    ></img>);
+
+    starsToBeRendered.push(star);
   }
   return (<div className="stars" data-testid={starId} id={starId}>
     {starsToBeRendered}
