@@ -10,15 +10,15 @@ let exampleData = [
       answerer_name: 'lando'
     },
     // eslint-disable-next-line camelcase
-    asker_name: 'lebron',
+    asker_name: 'isaac',
     // eslint-disable-next-line camelcase
-    question_body: 'Who what which when where why whether how?',
+    question_body: 'THIS WORKNG STILL TODAY?',
     // eslint-disable-next-line camelcase
     question_date: '2021-07-30T00:00:00.000Z',
     // eslint-disable-next-line camelcase
     question_helpfullness: 25,
     // eslint-disable-next-line camelcase
-    question_id: 23607,
+    question_id: 232608,
     reported: false
   },
 
