@@ -147,8 +147,8 @@ a {
 }
 
 .buy-btn {
-  width: 160px;
-  height: 40px;
+  width: 65%;
+  height: 15%;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -185,6 +185,7 @@ a {
   width: 15%;
   border: none;
   background: none;
+  padding: 5px;
   margin: 5px;
   background: rgba(255, 255, 255, 0.995);
 }

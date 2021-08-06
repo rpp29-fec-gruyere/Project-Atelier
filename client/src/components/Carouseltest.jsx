@@ -51,17 +51,17 @@ const Carouseltest = (props) => {
                 <img src={img} alt={`img${index}`} />
                 <div className="carousel-overlay">
                   {/* star icon that opens up modal for comparison */}
-                  <a href="javascript:void(0);" className="star-icon" onClick={() => {console.log('clicked')}}>
+                  <a href="javascript:void(0);" className="star-icon" onClick={() => console.log('clicked')}>
                     <img src="./assets/stars/star0.png" alt="" />
                   </a>
                   {/* buy button overlay, onClick => reset state and render product */}
-                  <a href="#" className="buy-btn" onClick={() => {renderProduct(id);}}>Buy Now</a>
+                  <a href="#" className="buy-btn" onClick={() => renderProduct(id)}>Buy Now</a>
                 </div>
               </div>
               <div className="carousel-detail">
                 <div className="product-detail">
                   <span>{category}</span>
-                  <a href="#" onClick={() => {renderProduct(id);}}>{name}</a>
+                  <a href="#" onClick={() => renderProduct(id)}>{name}</a>
                   <div className="price">${default_price}</div>
                   <div>Star Rating</div>
                 </div>
