@@ -3,7 +3,7 @@ import $ from 'jquery';
 import ProductOverview from './ProductOverview.jsx';
 import AdditionalProducts from './AdditionalProducts.jsx';
 import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
-import Reviews from './Reviews.jsx';
+import ReviewSection from './ReviewSection.jsx';
 
 
 class App extends React.Component {
@@ -77,6 +77,7 @@ class App extends React.Component {
           this.componentDidMount();
         }
       });
+
   }
 
   render() {
@@ -87,7 +88,7 @@ class App extends React.Component {
       <div className="app" data-testid="app">
         <header>
           <div id="mainHeader">
-            <span className="title">Atelier</span>
+            <span id="headerTitle">Atelier</span>
             <div id="headerSearchBar">
               <input type="text"></input>
               <button>
@@ -101,8 +102,8 @@ class App extends React.Component {
         </header>
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
         <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
-        <QuestionsAndAnswers />
-        <Reviews />
+        <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
+        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
       </div>
     );
   }
