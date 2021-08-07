@@ -101,9 +101,9 @@ class App extends React.Component {
           </div>
         </header>
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
-        <AdditionalProducts />
+        {/* <AdditionalProducts />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
-        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
+        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/> */}
       </div>
     );
   }

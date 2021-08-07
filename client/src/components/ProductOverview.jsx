@@ -1,5 +1,6 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import PhotoCarousel from './PhotoCarousel.jsx';
 
 //HELPER FUNCTIONS
 const ratingParser = (ratingsObj) => {
@@ -52,7 +53,6 @@ class ProductOverview extends React.Component {
 
     this.selectStyle = this.selectStyle.bind(this);
     this.selectSize = this.selectSize.bind(this);
-    this.rotatePhotos = this.rotatePhotos.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -102,25 +102,6 @@ class ProductOverview extends React.Component {
     this.setState({sku: event.target.value, sizeSelected: true});
   }
 
-  selectPhoto(event) {
-
-  }
-
-  rotatePhotos(event) {
-    console.log(event.target);
-    let stateUpdate = (state, props) => {
-      let photoArrayLength = state.item.styles[state.styleIndex].photos.length;
-      let nextPhotoIndex = (state.currentPhoto + (event.target.id.slice(0, 1) === 'r' ? 1 : -1)) % photoArrayLength;
-      if (nextPhotoIndex === -1) {
-        nextPhotoIndex = photoArrayLength - 1;
-      }
-      let newState = state;
-      newState.currentPhoto = nextPhotoIndex;
-      return newState;
-    };
-    this.setState(stateUpdate);
-  }
-
   render() {
     if (JSON.stringify(this.state.item) === '{}') {
       return (
@@ -137,49 +118,11 @@ class ProductOverview extends React.Component {
       let price = styles[styleIndex].original_price;
       return (<div data-testid="ProductOverview" id="overview">
         <div id="overview-main">
-          <div id="overview-carousel">
-            <div id="image-display">
-              <div className="alignment-helper"></div>
-              <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
-            </div>
-            <div id="carousel-controls-outer">
-              <div id="carousel-controls-inner">
-                {
-                  currentPhoto === 0 ? (<div className="filler"></div>) :
-                    <div className="arrow-container" key="left-arrow-container">
-                      <div className="alignment-helper"></div>
-                      <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos}></img>
-                    </div>
-                }
-                <div id="photo-catalog-outer-container">
-                  <div id="photo-catalog-inner-container">
-                    <div id="photo-catalog">
-                      <div className="alignment-helper"></div>
-                      <img className="catalog-scroll" id="left-scroll" key="left" src="./assets/leftarrow.png"></img>
-                      {
-                        styles[styleIndex].photos.map((photo, i) => (
-                          <img className={`photo-catalog-item${currentPhoto === i ? ' spotlight-thumbnail' : ''}`}
-                            key={`photo-catalog-item-${i}`}
-                            id={`photo-catalog-item-${i}`}
-                            src={photo.thumbnail_url}
-                            onClick={selectPhoto}>
-                          </img>
-                        ))
-                      }
-                      <img className="catalog-scroll" id="right-scroll" key="right" src="./assets/rightarrow.png"></img>
-                    </div>
-                  </div>
-                </div>
-                {
-                  currentPhoto === styles[styleIndex].photos.length - 1 ? (<div className="filler"></div>) :
-                    <div className="arrow-container" key="right-arrow-container">
-                      <div className="alignment-helper"></div>
-                      <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos}></img>
-                    </div>
-                }
-              </div>
-            </div>
-          </div>
+
+          {/* OVERVIEW CAROUSEL */}
+          <PhotoCarousel photos={styles[styleIndex].photos} />
+
+          {/* OVERVIEW CONTROLS (STYLE, SIZE, & QUANTITY SELECTION) */}
           <div id="controls">
             {
               numberOfReviews === 0 ? '' :
@@ -232,25 +175,38 @@ class ProductOverview extends React.Component {
                 }
               </select>
             </div>
-            <button id="add-to-cart">ADD TO CART</button>
+            {
+              styles[styleIndex].skus[sku].quantity ?
+                <button id="add-to-cart">ADD TO CART</button> :
+                <div id="sold-out">SOLD OUT</div>
+            }
           </div>
         </div>
+
+        {/* OVERVIEW DESCRIPTION */}
         <div id="overview-details">
           <div id="overview-description">
             <div id="product-tagline">{slogan}</div>
             <br></br>
             <div id="description-body">{description}</div>
           </div>
-          <div id="details-divide"></div>
-          <div id="overview-features">
-            {
-              // features.slice(0, 5).map((feature) => (
-              //   <div className="product-feature">
-
-              //   </div>
-              // ))
-            }
-          </div>
+          {
+            features.length > 0 ?
+              (<React.Fragment>
+                <div id="details-divide"></div>
+                <div id="overview-features">
+                  <ul id="features-list">
+                    {
+                      features.slice(0, 5).map((feature, i) => (
+                        <li className="product-feature" key={feature.feature}>
+                          <strong>{feature.feature}:</strong>{`  ${feature.value}`}
+                        </li>
+                      ))
+                    }
+                  </ul>
+                </div>
+              </React.Fragment>) : ''
+          }
         </div>
       </div>);
     }
