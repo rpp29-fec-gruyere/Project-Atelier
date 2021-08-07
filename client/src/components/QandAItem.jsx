@@ -8,8 +8,15 @@ const QandAItem = ({ questionsAndAnswers }) => (
         <div key={i}>
           <div className='q-and-a-item-question-detail'>Helpful? Yes({item.question_helpfulness}) | Add Answer</div>
           <div className='q-and-a-item-question'>Q: {item.question_body}</div>
-          <div className='q-and-a-item-answer'><b>A:</b> {item.answers.body}</div>
-          <div className='q-and-a-item-user'> by {item.asker_name} | Helpful?({item.answers.id}) | Report</div>
+          {
+            item.answers.map((answer, i) => (
+              <div key={i}>
+                <div className='q-and-a-item-answer'><b>A:</b> {answer.body}</div>
+                <div className='q-and-a-item-user'> by: {answer.answerer_name + ', ' + new Date(answer.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} | Helpful?({answer.helpfulness}) | Report</div>
+              </div>
+            ))
+          }
+
         </div>
       ))
     }
@@ -19,9 +26,4 @@ const QandAItem = ({ questionsAndAnswers }) => (
 
 export default QandAItem;
 
-
-
-// {/* <div className='q-and-a-item-answer'><b>A:</b> {item}</div>
-// <div className='q-and-a-posted-date'>{item} | Helpful? Yes(0) | Report </div>
-// <div className='q-and-a-picture'></div> */} */}
-
+// answer.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric'})

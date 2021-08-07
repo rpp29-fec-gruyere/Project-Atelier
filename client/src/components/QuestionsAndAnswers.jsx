@@ -7,24 +7,18 @@ import exampleData from '../../../helpers/QandAExample.js';
 
 // HELPER FUNCTION
 
-let sortAnswer = (answersObj) => {
-  let answersIDs = Object.keys(answersObj);
-  let mostHelpfulAnsId = '';
-  for (let i = 0; i < answersIDs.length - 1; i++) {
-    if (answerObj.answersIDs[i + 1].helpfulness > answerObj.answersIDs[i].helpfulness) {
-      mostHelpful = answersIDs[i + 1];
-    }
+let sortAnswerArr = (answersObj) => {
+  let answerArr = [];
+  for (let id in answersObj) {
+    answerArr.push(answersObj[id]);
   }
-  return mostHelpfulAnsId;
-
+  answerArr.sort((a, b) => parseFloat(b.helpfulness) - parseFloat(a.helpfulness));
+  return answerArr;
 };
 
 let sortQuestions = (questionsArr) => {
   questionsArr.sort((a, b) => parseFloat(b.question_helpfulness) - parseFloat(a.question_helpfulness));
 };
-
-
-//newState.questionsAndAnswers.answers.topAnswer(newState.questionsAndAnswers.answer)
 
 class QuestionsAndAnswers extends React.Component {
   constructor(props) {
@@ -44,6 +38,7 @@ class QuestionsAndAnswers extends React.Component {
       let newState = {
         questionsAndAnswers: [],
         questionsAndAnswersDisplay: []
+
       };
       newState.questionsAndAnswers = props.questionsAndAnswers;
       if (JSON.stringify(newState.questionsAndAnswers) !== '{}') {
@@ -51,7 +46,16 @@ class QuestionsAndAnswers extends React.Component {
         for (let i = 0; i < 2; i++) {
           newState.questionsAndAnswersDisplay.push(newState.questionsAndAnswers[i]);
         }
+        // sort answers in each question //
+        newState.questionsAndAnswers.forEach((item) => {
+          let answersObj = item.answers;
+          item.answers = sortAnswerArr(answersObj);
+        });
+
+        // let answersObj = newState.questionsAndAnswers[0].answers;
+        // newState.questionsAndAnswers[0].answers = sortAnswerArr(answersObj);
       }
+
       console.log('newstate:', newState);
       console.log('newstateDisplay:', newState.questionsAndAnswersDisplay);
       return newState;
@@ -60,16 +64,15 @@ class QuestionsAndAnswers extends React.Component {
     }
   }
 
-  // Load 2 more answers
+  // Load 2 more answers //
 
-  handleLoadAnswer (e) {
+  handleLoadAnswer(e) {
     let currLength = this.state.questionsAndAnswersDisplay.length;
     let newDisplay = this.state.questionsAndAnswersDisplay.slice();
     for (let i = currLength; i < currLength + 2; i++) {
       newDisplay.push(this.state.questionsAndAnswers[i]);
     }
-    console.log('more answers', newDisplay);
-    this.setState({questionsAndAnswersDisplay: newDisplay});
+    this.setState({ questionsAndAnswersDisplay: newDisplay });
 
   }
 
