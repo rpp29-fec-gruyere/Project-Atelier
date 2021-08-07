@@ -61,22 +61,24 @@
 .q-and-a-more-answers-button {
   padding-top: 1em;
   padding-bottom: 1em;
-  border-width: none;
+  border: none;
   color: darkgrey;
   font-weight: bold;
   font-size: 10px;
-  background-color: white;
+  background: none;
+  padding: 0;
 
 }
 
 .q-and-a-more-answered-questions {
   margin-top: 10px;
   background-color: white;
-  width: 300px;
+  width: 250px;
   height: 50px;
   font-weight: bold;
   border-width: thin;
   color: grey;
+  padding: 0;
 
 }
 
@@ -88,6 +90,7 @@
  font-weight: bold;
  border-width: thin;
  color: grey;
+ padding: 0;
 
 }
 

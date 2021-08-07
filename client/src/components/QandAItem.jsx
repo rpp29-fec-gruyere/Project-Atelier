@@ -13,9 +13,6 @@ const QandAItem = ({ questionsAndAnswers }) => (
         </div>
       ))
     }
-    <div className='q-and-a-more-answers'>
-      <button className='q-and-a-more-answers-button'>LOAD MORE ANSWERS</button>
-    </div>
 
   </div>
 );
