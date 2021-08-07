@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import Carousel from './Carousel.jsx';
 import Carouseltest from './Carouseltest.jsx';
+import ComparisonModal from './ComparisonModal.jsx';
 
 
 
@@ -10,6 +10,7 @@ const AdditionalProducts = (props) => {
   return (
     <div data-testid="AdditionalProducts" className="additional-products">
       <h3>RELATED PRODUCTS</h3>
+
       <Carouseltest items={props.relatedItems} loadPage={props.loadPage} show={4}/>
       {/* <Carousel show={4} content={props.relatedItems}>
         {props.relatedItems.length > 0 && props.relatedItems.map(item => {

@@ -1,15 +1,22 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
+import ComparisonModal from './ComparisonModal.jsx';
+import useModal from './useModal.jsx';
 
 const Carouseltest = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  let length = props.items ? props.items.length : 0
-  let children = props.items ? props.items.length : 0
+  const [modalShow, setModalShow] = useState(false);
+  let length = props.items ? props.items.length : 0;
+  let children = props.items ? props.items.length : 0;
+  const { isVisible, toggleModal } = useModal();
+
+  useEffect(() => {
+    console.log(modalShow)
+  },[modalShow]);
 
   const next = () => {
     if (currentIndex < (length - 4)) {
       setCurrentIndex(prevState => prevState + 1);
-      console.log(1)
     }
   };
 
@@ -20,8 +27,13 @@ const Carouseltest = (props) => {
   };
 
   const renderProduct = (id) => {
+    //reset carousel index and render product
     setCurrentIndex(() => 0);
     props.loadPage(id);
+  };
+
+  const openComparisonModal = () => {
+    setModalShow((prevState) => prevState ? false : true);
   };
 
   return (
@@ -51,9 +63,10 @@ const Carouseltest = (props) => {
                 <img src={img} alt={`img${index}`} />
                 <div className="carousel-overlay">
                   {/* star icon that opens up modal for comparison */}
-                  <a href="javascript:void(0);" className="star-icon" onClick={() => console.log('clicked')}>
+                  <a href="javascript:void(0);" id='star' className="star-icon" onClick={toggleModal}>
                     <img src="./assets/stars/star0.png" alt="" />
                   </a>
+                  <ComparisonModal isVisible={isVisible} hideModal={toggleModal}/>
                   {/* buy button overlay, onClick => reset state and render product */}
                   <a href="#" className="buy-btn" onClick={() => renderProduct(id)}>Buy Now</a>
                 </div>
@@ -70,19 +83,20 @@ const Carouseltest = (props) => {
           );
         }) : null }
       </div>
-      {currentIndex < (length - 4) &&
-      <div className="right-box">
-        <div className="right">
-          {/* right button */}
-          <a href="javascript:void(0);" className="right-btn" onClick={next}>
-            <FaAngleRight size="32" />
-          </a>
+      {
+        currentIndex < (length - 4) &&
+        <div className="right-box">
+          <div className="right">
+            {/* right button */}
+            <a href="javascript:void(0);" className="right-btn" onClick={next}>
+              <FaAngleRight size="32" />
+            </a>
+          </div>
         </div>
-      </div>
       }
     </div>
 
-  )
-}
+  );
+};
 
 export default Carouseltest;
