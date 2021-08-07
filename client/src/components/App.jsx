@@ -77,6 +77,7 @@ class App extends React.Component {
           this.componentDidMount();
         }
       });
+
   }
 
   render() {
@@ -101,7 +102,7 @@ class App extends React.Component {
         </header>
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
         <AdditionalProducts />
-        <QuestionsAndAnswers />
+        <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
         <Reviews />
       </div>
     );
