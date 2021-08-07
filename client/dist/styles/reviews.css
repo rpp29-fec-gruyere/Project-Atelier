@@ -1,0 +1,184 @@
+#mainReviewSection {
+    display: grid;
+    grid: "ratingsBreakdown reviewList" 1fr / 250px 1fr;
+    gap: 0 40px;
+    height: 100%;
+    margin: 10px 0;
+}
+
+.ratingsBreakdown {
+    width: fit-content;
+    font-size: 14px;
+    grid-area: ratingsBreakdown;
+}
+
+.reviewList {
+    grid-area: reviewList;
+}
+
+#ratingRepresentations {
+    display: flex;
+    align-items: flex-start;
+}
+
+#ratingRepresentations span {
+    font-size: 48px;
+    font-weight: bold;
+    margin-right: 10px;
+}
+
+#recommended {
+    font-size: 14px;
+}
+
+.ratingBar.component {
+    height: 20px;
+    width: 100%;
+    min-width: 245px;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+}
+
+.ratingBar.title {
+    height: 100%;
+    text-decoration: underline;
+}
+
+.ratingBar.container {
+    height: 30%;
+    width: 175px;
+    background-color: rgb(182, 182, 182);
+    margin: 0 5px;
+}
+
+.ratingBar.fill {
+    height: 100%;
+    background-color: darkgreen;
+    width: 0%;
+}
+
+.characteristicsSection {
+    height:fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.characteristic {
+    height: fit-content;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin: 5px 0;
+}
+
+.characteristicBar {
+    height: 5px;
+    width: 100%;
+    background-color: rgb(182, 182, 182);
+    justify-self: center;
+    margin: 5px 0;
+}
+
+.indicator {
+    height: 5px;
+    border-right: 3px solid black;
+}
+.characteristicDetails {
+    display: flex;
+    justify-content: space-between;
+}
+
+.characteristicDetail {
+    height: fit-content;
+    width: 30%;
+}
+
+.characteristicDetail.first {
+    text-align: left;
+}
+
+.characteristicDetail.middle {
+    text-align: center;
+}
+
+.characteristicDetail.last {
+    text-align: right;
+}
+
+
+#sortOptions {
+    margin-bottom: 30px;
+}
+
+.review {
+    height: fit-content;
+    width: 100%;
+    padding: 15px 0;
+    border-bottom: 1px solid rgb(148, 146, 146);
+}
+
+.reviewHeader {
+    display: flex;
+    justify-content: space-between;
+}
+
+.reviewUser {
+    font-size: 14px;
+    color: rgb(148, 146, 146);
+}
+
+.response {
+    background-color: rgb(139, 137, 137);
+}
+
+.helpful {
+    border-right: 1px solid rgb(148, 146, 146);
+    padding-right: 10px;
+}
+
+.helpfulResponse {
+    text-decoration: underline;
+}
+
+.report {
+    padding-left: 10px;
+}
+
+#reviewButtons {
+    height: fit-content;
+    width: 100%;
+    padding: 5% 0;
+}
+
+.reviewBtn {
+    height: 60px;
+    width: 140px;
+    background-color: white;
+    border-radius: 0%;
+    border: 1px solid rgb(148, 146, 146);
+}
+
+#addReviewModal {
+    position: fixed;
+    z-index: 1;
+    height: 60%;
+    width: 40%;
+    bottom: 25%;
+    left: 35%;
+    border: 1px solid rgb(148, 146, 146);
+    padding: 20px;
+    background-color: white;
+}
+
+#closeReviewModalBtn {
+    height: 10px;
+    width: 10px;
+    float: right;
+    cursor: pointer;
+}
+
+#sortOptions {
+    border: none;
+}
