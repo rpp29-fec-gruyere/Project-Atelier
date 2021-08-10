@@ -29,8 +29,41 @@ class QuestionsAndAnswers extends React.Component {
     };
 
     this.handleLoadAnswer = this.handleLoadAnswer.bind(this);
+    this.handleAddQuesion = this.handleAddQuesion.bind(this);
+    this.handleMoreAnsQ = this.handleMoreAnsQ.bind(this);
+    this.handleYes = this.handleYes.bind(this);
+    // this.handleAddAnswer = this.handleAddAnswer.bind(this);
+  }
+
+  handleLoadAnswer(e) {
+    let currLength = this.state.questionsAndAnswersDisplay.length;
+    let newDisplay = this.state.questionsAndAnswersDisplay.slice();
+    for (let i = currLength; i < currLength + 2; i++) {
+      newDisplay.push(this.state.questionsAndAnswers[i]);
+    }
+    this.setState({ questionsAndAnswersDisplay: newDisplay });
+  }
+
+  handleAddQuesion(e) {
 
   }
+
+  handleMoreAnsQ(e) {
+
+  }
+
+  handleYes(e) {
+
+
+  }
+
+  handleAddAnswer(e) {
+
+  }
+
+
+
+
 
   static getDerivedStateFromProps(props, state) {
     console.log('props', props.questionsAndAnswers);
@@ -51,30 +84,16 @@ class QuestionsAndAnswers extends React.Component {
           let answersObj = item.answers;
           item.answers = sortAnswerArr(answersObj);
         });
-
-        // let answersObj = newState.questionsAndAnswers[0].answers;
-        // newState.questionsAndAnswers[0].answers = sortAnswerArr(answersObj);
       }
 
-      console.log('newstate:', newState);
-      console.log('newstateDisplay:', newState.questionsAndAnswersDisplay);
+      // console.log('newstate:', newState);
+      // console.log('newstateDisplay:', newState.questionsAndAnswersDisplay);
       return newState;
     } else {
       return null;
     }
   }
 
-  // Load 2 more answers //
-
-  handleLoadAnswer(e) {
-    let currLength = this.state.questionsAndAnswersDisplay.length;
-    let newDisplay = this.state.questionsAndAnswersDisplay.slice();
-    for (let i = currLength; i < currLength + 2; i++) {
-      newDisplay.push(this.state.questionsAndAnswers[i]);
-    }
-    this.setState({ questionsAndAnswersDisplay: newDisplay });
-
-  }
 
 
   render() {
@@ -91,8 +110,8 @@ class QuestionsAndAnswers extends React.Component {
         <div data-testid='QuestionsAndAnswers' className='q-and-a-container'>
           <span className='q-and-a-title'>QUESTIONS & ANSWERS</span>
           <QandAForm />
-          <QandAList questionsAndAnswers={this.state.questionsAndAnswersDisplay} handleLoadAnswer={this.handleLoadAnswer} />
-          <QandAButtons />
+          <QandAList questionsAndAnswers={this.state.questionsAndAnswersDisplay} />
+          <QandAButtons handleLoadAnswer={this.handleLoadAnswer} />
         </div>
 
       );

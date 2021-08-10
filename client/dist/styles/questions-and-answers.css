@@ -19,7 +19,8 @@
 
 .q-and-a-item-question-detail {
   float: right;
-  color: grey
+  color: grey;
+  font-size: 12px;
 }
 
 .q-and-a-container {
@@ -96,7 +97,13 @@
 
 }
 
+.q-and-a-question-helpful, .q-and-a-question-addAnswer,
+.q-and-a-question-helpful-answer, .q-and-a-question-report {
+  text-decoration: underline;
+  background: none;
+  border: none;
+  color: grey;
+}
 /*
 --- Buttons ---
 */
-

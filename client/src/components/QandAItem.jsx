@@ -6,13 +6,23 @@ const QandAItem = ({ questionsAndAnswers }) => (
     {
       questionsAndAnswers.map((item, i) => (
         <div key={i}>
-          <div className='q-and-a-item-question-detail'>Helpful? Yes({item.question_helpfulness}) | Add Answer</div>
+          <div className='q-and-a-item-question-detail'>Helpful? <button className='q-and-a-question-helpful'>Yes</button>({item.question_helpfulness}) | <button className='q-and-a-question-addAnswer'>Add Answer</button></div>
           <div className='q-and-a-item-question'>Q: {item.question_body}</div>
           {
-            item.answers.map((answer, i) => (
+            item.answers.slice(0, 2).map((answer, i) => (
               <div key={i}>
                 <div className='q-and-a-item-answer'><b>A:</b> {answer.body}</div>
-                <div className='q-and-a-item-user'> by: {answer.answerer_name + ', ' + new Date(answer.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })} | Helpful?({answer.helpfulness}) | Report</div>
+                <div className='q-and-a-item-answer-pic'>
+                  {
+                    answer.photos.map((photo, i) => (
+                      <img src={photo} key={i}></img>
+                    ))
+                  }
+
+                </div>
+                <div className='q-and-a-item-user'> by: {answer.answerer_name + ', ' + new Date(answer.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })}
+                | Helpful? <button className='q-and-a-question-helpful-answer'>Yes</button>({answer.helpfulness}) | <button className='q-and-a-question-report'>Report</button>
+                </div>
               </div>
             ))
           }
@@ -25,5 +35,3 @@ const QandAItem = ({ questionsAndAnswers }) => (
 );
 
 export default QandAItem;
-
-// answer.date.toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric'})
