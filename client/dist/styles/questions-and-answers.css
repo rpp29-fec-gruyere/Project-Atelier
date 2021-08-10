@@ -105,5 +105,8 @@
   color: grey;
 }
 /*
---- Buttons ---
-*/
+/* --- Buttons --- */
+
+#q-an-a-item-img-container {
+  margin-left: 22px;
+}
