@@ -21,16 +21,24 @@ const buildGetRequest = (path, params) => {
 
 const buildPostRequest = (path, params) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${path}`;
-  const queryString = Object.keys(params)
-    .map(key => `${key}=${params[key]}`)
-    .join('&');
   return {
-    url: url + (queryString ? '/?' + queryString : ''),
+    url: url,
+    data: JSON.stringify(params),
     method: 'POST',
     headers: {
       Authorization: API_KEY
     }
   };
+};
+
+// BODY: [object] the request body
+//   example: {
+//     path: [string] the api endpoint,
+//     params: [object] additional api parameters (i.e. {sku_id: 941214})
+//   }
+// OUTPUT: a promise that resolves to the api result (object | array | error)
+const post = (body) => {
+  return axios(buildPostRequest(body.endpoint, body.params));
 };
 
 // BODY: [object] the request body
@@ -137,7 +145,6 @@ module.exports = {
   buildPostRequest,
   fetch,
   fetchItemData,
-  fetchAllData
+  fetchAllData,
+  post
 };
-
-// IT WORKS RIGHT NOW

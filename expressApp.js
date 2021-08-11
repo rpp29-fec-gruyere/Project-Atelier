@@ -36,5 +36,15 @@ app.get('/page-data', (req, res) => {
     });
 });
 
+app.post('/post-data', (req, res) => {
+  console.log('POST recieved at \'/post-data\'\ncookies: ', req.cookies, '\nbody: ', req.body);
+  api.post(req.body)
+    .then((result) => {
+      console.log('post successful', result);
+    })
+    .catch((err) => {
+      console.log('post failed', err);
+    });
+});
 
 module.exports = app;

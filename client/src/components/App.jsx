@@ -18,6 +18,7 @@ class App extends React.Component {
     };
 
     this.loadPage = this.loadPage.bind(this);
+    this.testPost = this.testPost.bind(this);
   }
 
   // For directly querying the API
@@ -36,6 +37,24 @@ class App extends React.Component {
     $.ajax({
       url: `/direct-query/?${queryString}`,
       type: 'GET',
+      success: successCB,
+      error: errorCB
+    });
+  }
+
+  // For sending post requests to the API
+  // Example of requestInfo:
+  //   {
+  //     endpoint: [string] api url endpoint (i.e. 'cart'),
+  //     params: [object] api uri parameters (i.e. {sku_id: 941214})
+  //   }
+  post(requestInfo, successCB = (data) => { console.log('[App] post successful.', data); }, errorCB = (error) => { throw error; }) {
+    console.log('request params in post: ', requestInfo);
+    $.ajax({
+      url: '/post-data',
+      type: 'POST',
+      data: JSON.stringify(requestInfo),
+      contentType: 'application/json',
       success: successCB,
       error: errorCB
     });
@@ -80,6 +99,10 @@ class App extends React.Component {
 
   }
 
+  testPost() {
+    this.post({endpoint: 'cart', params: {body: 'this is a question', name: 'blueberry', email: 'blue@berry.io', productId: 28212}});
+  }
+
   render() {
     if (JSON.stringify(this.state.item) !== '{}') {
       $(document).prop('title', this.state.item.name);
@@ -89,6 +112,7 @@ class App extends React.Component {
         <header>
           <div id="mainHeader">
             <span id="headerTitle">Atelier</span>
+            <button onClick={this.testPost}>Test POST</button>
             <div id="headerSearchBar">
               <input type="text"></input>
               <button>
