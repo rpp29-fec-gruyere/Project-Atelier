@@ -18,7 +18,6 @@ class App extends React.Component {
     };
 
     this.loadPage = this.loadPage.bind(this);
-    this.testPost = this.testPost.bind(this);
   }
 
   // For directly querying the API
