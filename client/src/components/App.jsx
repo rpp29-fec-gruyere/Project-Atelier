@@ -49,10 +49,26 @@ class App extends React.Component {
   //     params: [object] api uri parameters (i.e. {sku_id: 941214})
   //   }
   post(requestInfo, successCB = (data) => { console.log('[App] post successful.', data); }, errorCB = (error) => { throw error; }) {
-    console.log('request params in post: ', requestInfo);
     $.ajax({
       url: '/post-data',
       type: 'POST',
+      data: JSON.stringify(requestInfo),
+      contentType: 'application/json',
+      success: successCB,
+      error: errorCB
+    });
+  }
+
+  // For sending put requests to the API
+  // Example of requestInfo:
+  //   {
+  //     endpoint: [string] api url endpoint (i.e. 'qa/questions/[QUESTION_ID]/helpful'),
+  //     params: [object] api uri parameters (i.e. {question_id: 290539})
+  //   }
+  put(requestInfo, successCB = (data) => { console.log('[App] put successful.', data); }, errorCB = (error) => { throw error; }) {
+    $.ajax({
+      url: '/put-data',
+      type: 'PUT',
       data: JSON.stringify(requestInfo),
       contentType: 'application/json',
       success: successCB,
@@ -99,10 +115,6 @@ class App extends React.Component {
 
   }
 
-  testPost() {
-    this.post({endpoint: 'cart', params: {body: 'this is a question', name: 'blueberry', email: 'blue@berry.io', productId: 28212}});
-  }
-
   render() {
     if (JSON.stringify(this.state.item) !== '{}') {
       $(document).prop('title', this.state.item.name);
@@ -112,7 +124,6 @@ class App extends React.Component {
         <header>
           <div id="mainHeader">
             <span id="headerTitle">Atelier</span>
-            <button onClick={this.testPost}>Test POST</button>
             <div id="headerSearchBar">
               <input type="text"></input>
               <button>

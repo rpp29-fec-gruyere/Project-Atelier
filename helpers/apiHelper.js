@@ -19,12 +19,30 @@ const buildGetRequest = (path, params) => {
   };
 };
 
+// PATH: [string] i.e. 'cart'.
+// PARAMS: [object] i.e. {sku_id: 921412}
+// OUTPUT: [object] an axios request object
 const buildPostRequest = (path, params) => {
   let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${path}`;
   return {
     url: url,
-    data: JSON.stringify(params),
+    data: params,
     method: 'POST',
+    headers: {
+      Authorization: API_KEY
+    }
+  };
+};
+
+// PATH: [string] i.e. 'qa/questions/[QUESTION_ID]/helpful'
+// PARAMS: [object] i.e. {question_id: 842351}
+// OUTPUT: [object] an axios request object
+const buildPutRequest = (path, params) => {
+  let url = `https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp/${path}`;
+  return {
+    url: url,
+    data: params,
+    method: 'PUT',
     headers: {
       Authorization: API_KEY
     }
@@ -33,24 +51,34 @@ const buildPostRequest = (path, params) => {
 
 // BODY: [object] the request body
 //   example: {
-//     path: [string] the api endpoint,
+//     path: [string] the api endpoint (i.e. 'cart')
 //     params: [object] additional api parameters (i.e. {sku_id: 941214})
 //   }
 // OUTPUT: a promise that resolves to the api result (object | array | error)
 const post = (body) => {
-  return axios(buildPostRequest(body.endpoint, body.params));
+  let request = buildPostRequest(body.endpoint, body.params);
+  return axios(request);
 };
 
 // BODY: [object] the request body
 //   example: {
-//     path: [string] the api endpoint,
+//     path: [string] the api endpoint, (i.e. 'qa/questions/[QUESTION_ID]/helpful')
+//     params: [object] additional api parameters (i.e. {question_id: 290539})
+//   }
+// OUTPUT: a promise that resolves to the api result (object | array | error)
+const put = (body) => {
+  let request = buildPutRequest(body.endpoint, body.params);
+  return axios(request);
+};
+
+// BODY: [object] the request body
+//   example: {
+//     path: [string] the api endpoint, i.e. 'cart'
 //     params: [object] additional api parameters (i.e. {page: 1, count: 5})
 //   }
 // OUTPUT: a promise that resolves to the api result (object | array | error)
 const fetch = (body) => {
   let query = buildGetRequest(body.endpoint, body.params);
-  // console.log('[API Helper] axios query created: ', query);
-  // console.log('[API Helper] Initiating API query');
   return axios(query);
 };
 
@@ -146,5 +174,6 @@ module.exports = {
   fetch,
   fetchItemData,
   fetchAllData,
-  post
+  post,
+  put
 };
