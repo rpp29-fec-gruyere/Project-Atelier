@@ -168,9 +168,65 @@
     bottom: 25%;
     left: 35%;
     border: 1px solid rgb(148, 146, 146);
-    padding: 20px;
+    padding: 30px;
     background-color: white;
+    overflow-y: auto
 }
+
+#formContent {
+    width: 70%;
+}
+
+.formSection {
+    height: fit-content;
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.formSectionTitle {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.formCharacteristic {
+    width: 100%;
+    height: fit-content;
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.formCharacteristicName {
+    width: fit-content;
+    margin: 0 5px 10px 0;
+    text-decoration: underline;
+}
+
+
+.formChosenCharacteristicDescriprtion {
+    color: darkgreen;
+    
+}
+
+.formCharacteristicBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5px 10px 5px;
+}
+
+.formCharacteristicDescriptionBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
 
 #closeReviewModalBtn {
     height: 10px;
@@ -181,4 +237,13 @@
 
 #sortOptions {
     border: none;
+}
+
+#reviewSummaryInput {
+    width: 100%;
+}
+
+#reviewBodyInput {
+    width: 100%;
+    height: 100px;
 }
