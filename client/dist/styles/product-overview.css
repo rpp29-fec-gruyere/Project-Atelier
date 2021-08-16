@@ -41,7 +41,7 @@
       text-align: center;
       z-index: 10;
       position: relative;
-      cursor: zoom-in;
+      cursor: url('../assets/cursors/expand.png'), zoom-in;
     }
     #overview-carousel-expanded {
       height: 80vh;
@@ -52,7 +52,7 @@
       text-align: center;
       z-index: 10;
       position: relative;
-      cursor: cell;
+      cursor: url('../assets/cursors/plus.png'), cell;
     }
       #image-display {
         height: 100%;
