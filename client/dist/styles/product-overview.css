@@ -52,7 +52,7 @@
       text-align: center;
       z-index: 10;
       position: relative;
-      cursor: zoom-out;
+      cursor: cell;
     }
       #image-display {
         height: 100%;
@@ -138,6 +138,8 @@
                 .catalog-scroll {
                   vertical-align: middle;
                   height: 90%;
+                  width: 10%;
+                  object-fit: cover;
                   cursor: pointer;
                 }
                 .photo-catalog-item {

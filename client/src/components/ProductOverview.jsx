@@ -120,7 +120,7 @@ class ProductOverview extends React.Component {
         <div id="overview-main">
 
           {/* OVERVIEW CAROUSEL */}
-          <PhotoCarousel photos={styles[styleIndex].photos} />
+          <PhotoCarousel photos={styles[styleIndex].photos} description={`${styles[styleIndex].name} ${name}`} />
 
           {/* OVERVIEW CONTROLS (STYLE, SIZE, & QUANTITY SELECTION) */}
           <div id="controls">
@@ -151,9 +151,20 @@ class ProductOverview extends React.Component {
                 styles.map((style, i) => {
                   return (
                     <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
-                      <img className="style-icon" id={`style-${i}`} key={`style-${i}`} src={style.photos[0].thumbnail_url} onClick={this.selectStyle}></img>
+                      <img className="style-icon"
+                        id={`style-${i}`}
+                        key={`style-${i}`}
+                        src={style.photos[0].thumbnail_url}
+                        alt={`${styles[styleIndex].name} style`}
+                        onClick={this.selectStyle}>
+                      </img>
                       {
-                        styleIndex !== i ? '' : (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png"></img>)
+                        styleIndex !== i ? '' : (<img
+                          className="style-checkmark"
+                          key={`style-checkmark-${i}`}
+                          src="./assets/checkmark.png"
+                          alt={`${styles[styleIndex].name} style selected`}>
+                        </img>)
                       }
                     </div>
                   );
