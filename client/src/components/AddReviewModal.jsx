@@ -1,5 +1,7 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import $ from 'jquery';
+import { IMGBB_KEY } from '../../../config';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -15,7 +17,11 @@ class AddReviewModal extends React.Component {
       Length: undefined,
       Fit: undefined,
       reviewSummary: '',
-      reviewBody: ''
+      reviewBody: '',
+      imgs: [],
+      imgThumbnails: [],
+      nickname: '',
+      email: ''
     };
     
     this.characteristicDescriptions = {
@@ -40,7 +46,11 @@ class AddReviewModal extends React.Component {
       Length: undefined,
       Fit: undefined,
       reviewSummary: '',
-      reviewBody: ''
+      reviewBody: '',
+      imgs: [],
+      imgThumbnails: [],
+      nickname: '',
+      email: ''
     });
     this.props.handleClose();
   }
@@ -56,6 +66,35 @@ class AddReviewModal extends React.Component {
 
   handleStarClick() {
     this.setState({rating: this.state.tempRating});
+  }
+
+  handleAddImage() {
+    document.getElementById('imgInputBtn').click();
+  }
+
+  handleImageUpload (img) {
+    var form = new FormData();
+    form.append('image', img);
+    $.ajax({
+      url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMGBB_KEY}`,
+      method: 'POST',
+      timeout: 0,
+      processData: false,
+      mimeType: 'multipart/form-data',
+      contentType: false,
+      data: form,
+      success: response => {
+        response = JSON.parse(response);
+        let thumbnails = this.state.imgThumbnails;
+        let imgs = this.state.imgs;
+        thumbnails.push(response.data.thumb.url);
+        imgs.push(response.data.image.url);
+        this.setState({
+          imgThumbnails: thumbnails,
+          imgs: imgs
+        });
+      }
+    });
   }
 
   handleChange({target}) {
@@ -89,13 +128,32 @@ class AddReviewModal extends React.Component {
     case 'reviewBody':
       this.setState({[targetName]: targetValue});
       break;
+    case 'imgs':
+      if (target.value !== undefined) {
+        this.handleImageUpload(target.files[0]);
+        // let imgs = this.state.imgs;
+        // imgs.push(URL.createObjectURL(target.files[0]));
+        // this.setState({[targetName]: imgs});
+        // document.getElementById('imgForm').reset();
+      }
+      break;
+    case 'nickname':
+      this.setState({[targetName]: targetValue});
+      break;
+    case 'email':
+      this.setState({[targetName]: targetValue});
+      break;
     }
+  }
 
+  handleSubmit () {
+    
   }
 
 
   render () {
     let characteristics = [];
+
     for (let i = 0; i < this.props.characteristics.length; i++) {
       let characteristicName = this.props.characteristics[i];
       let characteristic = (
@@ -125,6 +183,12 @@ class AddReviewModal extends React.Component {
           </div>
         </div>);
       characteristics.push(characteristic);
+    }
+
+    let imgs = [];
+
+    for (let i = 0; i < this.state.imgThumbnails.length; i++) {
+      imgs.push(<img src={this.state.imgThumbnails[i]} alt="" className='imgThumbnail' />);
     }
 
     return (
@@ -178,6 +242,36 @@ class AddReviewModal extends React.Component {
               }
             </div>
             <div className="formSection">
+              <form id="imgForm">
+                <input type="file" id="imgInputBtn" name="imgs" accept="image/*"
+                  onChange={e => this.handleChange(e)}
+                ></input>
+                {this.state.imgs.length < 5 ? <button id="imgAddVisibleBtn" type="button" onClick={this.handleAddImage.bind(this)}>Add image</button> : undefined}
+              </form>
+              <div id="thumbnailDisplay">
+                {imgs}
+              </div>
+            </div>
+            <div className="formSection">
+              <span className="formSectionNickname">What is your nickname?</span>
+              <input id="nicknameInput" name="nickname" type="text" maxLength="60" placeholder="Example: jackson11!" required
+                onChange={e => this.handleChange(e)}
+                value={this.state.nickname}
+              ></input>
+              <span>For privacy reasons, do not use your full name or email address</span>
+            </div>
+            <div className="formSection">
+              <span className="formSectionEmail">What is your nickname?</span>
+              <input id="emailInput" name="email" type="email" pattern=".+@\.com" maxLength="60" placeholder="Example: jackson11@email.com" required
+                onChange={e => this.handleChange(e)}
+                value={this.state.email}
+              ></input>
+              <span>For authentication reasons, you will not be emailed</span>
+            </div>
+            <div className="formSection">
+              <div>
+                <button type="button" onClick={this.handleSubmit.bind(this)}>Submit</button>
+              </div>
             </div>
           </form>
         </div>

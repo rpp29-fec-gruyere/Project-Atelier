@@ -15,7 +15,7 @@ const RatingsBreakdown = props => {
     5: 0
   };
 
-  if (metaData) {
+  if (metaData && Object.keys(metaData.ratings).length > 0) {
     let sum = 0;
     let count = 0;
     for (let rating in metaData.ratings) {

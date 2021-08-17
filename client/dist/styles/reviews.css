@@ -247,3 +247,16 @@
     width: 100%;
     height: 100px;
 }
+
+#imgInputBtn {
+    display: none;
+}
+
+#thumbnailDisplay {
+    height: fit-content;
+}
+
+.imgThumbnail {
+    height: 75px;
+    width: 75px;
+}
