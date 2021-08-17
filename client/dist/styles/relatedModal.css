@@ -1,0 +1,142 @@
+#modal-overlay {
+  /* width: 100vw;
+  height: 100vh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 500;
+  background-color: rgba(0,0,0,0.1); */
+}
+
+#modal-box {
+  position: fixed;
+  top: 5%;
+  left:20%;
+  z-index: 1000;
+  height: 42%;
+  width: 60%;
+  border: 1px solid rgb(148, 146, 146);
+  padding: 0;
+  background-color: white;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: #fefefe;
+  margin: 0; /* 15% from the top and centered */
+  padding: 0;
+  border: 1px solid #888;
+  width: 80%; /* Could be more or less, depending on screen size */
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 30px;
+  font-weight: bold;
+  transform: translate(-50%,0%);
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+#modal-header {
+  display: flex;
+  flex-direction: column;
+  margin-left: 1.05em;
+}
+
+
+.header {
+  font-size: 1em;
+  letter-spacing: 1px;
+  flex-grow: 1;
+  margin: 0;
+  margin-top: 1em;
+  margin-left: 0;
+}
+
+.name-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.product-name {
+  margin: 0;
+  flex-grow: 1;
+  font-size: 1.1em;
+  width: 4.5em;
+  display: flex;
+  justify-content: center;
+  margin-top: 0.5em;
+  text-align: center;
+}
+
+.filler {
+  margin: 0 12%;
+}
+
+#modal-body {
+  margin-top: 1em;
+}
+
+#feature-box {
+  display: flex;
+  flex-direction: row;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0.75em;
+}
+
+.checklist, .feature-value {
+  font-size: 1.1em;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.feature-value-null {
+  /* padding: .657em 0; */
+  font-size: 1.1em;
+}
+
+.chekclist {
+  padding: 1.1em 0;
+}
+
+.feature-name {
+  font-size: 0.9em;
+  color: rgba(0,0,0,0.7);
+  letter-spacing: 0.7px;
+}
+
+.feature-value {
+  letter-spacing: 0.5px;
+}
+
+.check, .feature-value, .feature-name {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.not-check {
+  padding: 1.08em 0;
+  margin-bottom: 12px;
+}
+
+.check {
+  padding: .483em 0;
+  margin-bottom: 12px;
+}

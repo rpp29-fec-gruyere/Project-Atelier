@@ -77,7 +77,6 @@ class App extends React.Component {
           this.componentDidMount();
         }
       });
-
   }
 
   render() {
@@ -101,7 +100,13 @@ class App extends React.Component {
           </div>
         </header>
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
-        <AdditionalProducts relatedItems={this.state.relatedItems} loadPage={this.loadPage}/>
+        <AdditionalProducts
+          relatedItems={this.state.relatedItems}
+          fetch={this.fetch}
+          loadPage={this.loadPage}
+          item={this.state.item}
+          review={this.state.reviews}
+        />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
         <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
       </div>

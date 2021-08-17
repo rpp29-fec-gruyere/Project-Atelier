@@ -2,6 +2,8 @@
 @import url('product-overview.css');
 @import url('questions-and-answers.css');
 @import url('reviews.css');
+@import url('relatedCarousel.css');
+@import url('relatedModal.css');
 
 
 body, .root{

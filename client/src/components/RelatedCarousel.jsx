@@ -1,21 +1,48 @@
 import React, { useState, useEffect } from 'react';
 import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
-import ComparisonModal from './ComparisonModal.jsx';
-import useModal from './useModal.jsx';
+import Stars from './Stars.jsx';
+import $ from 'jquery'
 
-const Carouseltest = (props) => {
+const RelatedCarousel = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [modalShow, setModalShow] = useState(false);
   let length = props.items ? props.items.length : 0;
-  let children = props.items ? props.items.length : 0;
-  const { isVisible, toggleModal } = useModal();
+  const { toggleModal, changeModalIndex } = props;
+  const [reviews, setReviews] = useState(false);
 
-  useEffect(() => {
-    console.log(modalShow)
-  },[modalShow]);
+  const getRatingsOnProducts = (items) => {
+    const allRatings = items.map(item => {
+      let productId = item.id;
+
+      // $.ajax({
+      //   url: `/page-data/?id=${productId}`,
+      //   type: 'GET',
+      //   success: (pageData) => {
+      //     const { ratings } = pageData.reviews.meta;
+      //     let cumulativeStars = 0;
+      //     let numberOfRatings = 0;
+      //     for (let key in ratings) {
+      //       cumulativeStars += Number(key) * Number(ratings[key]);
+      //       numberOfRatings += Number(ratings[key]);
+      //     }
+      //     const reviewScore = cumulativeStars / numberOfRatings;
+      //     item.ratings = reviewScore.toString() === "NaN" ? 0 : reviewScore;
+      //     console.log('[Ratings]', productId, item);
+      //   },
+      //   error: (error) => {
+      //     console.log(error);
+      //   }
+      // });
+    });
+    return allRatings;
+  };
+
+  if (props.items && props.items.length > 0) {
+    getRatingsOnProducts(props.items);
+  }
 
   const next = () => {
     if (currentIndex < (length - 4)) {
+      console.log(review)
       setCurrentIndex(prevState => prevState + 1);
     }
   };
@@ -30,10 +57,6 @@ const Carouseltest = (props) => {
     //reset carousel index and render product
     setCurrentIndex(() => 0);
     props.loadPage(id);
-  };
-
-  const openComparisonModal = () => {
-    setModalShow((prevState) => prevState ? false : true);
   };
 
   return (
@@ -52,22 +75,21 @@ const Carouseltest = (props) => {
         style={{ transform: `translateX(-${currentIndex * 26}%)`}}
       >
         {props.items && props.items[0] !== undefined ? props.items.map((item, index) => {
-          const { id, category, name, default_price, features } = item;
+          const { id, category, name, default_price, features, ratings } = item;
           let img = item.styles[0].photos[0].thumbnail_url;
           // if no img found on product, display placeholder img
           img = img || 'https://via.placeholder.com/1600x2000';
 
           return (
-            <div className="carousel-wrapper">
+            <div className="carousel-wrapper" key={index}>
               <div className="carousel-img">
                 <img src={img} alt={`img${index}`} />
                 <div className="carousel-overlay">
                   {/* star icon that opens up modal for comparison */}
-                  <a href="javascript:void(0);" id='star' className="star-icon" onClick={toggleModal}>
+                  <a href="javascript:void(0);" id='star' className="star-icon" onClick={() => {toggleModal(); changeModalIndex(index);}}>
                     <img src="./assets/stars/star0.png" alt="" />
                   </a>
-                  <ComparisonModal isVisible={isVisible} hideModal={toggleModal}/>
-                  {/* buy button overlay, onClick => reset state and render product */}
+
                   <a href="#" className="buy-btn" onClick={() => renderProduct(id)}>Buy Now</a>
                 </div>
               </div>
@@ -76,7 +98,10 @@ const Carouseltest = (props) => {
                   <span>{category}</span>
                   <a href="#" onClick={() => renderProduct(id)}>{name}</a>
                   <div className="price">${default_price}</div>
-                  <div>Star Rating</div>
+                  {ratings ?
+                    <Stars rating={ratings}/>
+                    : <div>No Reviews</div>
+                  }
                 </div>
               </div>
             </div>
@@ -99,4 +124,4 @@ const Carouseltest = (props) => {
   );
 };
 
-export default Carouseltest;
+export default RelatedCarousel;
