@@ -200,9 +200,10 @@
 
     #controls {
       width: 100%;
+      height: 80vh;
       display: flex;
       flex-direction: column;
-      align-content: flex-start;
+      justify-content: space-around;
       font-family: inherit;
       font-weight: 800;
     }
@@ -211,9 +212,16 @@
         flex-direction: row;
         align-content: flex-start;
         column-gap: 5px;
-        font-size: 12pt;
+        font-size: 1.62vh;
       }
+        #overview .star {
+          height: 3vh;
+          width: auto;
+        }
         #link-to-reviews {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
           color: black;
           padding-top: 3px;
           font-weight: 400;
@@ -227,98 +235,109 @@
         font-size: 5.3vh;
       }
       #overview-price {
-        font-size: 2.15vh;
+        font-size: 2.5vh;
+        margin-left: .25vw;
       }
-      #style-indicator {
+      #style-section {
+        margin-bottom: .8vh;
         display: flex;
-        flex-direction: row;
-        column-gap: 8px;
+        flex-direction: column;
+        gap: 1.2vh;
       }
-        #overview-style {
-          font-size: 2.15vh;
+        #style-indicator {
+          display: flex;
+          flex-direction: row;
+          column-gap: 1vh;
+          margin-left: .25vw;
         }
-        #selected-style {
-          font-size:  2.15vh;
-          font-weight: 300;
-        }
-      #style-selector {
-        width: 100%;
-        display: grid;
-        grid-template-columns: 5vw 5vw 5vw 5vw;
-        grid-auto-rows: 5vw;
-        row-gap: .7vw;
-        column-gap: .7vw;
-      }
-        .style-outline {
-          border-color: rgb(182, 189, 197);
-          border-radius: 100%;
+          #overview-style {
+            font-size: 2.15vh;
+          }
+          #selected-style {
+            font-size:  2.15vh;
+            font-weight: 300;
+          }
+        #style-selector {
           width: 100%;
-          height: 100%;
-          cursor: pointer;
+          display: grid;
+          grid-template-columns: 5vw 5vw 5vw 5vw;
+          grid-auto-rows: 5vw;
+          row-gap: .7vw;
+          column-gap: .7vw;
         }
-        .style-icon {
-          width: 4.2vw;
-          height: 4.2vw;
-          object-fit: fill;
-          border: .5vw double;
-          border-color: inherit;
-          border-radius: 50%;
-          z-index: 0;
-          /* padding: -.5vw; */
-          position: absolute;
-        }
-        .current-style {
-          border-color: black;
-        }
-        .style-checkmark {
-          z-index: 1;
-          width: 4.2vw;
-          height: 4.2vw;
-          border-radius: 100%;
-          border: .5vw double black;
-          position: absolute;
-        }
-      #control-line-1 {
-        display: grid;
-        grid-template-columns: 15.75vw 5.625vw;
-        column-gap: 1.125vw;
+          .style-outline {
+            border-color: rgb(182, 189, 197);
+            border-radius: 100%;
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+          }
+          .style-icon {
+            width: 4.2vw;
+            height: 4.2vw;
+            object-fit: fill;
+            border: .5vw double;
+            border-color: inherit;
+            border-radius: 50%;
+            z-index: 0;
+            /* padding: -.5vw; */
+            position: absolute;
+          }
+          .current-style {
+            border-color: black;
+          }
+          .style-checkmark {
+            z-index: 1;
+            width: 4.2vw;
+            height: 4.2vw;
+            border-radius: 100%;
+            border: .5vw double black;
+            position: absolute;
+          }
+      #order-controls {
+        width: 100%;
       }
-        #control-line-1 select {
+        #control-line-1 {
+          display: grid;
+          grid-template-columns: 15.75vw 5.625vw;
+          column-gap: 1.125vw;
+        }
+          #control-line-1 select {
+            width: 100%;
+            height: 5vh;
+            border: 2px solid black;
+            padding-left: 1vh;
+            font-size: 1.9vh;
+            font-weight: 300;
+            background-color: white;
+            cursor: pointer;
+            overflow: auto;
+          }
+        #add-to-cart {
+          margin-top: 1.125vw;
           width: 100%;
           height: 5vh;
-          border: 2px solid black;
-          padding-left: 1vh;
+          text-align: center;
           font-size: 1.9vh;
-          font-weight: 300;
+          border: 2px solid black;
           background-color: white;
           cursor: pointer;
-          overflow: auto;
+          transition: color 300ms, background-color 300ms;
         }
-      #add-to-cart {
-        margin-top: 1.125vw;
-        width: 100%;
-        height: 5vh;
-        text-align: center;
-        font-size: 1.9vh;
-        border: 2px solid black;
-        background-color: white;
-        cursor: pointer;
-        transition: color 300ms, background-color 300ms;
-      }
-      #add-to-cart:hover {
-        background-color: black;
-        color: white;
-      }
-      #sold-out {
-        margin-top: 20px;
-        width: 100%;
-        height: 50px;
-        text-align: center;
-        font-size: 14pt;
-        border: 2px solid black;
-        background-color: black;
-        color: white;
-      }
+        #add-to-cart:hover {
+          background-color: black;
+          color: white;
+        }
+        #sold-out {
+          margin-top: 20px;
+          width: 100%;
+          height: 50px;
+          text-align: center;
+          font-size: 14pt;
+          border: 2px solid black;
+          background-color: black;
+          color: white;
+        }
   #overview-details {
     height: auto;
     min-height: 200px;

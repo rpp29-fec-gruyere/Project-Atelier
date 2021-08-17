@@ -141,62 +141,63 @@ class ProductOverview extends React.Component {
                   </a>
                 </div>)
             }
-            <br></br>
-            <div id="overview-category">{category.toUpperCase()}</div>
-            <div id="overview-product-title">{name}</div>
-            <br></br>
-            <div id="overview-price">${styles[styleIndex].original_price}</div>
-            <br></br>
-            <div id="style-indicator">
-              <div id="overview-style">STYLE:</div>
-              <div id="selected-style">{styles[styleIndex].name.toUpperCase()}</div>
+            <div id="product-info">
+              <div id="overview-category">{category.toUpperCase()}</div>
+              <div id="overview-product-title">{name}</div>
             </div>
-            <br></br>
-            <div id="style-selector">
+            <div id="overview-price">${styles[styleIndex].original_price}</div>
+            <div id="style-section">
+              <div id="style-indicator">
+                <div id="overview-style">STYLE:</div>
+                <div id="selected-style">{styles[styleIndex].name.toUpperCase()}</div>
+              </div>
+              <div id="style-selector">
+                {
+                  styles.map((style, i) => {
+                    return (
+                      <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
+                        <img className="style-icon"
+                          id={`style-${i}`}
+                          key={`style-${i}`}
+                          src={style.photos[0].thumbnail_url}
+                          alt={`${styles[styleIndex].name} style`}
+                          onClick={this.selectStyle}>
+                        </img>
+                        {
+                          styleIndex !== i ? '' : (<img
+                            className="style-checkmark"
+                            key={`style-checkmark-${i}`}
+                            src="./assets/checkmark.png"
+                            alt={`${styles[styleIndex].name} style selected`}>
+                          </img>)
+                        }
+                      </div>
+                    );
+                  })
+                }
+              </div>
+            </div>
+            <div id="order-controls">
+              <div id="control-line-1">
+                <select id="size-selector" name="size" value={sizeSelected ? sku : ''} onChange={this.selectSize}>
+                  <option value="" disabled hidden>SELECT SIZE</option>
+                  {
+                    sizeOptionsGenerator(styles[styleIndex].skus)
+                  }
+                </select>
+                <select id="quantity-selector" name="quantity" defaultValue="1">
+                  <option className="quantity-option" key="quantity1" value="1">1</option>
+                  {
+                    quantityOptionsGenerator(styles[styleIndex].skus[sku].quantity)
+                  }
+                </select>
+              </div>
               {
-                styles.map((style, i) => {
-                  return (
-                    <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
-                      <img className="style-icon"
-                        id={`style-${i}`}
-                        key={`style-${i}`}
-                        src={style.photos[0].thumbnail_url}
-                        alt={`${styles[styleIndex].name} style`}
-                        onClick={this.selectStyle}>
-                      </img>
-                      {
-                        styleIndex !== i ? '' : (<img
-                          className="style-checkmark"
-                          key={`style-checkmark-${i}`}
-                          src="./assets/checkmark.png"
-                          alt={`${styles[styleIndex].name} style selected`}>
-                        </img>)
-                      }
-                    </div>
-                  );
-                })
+                styles[styleIndex].skus[sku].quantity ?
+                  <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
+                  <div id="sold-out">SOLD OUT</div>
               }
             </div>
-            <br></br>
-            <div id="control-line-1">
-              <select id="size-selector" name="size" value={sizeSelected ? sku : ''} onChange={this.selectSize}>
-                <option value="" disabled hidden>SELECT SIZE</option>
-                {
-                  sizeOptionsGenerator(styles[styleIndex].skus)
-                }
-              </select>
-              <select id="quantity-selector" name="quantity" defaultValue="1">
-                <option className="quantity-option" key="quantity1" value="1">1</option>
-                {
-                  quantityOptionsGenerator(styles[styleIndex].skus[sku].quantity)
-                }
-              </select>
-            </div>
-            {
-              styles[styleIndex].skus[sku].quantity ?
-                <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
-                <div id="sold-out">SOLD OUT</div>
-            }
           </div>
         </div>
 
