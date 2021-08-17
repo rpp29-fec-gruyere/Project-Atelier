@@ -92,32 +92,47 @@ class PhotoCarousel extends React.Component {
           <div id="photo-catalog-outer-container">
             <div id="photo-catalog-inner-container">
               <div id="photo-catalog">
-                <div className="alignment-helper"></div>
-                <img className="catalog-scroll"
-                  id="left-scroll"
-                  key="left"
-                  src="./assets/leftarrow.png"
-                  alt='Cycle photo catalog left'
-                  onClick={this.rotateCatalog}>
-                </img>
                 {
-                  photos.slice(catalogStartingIndex, catalogStartingIndex + 7).map((photo, i) => (
-                    <img className={`photo-catalog-item${currentPhoto === i + catalogStartingIndex ? ' spotlight-thumbnail' : ''}`}
-                      key={`photo-catalog-item-${i + catalogStartingIndex}`}
-                      id={`photo-catalog-item-${i + catalogStartingIndex}`}
-                      src={photo.thumbnail_url}
-                      alt={`${description} photo thumbnail ${i + (catalogStartingIndex * 7) + 1}`}
-                      onClick={this.selectPhoto}>
-                    </img>
-                  ))
+                  expanded ? (<React.Fragment>
+                    {
+                      photos.map((photo, i) => (
+                        <div className={currentPhoto === i ? 'spotlight-circle' : 'catalog-circle'}
+                          key={`photo-catalog-item-${i}`}
+                          id={`photo-catalog-item-${i}`}
+                          onClick={this.selectPhoto}>
+                        </div>
+                      ))
+                    }
+                  </React.Fragment>) :
+                    (<React.Fragment>
+                      <div className="alignment-helper"></div>
+                      <img className="catalog-scroll"
+                        id="left-scroll"
+                        key="left"
+                        src="./assets/leftarrow.png"
+                        alt='Cycle photo catalog left'
+                        onClick={this.rotateCatalog}>
+                      </img>
+                      {
+                        photos.slice(catalogStartingIndex, catalogStartingIndex + 7).map((photo, i) => (
+                          <img className={`photo-catalog-item${currentPhoto === i + catalogStartingIndex ? ' spotlight-thumbnail' : ''}`}
+                            key={`photo-catalog-item-${i + catalogStartingIndex}`}
+                            id={`photo-catalog-item-${i + catalogStartingIndex}`}
+                            src={photo.thumbnail_url}
+                            alt={`${description} photo thumbnail ${i + (catalogStartingIndex * 7) + 1}`}
+                            onClick={this.selectPhoto}>
+                          </img>
+                        ))
+                      }
+                      <img className="catalog-scroll"
+                        id="right-scroll"
+                        key="right"
+                        src="./assets/rightarrow.png"
+                        alt='Cycle photo catalog right'
+                        onClick={this.rotateCatalog}>
+                      </img>
+                    </React.Fragment>)
                 }
-                <img className="catalog-scroll"
-                  id="right-scroll"
-                  key="right"
-                  src="./assets/rightarrow.png"
-                  alt='Cycle photo catalog right'
-                  onClick={this.rotateCatalog}>
-                </img>
               </div>
             </div>
           </div>
