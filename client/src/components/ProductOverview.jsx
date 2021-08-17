@@ -116,7 +116,7 @@ class ProductOverview extends React.Component {
       let {category, name, slogan, description, features, styles} = this.state.item;
       let {styleIndex, rating, numberOfReviews, sku, sizeSelected, currentPhoto} = this.state;
       let price = styles[styleIndex].original_price;
-      return (<div data-testid="ProductOverview" id="overview">
+      return (<div data-testid="ProductOverview" id="overview" className="product-overview">
         <div id="overview-main">
 
           {/* OVERVIEW CAROUSEL */}
