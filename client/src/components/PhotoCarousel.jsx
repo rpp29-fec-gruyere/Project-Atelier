@@ -17,7 +17,6 @@ class PhotoCarousel extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    debugger;
     let newState = state;
     newState.photos = props.photos;
     newState.description = props.description;
@@ -37,6 +36,9 @@ class PhotoCarousel extends React.Component {
       }
       let newState = state;
       newState.currentPhoto = nextPhotoIndex;
+      if (newState.currentPhoto > newState.catalogStartingIndex + 6) {
+        newState.catalogStartingIndex = Math.min(newState.currentPhoto, newState.photos.length - 7);
+      }
       return newState;
     };
     this.setState(stateUpdate);

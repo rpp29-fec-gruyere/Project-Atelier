@@ -1,4 +1,5 @@
 import React from 'react';
+import $ from 'jquery';
 import Stars from './Stars.jsx';
 import PhotoCarousel from './PhotoCarousel.jsx';
 
@@ -53,6 +54,7 @@ class ProductOverview extends React.Component {
 
     this.selectStyle = this.selectStyle.bind(this);
     this.selectSize = this.selectSize.bind(this);
+    this.addToCart = this.addToCart.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -100,6 +102,10 @@ class ProductOverview extends React.Component {
 
   selectSize(event) {
     this.setState({sku: event.target.value, sizeSelected: true});
+  }
+
+  addToCart(event) {
+    $('#size-selector').change();
   }
 
   render() {
@@ -188,7 +194,7 @@ class ProductOverview extends React.Component {
             </div>
             {
               styles[styleIndex].skus[sku].quantity ?
-                <button id="add-to-cart">ADD TO CART</button> :
+                <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
                 <div id="sold-out">SOLD OUT</div>
             }
           </div>
@@ -204,9 +210,12 @@ class ProductOverview extends React.Component {
           {
             features.length > 0 ?
               (<React.Fragment>
-                <div id="details-divide"></div>
+                <div id="details-divide-container">
+                  <div id="details-divide"></div>
+                </div>
                 <div id="overview-features">
                   <ul id="features-list">
+                    <div className="filler" key="top"></div>
                     {
                       features.slice(0, 5).map((feature, i) => (
                         <li className="product-feature" key={feature.feature}>
@@ -214,6 +223,7 @@ class ProductOverview extends React.Component {
                         </li>
                       ))
                     }
+                    <div className="filler" key='bottom'></div>
                   </ul>
                 </div>
               </React.Fragment>) : ''
