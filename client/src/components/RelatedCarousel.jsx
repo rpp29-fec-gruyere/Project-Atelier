@@ -13,6 +13,8 @@ const RelatedCarousel = (props) => {
     const allRatings = items.map(item => {
       let productId = item.id;
 
+      // return promise that will resolve setTimeout fetch with bind
+
       // $.ajax({
       //   url: `/page-data/?id=${productId}`,
       //   type: 'GET',
@@ -35,24 +37,23 @@ const RelatedCarousel = (props) => {
     });
     return allRatings;
   };
-
+  // update each related products ratings
   if (props.items && props.items.length > 0) {
     getRatingsOnProducts(props.items);
   }
-
+  // carousel slides to right
   const next = () => {
     if (currentIndex < (length - 4)) {
-      console.log(review)
       setCurrentIndex(prevState => prevState + 1);
     }
   };
-
+  // carousel slides to left
   const prev = () => {
     if (currentIndex > 0) {
       setCurrentIndex(prevState => prevState - 1);
     }
   };
-
+  // render product on Buy Now click
   const renderProduct = (id) => {
     //reset carousel index and render product
     setCurrentIndex(() => 0);

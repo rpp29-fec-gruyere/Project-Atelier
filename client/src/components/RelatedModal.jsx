@@ -6,7 +6,6 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
   const itemFeature = item ? item.features : null;
   let featureClone = [];
 
-
   const feature = itemFeature && modalFeature ? new Set([
     ...itemFeature.map(item => item),
     ...modalFeature.map(modal => modal)
@@ -25,6 +24,7 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
     ? createPortal(
       <div id="modal-overlay">
         <div id="modal-box">
+          {/* close button on top-right */}
           <span className="close" onClick={hideModal}>&times;</span>
           <div id="modal-content">
             <div id="modal-header">
@@ -41,6 +41,7 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
                 <div className="checklist">
                   {feature !== null &&
                     featureClone.map(feat => {
+                      // checks if "displayed" product's feature is included or not
                       for (let i = 0; i < itemFeature.length; i++) {
                         if (itemFeature[i].value === feat.value) {
                           return <div className="check">check</div>
@@ -54,6 +55,7 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
                 <div className="feature-box2">
                   {feature !== null &&
                     featureClone.map(feat => {
+                      // list all the features between two products (no dups)
                       return (
                         <div className="feature">
                           <div className="feature-name">{feat.feature}</div>
@@ -69,6 +71,7 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
                 <div className="checklist">
                   {feature !== null &&
                     featureClone.map(feat => {
+                      // checks if "related" product's feature is included or not
                       for (let i = 0; i < modalFeature.length; i++) {
                         if (modalFeature[i].value === feat.value) {
                           return <div className="check">check</div>
