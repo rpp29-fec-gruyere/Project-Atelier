@@ -36,5 +36,30 @@ app.get('/page-data', (req, res) => {
     });
 });
 
+app.post('/post-data', (req, res) => {
+  console.log('POST recieved at \'/post-data\'\ncookies: ', req.cookies, '\nbody: ', req.body);
+  api.post(req.body)
+    .then((result) => {
+      console.log('post successful');
+      res.status(201).end();
+    })
+    .catch((err) => {
+      console.log('post failed', err.response);
+      res.status(err.response.status).send({error: err.response.data});
+    });
+});
+
+app.put('/put-data', (req, res) => {
+  console.log('PUT recieved at \'/put-data\'\ncookies: ', req.cookies, '\nbody: ', req.body);
+  api.put(req.body)
+    .then((result) => {
+      console.log('put successful');
+      res.status(201).end();
+    })
+    .catch((err) => {
+      console.log('put failed', err.response);
+      res.status(err.response.status).send({error: err.response.data});
+    });
+});
 
 module.exports = app;
