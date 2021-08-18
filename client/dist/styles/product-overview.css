@@ -203,7 +203,8 @@
       height: 80vh;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
+      justify-content: flex-start;
+      gap: 2vh;
       font-family: inherit;
       font-weight: 800;
     }
@@ -229,6 +230,7 @@
       #overview-category {
         font-weight: 300;
         font-size: 2.15vh;
+        margin-left: .15vw;
         margin-bottom: -.7vh;
       }
       #overview-product-title {
@@ -275,7 +277,7 @@
           .style-icon {
             width: 4.2vw;
             height: 4.2vw;
-            object-fit: fill;
+            object-fit: cover;
             border: .5vw double;
             border-color: inherit;
             border-radius: 50%;
@@ -322,21 +324,31 @@
           border: 2px solid black;
           background-color: white;
           cursor: pointer;
-          transition: color 300ms, background-color 300ms;
+          transition: 300ms;
         }
-        #add-to-cart:hover {
-          background-color: black;
-          color: white;
-        }
+          #add-to-cart:hover {
+            background-color: black;
+            color: white;
+          }
         #sold-out {
-          margin-top: 20px;
+          margin-top: 1.125vw;
           width: 100%;
-          height: 50px;
+          height: 5vh;
           text-align: center;
-          font-size: 14pt;
+          font-size: 1.9vh;
           border: 2px solid black;
           background-color: black;
           color: white;
+        }
+        #please-select-size {
+          width: 100%;
+          text-align: center;
+          color: rgb(202, 12, 12);
+          font-size: 2.5vh;
+          margin-top: .55vw;
+          font-weight: 500;
+          opacity: 0%;
+          transition: opacity 300ms;
         }
   #overview-details {
     height: auto;

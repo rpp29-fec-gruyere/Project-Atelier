@@ -19,11 +19,11 @@ const sizeOptionsGenerator = (skus) => {
   for (let sku in skus) {
     let size = skus[sku];
     if (size.quantity < 1) {
-      options.push(<option className="size-option" key={sku} >{`${size.size.toUpperCase()} (SOLD OUT)`}</option>);
+      options.push(<option className="size-option" key={sku} >{`${String(size.size).toUpperCase()} (SOLD OUT)`}</option>);
     } else if (size.quantity <= 10) {
-      options.push(<option className="size-option" key={sku} value={sku}>{`${size.size.toUpperCase()} (ALMOST GONE)`}</option>);
+      options.push(<option className="size-option" key={sku} value={sku}>{`${String(size.size).toUpperCase()} (ALMOST GONE)`}</option>);
     } else {
-      options.push(<option className="size-option" key={sku} value={sku}>{size.size.toUpperCase()}</option>);
+      options.push(<option className="size-option" key={sku} value={sku}>{String(size.size).toUpperCase()}</option>);
     }
   }
   return options;
@@ -55,6 +55,7 @@ class ProductOverview extends React.Component {
     this.selectStyle = this.selectStyle.bind(this);
     this.selectSize = this.selectSize.bind(this);
     this.addToCart = this.addToCart.bind(this);
+    this.post = props.post.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -105,7 +106,18 @@ class ProductOverview extends React.Component {
   }
 
   addToCart(event) {
-    $('#size-selector').change();
+    if (this.state.sizeSelected) {
+      console.log('[overview] initiating add to cart');
+      this.post({endpoint: 'cart', params: {'sku_id': this.state.sku}});
+    } else {
+      let warning = $('#please-select-size');
+      warning.css({opacity: '100%'});
+      let revert = () => {
+        console.log('revert activated');
+        warning.css({opacity: '0%'});
+      };
+      setTimeout(revert, 1500);
+    }
   }
 
   render() {
@@ -126,7 +138,7 @@ class ProductOverview extends React.Component {
         <div id="overview-main">
 
           {/* OVERVIEW CAROUSEL */}
-          <PhotoCarousel photos={styles[styleIndex].photos} description={`${styles[styleIndex].name} ${name}`} />
+          <PhotoCarousel photos={styles[styleIndex].photos} description={`${String(styles[styleIndex].name)} ${name}`} />
 
           {/* OVERVIEW CONTROLS (STYLE, SIZE, & QUANTITY SELECTION) */}
           <div id="controls">
@@ -142,14 +154,14 @@ class ProductOverview extends React.Component {
                 </div>)
             }
             <div id="product-info">
-              <div id="overview-category">{category.toUpperCase()}</div>
+              <div id="overview-category">{String(category).toUpperCase()}</div>
               <div id="overview-product-title">{name}</div>
             </div>
             <div id="overview-price">${styles[styleIndex].original_price}</div>
             <div id="style-section">
               <div id="style-indicator">
                 <div id="overview-style">STYLE:</div>
-                <div id="selected-style">{styles[styleIndex].name.toUpperCase()}</div>
+                <div id="selected-style">{String(styles[styleIndex].name).toUpperCase()}</div>
               </div>
               <div id="style-selector">
                 {
@@ -188,15 +200,16 @@ class ProductOverview extends React.Component {
                 <select id="quantity-selector" name="quantity" defaultValue="1">
                   <option className="quantity-option" key="quantity1" value="1">1</option>
                   {
-                    quantityOptionsGenerator(styles[styleIndex].skus[sku].quantity)
+                    quantityOptionsGenerator(Number(styles[styleIndex].skus[sku].quantity))
                   }
                 </select>
               </div>
               {
-                styles[styleIndex].skus[sku].quantity ?
+                Number(styles[styleIndex].skus[sku].quantity) ?
                   <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
                   <div id="sold-out">SOLD OUT</div>
               }
+              <div id="please-select-size" style={{userSelect: 'none'}}>PLEASE SELECT SIZE</div>
             </div>
           </div>
         </div>
