@@ -8,17 +8,13 @@ const ReviewList = props => {
   const [sortOption, setSortOption] = useState('relevant');
 
   useEffect(() => {
-    // add ajax call for new reviewList
-  }, [sortOption]);
-
-  useEffect(() => {
     setReviewCount(props.reviews ? props.reviews.length : 0);
+    setReviews(props.reviews ? props.reviews.slice(0, reviewsToShow) : []);
   }, [props.reviews]);
 
 
   useEffect(() => {
     setReviewsToShow(props.reviews ? reviewCount > 2 ? 2 : reviewCount : 0);
-    setReviews(props.reviews ? props.reviews.slice(0, reviewsToShow) : []);
   }, [reviewCount]);
 
   useEffect(() => {
@@ -33,8 +29,9 @@ const ReviewList = props => {
     }
   };
 
-  const handleSortChange = (e) => {
-    setSortOption(e.target.value);
+  const handleSortChange = ({target}) => {
+    setSortOption(target.value);
+    props.handleSortChange(target.value);
   };
 
   return (
