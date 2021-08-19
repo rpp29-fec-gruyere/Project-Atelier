@@ -207,7 +207,7 @@ class ProductOverview extends React.Component {
               {
                 Number(styles[styleIndex].skus[sku].quantity) ?
                   <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
-                  <div id="sold-out">SOLD OUT</div>
+                  <button id="sold-out">SOLD OUT</button>
               }
               <div id="please-select-size" style={{userSelect: 'none'}}>PLEASE SELECT SIZE</div>
             </div>

@@ -31,6 +31,9 @@
     column-gap: 1%;
     font-family: inherit;
   }
+
+/*         OVERVIEW CAROUSEL         */
+
     #overview-carousel {
       height: 80vh;
       width: 100%;
@@ -45,7 +48,7 @@
     }
     #overview-carousel-expanded {
       height: 80vh;
-      width: 144.8%;
+      width: calc(144.8% - 2px);
       max-height: 80vh;
       border: 2px solid black;
       background-color: rgb(241, 242, 243);
@@ -339,6 +342,7 @@
           border: 2px solid black;
           background-color: black;
           color: white;
+          transition: 300ms;
         }
         #please-select-size {
           width: 100%;
@@ -350,6 +354,9 @@
           opacity: 0%;
           transition: opacity 300ms;
         }
+
+/*         OVERVIEW DESCRIPTION & DETAILS         */
+
   #overview-details {
     height: auto;
     min-height: 200px;
