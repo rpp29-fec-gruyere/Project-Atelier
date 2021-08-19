@@ -57,6 +57,9 @@
       position: relative;
       cursor: url('../assets/cursors/plus.png'), cell;
     }
+      .zoomed {
+        overflow: hidden;
+      }
       #image-display {
         height: 100%;
         width: 100%;
@@ -65,13 +68,22 @@
         text-align: center;
         z-index: 11;
       }
-        #spotlight-image {
+        .not-zoomed #spotlight-image {
           max-height: 99%;
           max-width: 99%;
           object-fit: cover;
           margin-left: auto;
           margin-right: auto;
           vertical-align: middle;
+        }
+        .zoomed #spotlight-image {
+          max-height: 99%;
+          max-width: 99%;
+          object-fit: cover;
+          margin-left: auto;
+          margin-right: auto;
+          vertical-align: middle;
+          transform: scale(2.5);
         }
       #carousel-controls-outer {
         position: absolute;

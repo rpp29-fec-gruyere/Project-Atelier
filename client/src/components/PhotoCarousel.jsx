@@ -7,6 +7,7 @@ class PhotoCarousel extends React.Component {
       photos: props.photos,
       currentPhoto: 0,
       expanded: false,
+      zoomed: false,
       description: props.description,
       catalogStartingIndex: 0
     };
@@ -14,6 +15,7 @@ class PhotoCarousel extends React.Component {
     this.rotateCatalog = this.rotateCatalog.bind(this);
     this.selectPhoto = this.selectPhoto.bind(this);
     this.toggleExpansion = this.toggleExpansion.bind(this);
+    this.toggleZoom = this.toggleZoom.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -65,6 +67,9 @@ class PhotoCarousel extends React.Component {
     let changeExpansionInState = (state, props) => {
       let newState = state;
       newState.expanded = !state.expanded;
+      if (newState.expanded === false) {
+        newState.zoomed = false;
+      }
       return newState;
     };
     if (event.target.id === 'photo-catalog-outer-container' || event.target.id === 'minimize-carousel') {
@@ -73,14 +78,25 @@ class PhotoCarousel extends React.Component {
     }
   }
 
+  toggleZoom() {
+    let changeZoomInState = (state, props) => {
+      let newState = state;
+      newState.zoomed = !state.zoomed;
+      return newState;
+    };
+    if (event.target.id === 'photo-catalog-outer-container') {
+      this.setState(changeZoomInState);
+    }
+  }
+
   render() {
-    let {photos, currentPhoto, expanded, description, catalogStartingIndex} = this.state;
+    let {photos, currentPhoto, expanded, zoomed, description, catalogStartingIndex} = this.state;
     return (<div id={expanded ? 'overview-carousel-expanded' : 'overview-carousel'}>
-      <div id="image-display">
+      <div className={zoomed ? 'zoomed' : 'not-zoomed'} id="image-display">
         <div className="alignment-helper"></div>
         <img id="spotlight-image" src={photos[currentPhoto].url} alt={`Photo of ${description}`}></img>
       </div>
-      <div id="carousel-controls-outer" onClick={!expanded ? this.toggleExpansion : () => { console.log('currently useless'); }}>
+      <div id="carousel-controls-outer" onClick={!expanded ? this.toggleExpansion : this.toggleZoom}>
         {
           expanded ? (<img
             id="minimize-carousel"
