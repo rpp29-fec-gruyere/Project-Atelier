@@ -93,7 +93,8 @@ const ReviewSection = props => {
       }
     },
     data => {
-      setReviewsMetaData(data.results);
+      console.log(data);
+      setReviewsMetaData(data);
     });
   };
 
@@ -134,13 +135,13 @@ const ReviewSection = props => {
       {reviewModalDisplay ? 
         <AddReviewModal 
           itemInfo={props.itemInfo}
-          characteristics={props.reviewData.meta.characteristics}
+          characteristics={reviewsMetaData.characteristics}
           handleClose={closeAddReviewModal}
           handlePost={props.handlePost}
         ></AddReviewModal> : null}
       <span className="widgetHeader">Ratings &#38; Reviews</span>
       <div id="mainReviewSection">
-        <RatingsBreakdown metaData={props.reviewData ? props.reviewData.meta : false}/>
+        <RatingsBreakdown metaData={Object.keys(reviewsMetaData).length > 0 ? reviewsMetaData : undefined}/>
         <ReviewList 
           reviews={reviews.length > 0 ? reviews : undefined}
           handleSortChange={handleSortChange}

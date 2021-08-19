@@ -3,7 +3,6 @@ import Stars from './Stars.jsx';
 import CharacteristicSection from './CharacteristicsSection.jsx';
 
 const RatingsBreakdown = props => {
-  console.log('MetaData', props.metaData);
   let metaData = props.metaData ? props.metaData : undefined;
   let averageRating = 0;
   let recommendedPercentage = 0;
