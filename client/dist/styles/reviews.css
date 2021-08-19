@@ -3,17 +3,25 @@
     grid: "ratingsBreakdown reviewList" 1fr / 250px 1fr;
     gap: 0 40px;
     height: 100%;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
 }
 
 .ratingsBreakdown {
     width: fit-content;
+    height: fit-content;
     font-size: 14px;
     grid-area: ratingsBreakdown;
 }
 
 .reviewList {
     grid-area: reviewList;
+    max-height: 170vh;
+    height: fit-content;
+}
+
+#reviewItemContainer {
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 #ratingRepresentations {

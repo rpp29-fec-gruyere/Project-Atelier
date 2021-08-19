@@ -47,7 +47,7 @@ const ReviewList = props => {
             <option value="helpful">helpful</option>
           </select></span>
       </div>
-      <div>{reviews.map(review => <Review key={review.review_id} reviewInfo={review} handlePut={props.handlePut} fetchReviews={props.fetchReviews}
+      <div id="reviewItemContainer">{reviews.map(review => <Review key={review.review_id} reviewInfo={review} handlePut={props.handlePut} fetchReviews={props.fetchReviews}
       />)}</div>
       <div id="reviewButtons">
         <button className="reviewBtn" onClick={() => props.showAddReviewModal()}>ADD REVIEW</button>

@@ -93,7 +93,7 @@ const ReviewSection = props => {
       }
     },
     data => {
-      console.log(data);
+      console.log('In MetaData:', reviews);
       setReviewsMetaData(data);
     });
   };
@@ -104,10 +104,12 @@ const ReviewSection = props => {
       endpoint: 'reviews',
       params: {
         'sort': sortOption,
+        'count': 100000,
         'product_id': props.itemInfo.id
       }
     },
     data => {
+      console.log('In Fetch:', data.results);
       setReviews(data.results);
       if (needMetaData) {
         fetchReviewsMetaData();
@@ -138,6 +140,7 @@ const ReviewSection = props => {
           characteristics={reviewsMetaData.characteristics}
           handleClose={closeAddReviewModal}
           handlePost={props.handlePost}
+          updateReviews={fetchReviews}
         ></AddReviewModal> : null}
       <span className="widgetHeader">Ratings &#38; Reviews</span>
       <div id="mainReviewSection">
