@@ -107,11 +107,6 @@
     text-align: right;
 }
 
-
-#sortOptions {
-    margin-bottom: 30px;
-}
-
 .review {
     height: fit-content;
     width: 100%;
@@ -151,6 +146,7 @@
 
 .helpfulResponse {
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .report {
@@ -252,6 +248,7 @@
 
 #sortOptions {
     border: none;
+    margin-bottom: 15px;
 }
 
 #reviewSummaryInput {

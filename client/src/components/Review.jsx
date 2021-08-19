@@ -17,6 +17,10 @@ const Review = props => {
     imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto"/>);
   });
 
+  let markAsHelpful = () => {
+    props.handlePut({'endpoint': `reviews/${props.reviewInfo.review_id}/helpful`, params: {'review_id': props.reviewInfo.review_id}});
+  };
+
   return (
     <div className="review">
       <div className="reviewHeader">
@@ -30,7 +34,7 @@ const Review = props => {
       </div> : undefined}
       {response ? response : null}
       <div className="feedback">
-        <span className="helpful">Helpful? <span className="helpfulResponse">Yes</span></span>
+        <span className="helpful">Helpful? <span className="helpfulResponse" onClick={() => markAsHelpful()}>Yes</span> ({props.reviewInfo.helpfulness})</span>
         <span className="report">Report</span>
       </div>
     </div>

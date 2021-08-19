@@ -39,7 +39,7 @@ class ReviewSection extends React.Component {
         <span className="widgetHeader">Ratings &#38; Reviews</span>
         <div id="mainReviewSection">
           <RatingsBreakdown metaData={this.props.reviewData ? this.props.reviewData.meta : false}/>
-          <ReviewList reviews={this.props.reviewData ? this.props.reviewData.allReviews : false} showAddReviewModal={this.showAddReviewModal.bind(this)}/>
+          <ReviewList reviews={this.props.reviewData ? this.props.reviewData.allReviews : false} showAddReviewModal={this.showAddReviewModal.bind(this)} handlePut={this.props.handlePut}/>
         </div>
       </div>
     );

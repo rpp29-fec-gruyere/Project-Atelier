@@ -168,7 +168,7 @@ class App extends React.Component {
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
         <AdditionalProducts />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
-        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item} handlePost={this.post.bind(this)}/>
+        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item} handlePost={this.post.bind(this)} handlePut={this.put.bind(this)}/>
       </div>
     );
   }
