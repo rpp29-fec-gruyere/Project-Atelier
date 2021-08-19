@@ -67,7 +67,7 @@ class PhotoCarousel extends React.Component {
       newState.expanded = !state.expanded;
       return newState;
     };
-    if (event.target.id === 'photo-catalog-outer-container') {
+    if (event.target.id === 'photo-catalog-outer-container' || event.target.id === 'minimize-carousel') {
       console.log('expansion click registered\nevent: ', event);
       this.setState(changeExpansionInState);
     }
@@ -80,7 +80,15 @@ class PhotoCarousel extends React.Component {
         <div className="alignment-helper"></div>
         <img id="spotlight-image" src={photos[currentPhoto].url} alt={`Photo of ${description}`}></img>
       </div>
-      <div id="carousel-controls-outer" onClick={this.toggleExpansion}>
+      <div id="carousel-controls-outer" onClick={!expanded ? this.toggleExpansion : () => { console.log('currently useless'); }}>
+        {
+          expanded ? (<img
+            id="minimize-carousel"
+            alt="Minimize carousel"
+            src="./assets/minimize.png"
+            onClick={this.toggleExpansion}>
+          </img>) : ''
+        }
         <div id="carousel-controls-inner">
           {
             currentPhoto === 0 ? (<div className="filler"></div>) :
@@ -136,13 +144,10 @@ class PhotoCarousel extends React.Component {
               </div>
             </div>
           </div>
-          {
-            currentPhoto === photos.length - 1 ? (<div className="filler"></div>) :
-              <div className="arrow-container" key="right-arrow-container">
-                <div className="alignment-helper"></div>
-                <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel right"></img>
-              </div>
-          }
+          <div className="arrow-container" key="right-arrow-container">
+            <div className="alignment-helper"></div>
+            <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel right"></img>
+          </div>
         </div>
       </div>
     </div>);
