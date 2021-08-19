@@ -1,7 +1,7 @@
 import React from 'react';
 import Stars from './Stars.jsx';
 import $ from 'jquery';
-import { IMGBB_KEY } from '../../../config';
+import { IMGBB_KEY, EMAIL_VALIDATION_API_KEY } from '../../../config';
 
 class AddReviewModal extends React.Component {
   constructor(props) {
@@ -10,18 +10,14 @@ class AddReviewModal extends React.Component {
       tempRating: 0,
       rating: 0,
       recommended: 'true',
-      Size: undefined,
-      Width: undefined,
-      Comfort: undefined,
-      Quality: undefined,
-      Length: undefined,
-      Fit: undefined,
+      tempCharacteristics: {},
+      characteristics: {},
       reviewSummary: '',
       reviewBody: '',
       imgs: [],
-      imgThumbnails: [],
       nickname: '',
-      email: ''
+      email: '',
+      invalidInputs: []
     };
     
     this.characteristicDescriptions = {
@@ -39,18 +35,15 @@ class AddReviewModal extends React.Component {
       tempRating: 0,
       rating: 0,
       recommended: 'true',
-      Size: undefined,
-      Width: undefined,
-      Comfort: undefined,
-      Quality: undefined,
-      Length: undefined,
-      Fit: undefined,
+      tempCharacteristics: {},
+      characteristics: {},
       reviewSummary: '',
       reviewBody: '',
       imgs: [],
       imgThumbnails: [],
       nickname: '',
-      email: ''
+      email: '',
+      invalidInputs: []
     });
     this.props.handleClose();
   }
@@ -76,7 +69,7 @@ class AddReviewModal extends React.Component {
     var form = new FormData();
     form.append('image', img);
     $.ajax({
-      url: `https://api.imgbb.com/1/upload?expiration=600&key=${IMGBB_KEY}`,
+      url: `https://api.imgbb.com/1/upload?key=${IMGBB_KEY}`,
       method: 'POST',
       timeout: 0,
       processData: false,
@@ -85,12 +78,9 @@ class AddReviewModal extends React.Component {
       data: form,
       success: response => {
         response = JSON.parse(response);
-        let thumbnails = this.state.imgThumbnails;
         let imgs = this.state.imgs;
-        thumbnails.push(response.data.thumb.url);
         imgs.push(response.data.image.url);
         this.setState({
-          imgThumbnails: thumbnails,
           imgs: imgs
         });
       }
@@ -100,82 +90,148 @@ class AddReviewModal extends React.Component {
   handleChange({target}) {
     let targetName = target.name;
     let targetValue = target.value;
-    switch (targetName) {
-    case 'recommended':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Size':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Width':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Comfort':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Quality':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Length':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'Fit':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'reviewSummary':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'reviewBody':
-      this.setState({[targetName]: targetValue});
-      break;
-    case 'imgs':
+
+    if (target.classList[0] === 'characteristicInput') {
+      let characteristics = this.state.characteristics;
+      let tempCharacteristics = this.state.tempCharacteristics;
+      characteristics[this.props.characteristics[targetName].id] = Number.parseInt(target.value) + 1;
+      tempCharacteristics[targetName] = this.characteristicDescriptions[targetName][Number.parseInt(target.value)];
+      this.setState({
+        characteristics: characteristics,
+        tempCharacteristics: tempCharacteristics,
+      });
+    } else if (targetName === 'imgs') {
       if (target.value !== undefined) {
         this.handleImageUpload(target.files[0]);
-        // let imgs = this.state.imgs;
-        // imgs.push(URL.createObjectURL(target.files[0]));
-        // this.setState({[targetName]: imgs});
-        // document.getElementById('imgForm').reset();
       }
-      break;
-    case 'nickname':
+    } else {
       this.setState({[targetName]: targetValue});
-      break;
-    case 'email':
-      this.setState({[targetName]: targetValue});
-      break;
     }
   }
 
   handleSubmit () {
-    
+
+    this.checkForMandatoryInputs()
+      .then(invalidInputs => {
+        if (invalidInputs.length === 0) {
+          const reviewData = {
+            'product_id': this.props.itemInfo.id,
+            'rating': this.state.rating,
+            'summary': this.state.reviewSummary,
+            'body': this.state.reviewBody,
+            'recommend': this.state.recommended === 'true' ? true : false,
+            'name': this.state.nickname,
+            'email': this.state.email,
+            'photos': this.state.imgs,
+            'characteristics': this.state.characteristics
+          };
+          //this.props.handlePost({endpoint: 'reviews', params: reviewData});
+          this.handleClose();
+        }
+      });
+  }
+
+  checkForMandatoryInputs() {
+    this.setState({invalidInputs: []});
+    return new Promise(res => {
+      let invalidInputs = [];
+
+      this.validateEmail(this.state.email)
+        .then(emailIsValid => {
+          if (!emailIsValid) {
+            invalidInputs.push('Please enter valid email');
+          }
+        })
+        .then(() => {
+          for (let dataPoint in this.state) {
+            switch (dataPoint) {
+            case 'rating':
+              if (this.state[dataPoint] === 0) {
+                invalidInputs.push('Overall rating');
+              }
+              break;
+            case 'reviewBody':
+              if (this.state[dataPoint].length < 50) {
+                invalidInputs.push('Review body must be at least 50 characters');
+              }
+              break;
+            case 'nickname':
+              if (this.state[dataPoint].length < 1) {
+                invalidInputs.push('Nickname');
+              }
+              break;
+            case 'tempCharacteristics':
+              for (let characteristic in this.state[dataPoint]) {
+                if (this.state[dataPoint][characteristic] === undefined) {
+                  invalidInputs.push(`Characteristic: ${characteristic}`);
+                }
+              }
+              break;
+            }
+          }
+          this.setState({invalidInputs: invalidInputs});
+          res(invalidInputs);
+        });
+    });
+  }
+
+  validateEmail (email) {
+    return new Promise((res, rej) => {
+      if (email.length < 1) {
+        res(false);
+      } else {
+        $.get(`https://emailvalidation.abstractapi.com/v1/?api_key=${EMAIL_VALIDATION_API_KEY}&email=${email}`,
+          result => {
+            res(result['is_valid_format'].value);
+          })
+          .fail(err => {
+            rej(new Error('Could not validate email', { cause: err }));
+          });
+      }
+    });
+  }
+
+  componentDidMount() {
+    let characteristics = {};
+    let tempCharacteristics = {};
+    for (let characteristic in this.props.characteristics) {
+      characteristics[this.props.characteristics[characteristic].id] = undefined;
+      tempCharacteristics[characteristic] = undefined;
+    }
+    this.setState({
+      characteristics: characteristics,
+      tempCharacteristics: tempCharacteristics
+    });
   }
 
 
   render () {
-    let characteristics = [];
 
-    for (let i = 0; i < this.props.characteristics.length; i++) {
-      let characteristicName = this.props.characteristics[i];
+    // Handles dynamically rendering characteristics distinct to each item
+    let characteristics = [];
+    let characteristicNames = Object.keys(this.props.characteristics);
+    for (let i = 0; i < characteristicNames.length; i++) {
+      let characteristicName = characteristicNames[i];
       let characteristic = (
         <div key={i} className="formCharacteristic">
           <label htmlFor={characteristicName} className="formCharacteristicName">{characteristicName + ' '}</label>
-          <span className="formChosenCharacteristicDesciprtion">{this.state[characteristicName] ? ' - ' + this.state[characteristicName] : undefined}</span>
+          <span className="formChosenCharacteristicDescription">{this.state.tempCharacteristics[characteristicName] ? ' - ' + this.state.tempCharacteristics[characteristicName] : undefined}</span>
           <div className="formCharacteristicBtnContainer">
-            <input type="radio" id={this.characteristicDescriptions[characteristicName][0]} name={characteristicName} value={this.characteristicDescriptions[characteristicName][0]} 
+            <input type="radio" name={characteristicName} value={0} className="characteristicInput"
               onChange={e => this.handleChange(e)} 
-              checked={this.state[characteristicName] === this.characteristicDescriptions[characteristicName][0]}></input>
-            <input type="radio" id={this.characteristicDescriptions[characteristicName][1]} name={characteristicName} value={this.characteristicDescriptions[characteristicName][1]} 
+              checked={this.state.tempCharacteristics[characteristicName] === this.characteristicDescriptions[characteristicName][0]}></input>
+            <input type="radio" name={characteristicName} value={1} className="characteristicInput"
               onChange={e => this.handleChange(e)} 
-              checked={this.state[characteristicName] === this.characteristicDescriptions[characteristicName][1]}></input>
-            <input type="radio" id={this.characteristicDescriptions[characteristicName][2]} name={characteristicName} value={this.characteristicDescriptions[characteristicName][2]} 
+              checked={this.state.tempCharacteristics[characteristicName] === this.characteristicDescriptions[characteristicName][1]}></input>
+            <input type="radio" name={characteristicName} value={2} className="characteristicInput"
               onChange={e => this.handleChange(e)} 
-              checked={this.state[characteristicName] === this.characteristicDescriptions[characteristicName][2]}></input>
-            <input type="radio" id={this.characteristicDescriptions[characteristicName][3]} name={characteristicName} value={this.characteristicDescriptions[characteristicName][3]} 
+              checked={this.state.tempCharacteristics[characteristicName] === this.characteristicDescriptions[characteristicName][2]}></input>
+            <input type="radio" name={characteristicName} value={3} className="characteristicInput"
               onChange={e => this.handleChange(e)} 
-              checked={this.state[characteristicName] === this.characteristicDescriptions[characteristicName][3]}></input>
-            <input type="radio" id={this.characteristicDescriptions[characteristicName][4]} name={characteristicName} value={this.characteristicDescriptions[characteristicName][4]} 
+              checked={this.state.tempCharacteristics[characteristicName] === this.characteristicDescriptions[characteristicName][3]}></input>
+            <input type="radio" name={characteristicName} value={4} className="characteristicInput"
               onChange={e => this.handleChange(e)} 
-              checked={this.state[characteristicName] === this.characteristicDescriptions[characteristicName][4]}></input>
+              checked={this.state.tempCharacteristics[characteristicName] === this.characteristicDescriptions[characteristicName][4]}></input>
           </div>
           <div className="formCharacteristicDescriptionBar">
             <span className="formCharacteristicDescription">{this.characteristicDescriptions[characteristicName][0]}</span>
@@ -185,18 +241,28 @@ class AddReviewModal extends React.Component {
       characteristics.push(characteristic);
     }
 
-    let imgs = [];
+    // Handles dynamically rendering uploaded thumbnails to newReview form modal
+    let addReviewImgThumbnails = [];
 
-    for (let i = 0; i < this.state.imgThumbnails.length; i++) {
-      imgs.push(<img src={this.state.imgThumbnails[i]} alt="" className='imgThumbnail' />);
+    for (let i = 0; i < this.state.imgs.length; i++) {
+      addReviewImgThumbnails.push(<img src={this.state.imgs[i]} alt="" className='imgThumbnail' key={i} />);
+    }
+
+    // Handles dynamically rendering invalidInput list to newReview form modal
+    let invalidInputListItems = [];
+
+    for (let i = 0; i < this.state.invalidInputs.length; i++) {
+      invalidInputListItems.push(<li className='invalidInputListItem' key={i}>{this.state.invalidInputs[i]}</li>);
     }
 
     return (
       <div id="addReviewModal">
-        <div id="closeReviewModalBtn" onClick={() => this.handleClose()}>X</div>
+        <div id="addReviewHeader">
+          <img id="closeReviewModalBtn" src="./assets/closeBtn.png" onClick={() => this.handleClose()}/>
+        </div>
         <div id="formContent">
           <h1>Write Your Review</h1>
-          <h4>About the {this.props.itemName}</h4>
+          <h4>About the {this.props.itemInfo.name}</h4>
           <form>
             <div className="formSection">
               <span className="formSectionTitle">Overall Rating</span>
@@ -207,8 +273,8 @@ class AddReviewModal extends React.Component {
                 handleClick={this.handleStarClick.bind(this)}
               />
             </div>
-            <div className="formSection">
-              <span className="formSectionTitle">Do you recommend this product?</span>
+            <div className="formSection" id="recommendedSection">
+              <span className="formSectionTitle" id="recommendedTitle">Do you recommend this product?</span>
               <input type="radio" id="recommended" name="recommended" value="true" 
                 onChange={e => this.handleChange(e)} 
                 checked={this.state.recommended === 'true'}></input>
@@ -242,18 +308,16 @@ class AddReviewModal extends React.Component {
               }
             </div>
             <div className="formSection">
-              <form id="imgForm">
-                <input type="file" id="imgInputBtn" name="imgs" accept="image/*"
-                  onChange={e => this.handleChange(e)}
-                ></input>
-                {this.state.imgs.length < 5 ? <button id="imgAddVisibleBtn" type="button" onClick={this.handleAddImage.bind(this)}>Add image</button> : undefined}
-              </form>
+              <input type="file" id="imgInputBtn" name="imgs" accept="image/*"
+                onChange={e => this.handleChange(e)}
+              ></input>
+              {this.state.imgs.length < 5 ? <button id="imgAddVisibleBtn" type="button" onClick={this.handleAddImage.bind(this)}>Add image</button> : undefined}
               <div id="thumbnailDisplay">
-                {imgs}
+                {addReviewImgThumbnails}
               </div>
             </div>
             <div className="formSection">
-              <span className="formSectionNickname">What is your nickname?</span>
+              <span className="formSectionTitle">What is your nickname?</span>
               <input id="nicknameInput" name="nickname" type="text" maxLength="60" placeholder="Example: jackson11!" required
                 onChange={e => this.handleChange(e)}
                 value={this.state.nickname}
@@ -261,16 +325,22 @@ class AddReviewModal extends React.Component {
               <span>For privacy reasons, do not use your full name or email address</span>
             </div>
             <div className="formSection">
-              <span className="formSectionEmail">What is your nickname?</span>
+              <span className="formSectionTitle">Your email</span>
               <input id="emailInput" name="email" type="email" pattern=".+@\.com" maxLength="60" placeholder="Example: jackson11@email.com" required
                 onChange={e => this.handleChange(e)}
                 value={this.state.email}
               ></input>
               <span>For authentication reasons, you will not be emailed</span>
             </div>
+            {this.state.invalidInputs.length > 0 ? <div className="formSection" id="invalidReviewInputSection">
+              <span className="formSectionTitle">You must enter the following:</span>
+              <ul id="invalidInputList">
+                {invalidInputListItems}
+              </ul>
+            </div> : undefined}
             <div className="formSection">
               <div>
-                <button type="button" onClick={this.handleSubmit.bind(this)}>Submit</button>
+                <button type="button" onClick={this.handleSubmit.bind(this)} id="submitBtn">Submit</button>
               </div>
             </div>
           </form>

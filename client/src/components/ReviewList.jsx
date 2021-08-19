@@ -41,7 +41,7 @@ const ReviewList = props => {
     <div data-testid="reviewList" className="reviewList">
       <div id="sortOptions">
         <span>{reviewCount} reviews, sorted by 
-        <select name="sortOptions" id="sortOptions" value={sortOption} onChange={(e) => { handleSortChange(e); }}>
+          <select name="sortOptions" id="sortOptions" value={sortOption} onChange={(e) => { handleSortChange(e); }}>
             <option value="relevant">relevant</option>
             <option value="newest">newest</option>
             <option value="helpful">helpful</option>
@@ -49,8 +49,8 @@ const ReviewList = props => {
       </div>
       <div>{reviews.map(review => <Review key={review.review_id} reviewInfo={review}/>)}</div>
       <div id="reviewButtons">
-        {reviewCount > reviewsToShow ? <button className="reviewBtn" onClick={() => handleShowMoreReviews()}>MORE REVIEWS</button> : null}
         <button className="reviewBtn" onClick={() => props.showAddReviewModal()}>ADD REVIEW</button>
+        {reviewCount > reviewsToShow ? <button className="reviewBtn" onClick={() => handleShowMoreReviews()}>MORE REVIEWS</button> : null}
       </div>
     </div>
   );

@@ -29,7 +29,9 @@ const RatingsBreakdown = props => {
       percentageOfEachRating[rating] = (percentageOfEachRating[rating] / count) * 100;
     }
 
-    recommendedPercentage = Math.ceil((parseInt(props.metaData.recommended.true) / (parseInt(props.metaData.recommended.true) + parseInt(props.metaData.recommended.false))) * 100);
+    let recommended = props.metaData.recommended.true ? parseInt(props.metaData.recommended.true) : 0;
+    let notRecommended = props.metaData.recommended.false ? parseInt(props.metaData.recommended.false) : 0;
+    recommendedPercentage = Math.ceil((recommended / (recommended + notRecommended)) * 100);
   }
 
   

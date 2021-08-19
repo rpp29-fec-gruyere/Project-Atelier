@@ -28,13 +28,14 @@ class ReviewSection extends React.Component {
 
     // characteristics={Object.keys(this.reviewData.meta.characteristics)}
     return (
-      <div data-testid="reviewSection" className="reviewSection">
+      <div data-testid="reviewSection" className="reviewSection" id="reviewSection">
         {this.state.showAddReviewModal ? 
           <AddReviewModal 
-            itemName={this.props.itemInfo.name}
-            characteristics={Object.keys(this.props.reviewData.meta.characteristics)}
-            handleClose={this.closeAddReviewModal.bind(this)
-            }></AddReviewModal> : null}
+            itemInfo={this.props.itemInfo}
+            characteristics={this.props.reviewData.meta.characteristics}
+            handleClose={this.closeAddReviewModal.bind(this)}
+            handlePost={this.props.handlePost}
+          ></AddReviewModal> : null}
         <span className="widgetHeader">Ratings &#38; Reviews</span>
         <div id="mainReviewSection">
           <RatingsBreakdown metaData={this.props.reviewData ? this.props.reviewData.meta : false}/>

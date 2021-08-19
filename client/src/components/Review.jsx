@@ -12,6 +12,11 @@ const Review = props => {
       </div>;
   }
 
+  let imgs = [];
+  props.reviewInfo.photos.forEach(photo => {
+    imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto"/>);
+  });
+
   return (
     <div className="review">
       <div className="reviewHeader">
@@ -20,6 +25,9 @@ const Review = props => {
       </div>
       <span>{props.reviewInfo.summary}</span>
       <p>{props.reviewInfo.body}</p>
+      {imgs.length > 0 ? <div className="reviewPhotoContainer">
+        {imgs}
+      </div> : undefined}
       {response ? response : null}
       <div className="feedback">
         <span className="helpful">Helpful? <span className="helpfulResponse">Yes</span></span>
