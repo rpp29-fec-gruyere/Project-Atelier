@@ -34,6 +34,9 @@ const ReviewList = props => {
     props.handleSortChange(target.value);
   };
 
+
+
+
   return (
     <div data-testid="reviewList" className="reviewList">
       <div id="sortOptions">
@@ -44,7 +47,8 @@ const ReviewList = props => {
             <option value="helpful">helpful</option>
           </select></span>
       </div>
-      <div>{reviews.map(review => <Review key={review.review_id} reviewInfo={review} handlePut={props.handlePut}/>)}</div>
+      <div>{reviews.map(review => <Review key={review.review_id} reviewInfo={review} handlePut={props.handlePut} fetchReviews={props.fetchReviews}
+      />)}</div>
       <div id="reviewButtons">
         <button className="reviewBtn" onClick={() => props.showAddReviewModal()}>ADD REVIEW</button>
         {reviewCount > reviewsToShow ? <button className="reviewBtn" onClick={() => handleShowMoreReviews()}>MORE REVIEWS</button> : null}

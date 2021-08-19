@@ -128,6 +128,10 @@ class App extends React.Component {
     this.post({endpoint: 'interactions', params: params});
   }
 
+  updateReviewData() {
+    
+  }
+
   componentDidMount() {
     let initialFetchAttempts = 0;
     this.fetch({endpoint: 'products', params: {count: 1}},

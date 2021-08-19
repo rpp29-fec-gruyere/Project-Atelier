@@ -80,6 +80,11 @@ const ReviewSection = props => {
     setReviewModalDisplay(false);
   };
 
+  const handleSortChange = (sortOption) => {
+    setSortOption(sortOption);
+  };
+
+  // Function to retrieve review metaData for product from API via the server
   const fetchReviewsMetaData = () => {
     props.handleFetch({
       endpoint: 'reviews/meta',
@@ -92,10 +97,7 @@ const ReviewSection = props => {
     });
   };
 
-  const handleSortChange = (sortOption) => {
-    setSortOption(sortOption);
-  };
-
+  // Function to retrieve reviewList for product from API via the server
   const fetchReviews = (needMetaData = true) => {
     props.handleFetch({
       endpoint: 'reviews',
