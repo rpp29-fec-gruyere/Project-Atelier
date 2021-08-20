@@ -325,3 +325,7 @@
     font-weight: bold;
     text-decoration: underline;
 }
+
+#imgModal {
+    position: absolute;
+}

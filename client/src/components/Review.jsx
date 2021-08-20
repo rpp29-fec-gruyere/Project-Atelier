@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import Stars from './Stars.jsx';
-import $ from 'jquery';
 
 const Review = props => {
   let reviewDate = new Date(props.reviewInfo.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   let response = undefined;
 
   const [showFullReviewBody, setShowFullReviewBody] = useState(false);
+  const [showImgModal, setShowImgModal] = useState(false);
+  const [selectedImg, setSelectedImg] = useState('');
 
   if (props.reviewInfo.response) {
     response = 
@@ -16,9 +17,26 @@ const Review = props => {
       </div>;
   }
 
+  let handleImgClick = ({target}) => {
+    setSelectedImg(target.src);
+    setShowImgModal(true);
+  };
+
+  let handleImgModalClose = () => {
+    setSelectedImg('');
+    setShowImgModal(false);
+  };
+
+  let imgModal = (
+    <div id="imgModal">
+      <img src="./assets/closeBtn.png" alt="" onClick={() => { handleImgModalClose(); }}/>
+      <img src={selectedImg} alt="" />
+    </div>
+  );
+
   let imgs = [];
   props.reviewInfo.photos.forEach(photo => {
-    imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto"/>);
+    imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto" onClick={e => handleImgClick(e)}/>);
   });
 
   let markAsHelpful = () => {
@@ -34,6 +52,7 @@ const Review = props => {
 
   return (
     <div className="review">
+      {showImgModal ? imgModal : null}
       <div className="reviewHeader">
         <Stars rating={props.reviewInfo.rating}/>
         <div className="reviewUser">{props.reviewInfo.reviewer_name}, {reviewDate}</div>
