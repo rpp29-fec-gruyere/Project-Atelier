@@ -90,7 +90,7 @@ class App extends React.Component {
     let pageDataRetrievalAttempts = 0;
     console.log('[App] initiating retrieval of all page data'); 
     $.ajax({
-      url: `/page-data/?id=${productId}`,
+      url: `/page-data/?id=${36307}`,
       type: 'GET',
       success: (pageData) => {
         console.log('[App] page data retrieval successful', pageData);
