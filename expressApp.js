@@ -3,10 +3,17 @@ const bodyParser = require('body-parser');
 const postBodyParser = bodyParser.json();
 const getBodyParser = require('./helpers/getBodyParser');
 const api = require('./helpers/apiHelper');
+const expressStaticGzip = require('express-static-gzip');
+const path = require('path');
 
 const app = express();
 
-app.use(express.static('./client/dist'));
+// app.use(express.static('./client/dist')); // used before serving compressed file
+
+// serving up compress bundle.js using brotli
+app.use('/', expressStaticGzip(path.join(__dirname, './client/dist'), {
+  enableBrotli: true
+}));
 app.use(postBodyParser);
 app.use(getBodyParser);
 
