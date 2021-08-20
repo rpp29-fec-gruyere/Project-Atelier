@@ -88,7 +88,7 @@ class App extends React.Component {
   // productId: [integer] the id of the new page's main product
   loadPage(productId) {
     let pageDataRetrievalAttempts = 0;
-    console.log('[App] initiating retrieval of all page data'); 
+    console.log('[App] initiating retrieval of all page data');
     $.ajax({
       url: `/page-data/?id=${36307}`,
       type: 'GET',
@@ -131,20 +131,7 @@ class App extends React.Component {
 
 
   componentDidMount() {
-    let initialFetchAttempts = 0;
-    this.fetch({endpoint: 'products', params: {count: 1}},
-      (data) => {
-        console.log('[App] data recieved: ', data);
-        this.loadPage(data[0].id);
-      },
-      (error) => {
-        throw error;
-        initialFetchAttempts++;
-        if (initialFetchAttempts < 3) {
-          this.componentDidMount();
-        }
-      });
-
+    this.loadPage(36307);
   }
 
   render() {
@@ -168,13 +155,18 @@ class App extends React.Component {
           </div>
         </header>
         <ProductOverview item={this.state.item} reviews={this.state.reviews} />
-        <AdditionalProducts />
+        <AdditionalProducts
+          relatedItems={this.state.relatedItems}
+          fetch={this.fetch}
+          loadPage={this.loadPage}
+          item={this.state.item}
+        />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
         <ReviewSection
-          reviewData={this.state.reviews} 
-          itemInfo={this.state.item} 
-          handlePost={this.post.bind(this)} 
-          handlePut={this.put.bind(this)} 
+          reviewData={this.state.reviews}
+          itemInfo={this.state.item}
+          handlePost={this.post.bind(this)}
+          handlePut={this.put.bind(this)}
           handleFetch={this.fetch.bind(this)}/>
       </div>
     );
