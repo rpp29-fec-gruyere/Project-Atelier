@@ -91,7 +91,11 @@
     width: 100%;
     display: flex;
     flex-direction: column;
-    margin: 5px 0;
+    margin: .8vh 0;
+}
+
+.characteristic span {
+    font-weight: 600;
 }
 
 .characteristicBar {
@@ -167,7 +171,7 @@
 
 .reviewPhoto:hover {
     transform: scale(1.5);
-    z-index: 30;
+    z-index: 24;
 }
 
 .response {
@@ -282,7 +286,7 @@
     float: right;
 }
 
-#sortOptions {
+#sortReviewsBy {
     border: none;
     margin-bottom: 15px;
 }

@@ -41,7 +41,7 @@ const ReviewList = props => {
     <div data-testid="reviewList" className="reviewList">
       <div id="sortOptions">
         <span>{reviewCount} reviews, sorted by
-          <select name="sortOptions" id="sortOptions" value={sortOption} onChange={(e) => { handleSortChange(e); }}>
+          <select name="sortOptions" id="sortReviewsBy" value={sortOption} onChange={(e) => { handleSortChange(e); }}>
             <option value="relevant">relevant</option>
             <option value="newest">newest</option>
             <option value="helpful">helpful</option>

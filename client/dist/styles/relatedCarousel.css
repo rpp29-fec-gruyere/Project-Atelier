@@ -68,13 +68,14 @@ a {
   padding-right: 8px;
 }
 
-.product-detail span {
+.category {
   position: relative;
-  color: rgba(26,26,26,0.5);
+  color: rgba(0,0,0,0.7);
+  font-weight: 200;
 }
 
 .price {
-  color: rgba(26,26,26,0.5);
+  color: rgba(0,0,0,0.7);
   font-weight: 600;
   font-size: 1.1rem;
   letter-spacing: 0.5px;

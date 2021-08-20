@@ -3,7 +3,7 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const zlib = require('zlib');
 
 module.exports = {
-  mode: 'development',
+  mode: 'production',
   entry: `${path.join(__dirname, '/client/src')}/index.js`,
   output: {
     filename: 'bundle.js',

@@ -242,7 +242,7 @@ class ProductOverview extends React.Component {
                     {
                       features.slice(0, 5).map((feature, i) => (
                         <li className="product-feature" key={feature.feature}>
-                          <strong>{feature.feature}:</strong>{`  ${feature.value}`}
+                          <b>{feature.feature}:</b>{`  ${feature.value}`}
                         </li>
                       ))
                     }
