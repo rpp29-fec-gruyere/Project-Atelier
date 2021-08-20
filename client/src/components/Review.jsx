@@ -67,6 +67,11 @@ const Review = props => {
       {response ? response : null}
       <div className="feedback">
         <span className="helpful">Helpful? <span className="helpfulResponse" onClick={() => markAsHelpful()}>Yes</span> ({props.reviewInfo.helpfulness})</span>
+        <span>{props.reviewInfo.recommend ? 
+          <div>
+            <span>I recommend this product</span> 
+            <img src="./assets/checkmark.png" alt="" />
+          </div> : null}</span>
       </div>
     </div>
   );
