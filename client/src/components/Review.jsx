@@ -8,6 +8,7 @@ const Review = props => {
   const [showFullReviewBody, setShowFullReviewBody] = useState(false);
   const [showImgModal, setShowImgModal] = useState(false);
   const [selectedImg, setSelectedImg] = useState('');
+  const [foundHelpful, setFoundHelpul] = useState(false);
 
   if (props.reviewInfo.response) {
     response = 
@@ -39,9 +40,13 @@ const Review = props => {
     imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto" onClick={e => handleImgClick(e)}/>);
   });
 
-  let markAsHelpful = () => {
-    props.handlePut({'endpoint': `reviews/${props.reviewInfo.review_id}/helpful`, params: {'review_id': props.reviewInfo.review_id}});
-    setTimeout(() => { props.fetchReviews(false); }, 50);
+  let markAsHelpful = ({target}) => {
+    if (!foundHelpful) {
+      setFoundHelpul(true);
+      target.style.fontWeight = 'bold';
+      props.handlePut({'endpoint': `reviews/${props.reviewInfo.review_id}/helpful`, params: {'review_id': props.reviewInfo.review_id}});
+      setTimeout(() => { props.fetchReviews(false); }, 50);
+    }
   };
 
   let handleShowMoreBtnClick = () => {
@@ -66,7 +71,7 @@ const Review = props => {
       </div> : undefined}
       {response ? response : null}
       <div className="feedback">
-        <span className="helpful">Helpful? <span className="helpfulResponse" onClick={() => markAsHelpful()}>Yes</span> ({props.reviewInfo.helpfulness})</span>
+        <span className="helpful">Helpful? <span className="helpfulResponse" onClick={(e) => markAsHelpful(e)}>Yes</span> ({props.reviewInfo.helpfulness})</span>
         <span>{props.reviewInfo.recommend ? 
           <div>
             <span>I recommend this product</span> 
