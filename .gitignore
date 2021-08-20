@@ -7,3 +7,5 @@ coverage
 client/.DS_Store
 client/dist/.DS_Store
 spec/testData.js
+bundle.js.br
+bundle.js.gz
