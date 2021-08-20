@@ -90,7 +90,7 @@ class App extends React.Component {
     let pageDataRetrievalAttempts = 0;
     console.log('[App] initiating retrieval of all page data');
     $.ajax({
-      url: `/page-data/?id=${productId}`,
+      url: `/page-data/?id=${36307}`,
       type: 'GET',
       success: (pageData) => {
         console.log('[App] page data retrieval successful', pageData);
@@ -128,6 +128,8 @@ class App extends React.Component {
     this.post({endpoint: 'interactions', params: params});
   }
 
+
+
   componentDidMount() {
     this.loadPage(36307);
   }
@@ -160,7 +162,12 @@ class App extends React.Component {
           item={this.state.item}
         />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
-        <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
+        <ReviewSection
+          reviewData={this.state.reviews}
+          itemInfo={this.state.item}
+          handlePost={this.post.bind(this)}
+          handlePut={this.put.bind(this)}
+          handleFetch={this.fetch.bind(this)}/>
       </div>
     );
   }
