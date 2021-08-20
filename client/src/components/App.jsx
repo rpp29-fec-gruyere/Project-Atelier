@@ -134,19 +134,7 @@ class App extends React.Component {
   }
 
   componentDidMount() {
-    let initialFetchAttempts = 0;
-    this.fetch({endpoint: 'products', params: {count: 1}},
-      (data) => {
-        console.log('[App] data recieved: ', data);
-        this.loadPage(36307);
-      },
-      (error) => {
-        throw error;
-        initialFetchAttempts++;
-        if (initialFetchAttempts < 3) {
-          this.componentDidMount();
-        }
-      });
+    this.loadPage(36307);
   }
 
   render() {

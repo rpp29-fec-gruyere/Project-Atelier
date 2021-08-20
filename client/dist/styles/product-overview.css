@@ -57,9 +57,9 @@
       position: relative;
       cursor: url('../assets/cursors/plus.png'), cell;
     }
-      .zoomed {
-        overflow: hidden;
-      }
+    #overview-carousel-expanded.zoomed {
+      cursor: url('../assets/cursors/minus.png'), pointer;
+    }
       #image-display {
         height: 100%;
         width: 100%;
@@ -67,6 +67,9 @@
         max-height: 100%;
         text-align: center;
         z-index: 11;
+      }
+      .zoomed #image-display {
+        overflow: hidden;
       }
         .not-zoomed #spotlight-image {
           max-height: 99%;

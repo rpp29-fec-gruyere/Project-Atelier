@@ -1,5 +1,27 @@
 import React from 'react';
 
+//the coordinates of the mouse relative to the carousel
+// let mouseX = 0;
+// let mouseY = 0;
+
+// //updates the above mouseX and mouseY coordinates
+// const mouseCoordinateTracker = function(event = window.event) {
+//   let rawMouseX = 0;
+//   let rawMouseY = 0;
+//   let rawCarouselX = 0;
+//   let rawCarouselY = 0;
+
+//   if (event.pageX || event.pageY) {
+//     rawMouseX = event.pageX;
+//     rawMouseY = event.pageY;
+//   } else if (event.clietX || event.clientY) {
+//     rawMouseX = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
+//     rawMouseY = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
+//   }
+
+
+// };
+
 class PhotoCarousel extends React.Component {
   constructor(props) {
     super(props);
@@ -20,6 +42,10 @@ class PhotoCarousel extends React.Component {
 
   static getDerivedStateFromProps(props, state) {
     let newState = state;
+    if (newState.photos[0].url !== props.photos[0].url) {
+      newState.expanded = false;
+      newState.zoomed = false;
+    }
     newState.photos = props.photos;
     newState.description = props.description;
     newState.currentPhoto = props.photos.length > state.currentPhoto ? state.currentPhoto : 0;
@@ -91,8 +117,8 @@ class PhotoCarousel extends React.Component {
 
   render() {
     let {photos, currentPhoto, expanded, zoomed, description, catalogStartingIndex} = this.state;
-    return (<div id={expanded ? 'overview-carousel-expanded' : 'overview-carousel'}>
-      <div className={zoomed ? 'zoomed' : 'not-zoomed'} id="image-display">
+    return (<div className={zoomed ? 'zoomed' : 'not-zoomed'} id={expanded ? 'overview-carousel-expanded' : 'overview-carousel'}>
+      <div id="image-display">
         <div className="alignment-helper"></div>
         <img id="spotlight-image" src={photos[currentPhoto].url} alt={`Photo of ${description}`}></img>
       </div>
