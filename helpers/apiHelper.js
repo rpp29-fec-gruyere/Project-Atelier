@@ -1,4 +1,4 @@
-const API_KEY = require('../config');
+const { API_KEY } = require('../config');
 const axios = require('axios');
 const STATIC_PATH = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-rpp';
 

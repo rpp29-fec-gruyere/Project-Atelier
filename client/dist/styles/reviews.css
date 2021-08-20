@@ -1,19 +1,37 @@
+#reviewSection {
+    margin-top: 5vh;
+}
+
+.widgetHeader {
+    font-size: 3vh;
+    font-weight: bold;
+}
+
+
 #mainReviewSection {
     display: grid;
     grid: "ratingsBreakdown reviewList" 1fr / 250px 1fr;
     gap: 0 40px;
     height: 100%;
-    margin: 10px 0;
+    margin: 10px 0 0 0;
 }
 
 .ratingsBreakdown {
     width: fit-content;
+    height: fit-content;
     font-size: 14px;
     grid-area: ratingsBreakdown;
 }
 
 .reviewList {
     grid-area: reviewList;
+    max-height: 170vh;
+    height: fit-content;
+}
+
+#reviewItemContainer {
+    max-height: 70vh;
+    overflow-y: auto;
 }
 
 #ratingRepresentations {
@@ -42,7 +60,9 @@
 
 .ratingBar.title {
     height: 100%;
+    font-weight: normal;
     text-decoration: underline;
+    cursor: pointer;
 }
 
 .ratingBar.container {
@@ -107,11 +127,6 @@
     text-align: right;
 }
 
-
-#sortOptions {
-    margin-bottom: 30px;
-}
-
 .review {
     height: fit-content;
     width: 100%;
@@ -127,24 +142,29 @@
 .reviewUser {
     font-size: 14px;
     color: rgb(148, 146, 146);
+    margin-right: 1vw;
+}
+
+.reviewPhotoContainer {
+    margin: 5% 0;
+    height: fit-content;
+    width: fit-content;
+}
+
+.reviewPhoto {
+    height: 75px;
+    width: 75px;
 }
 
 .response {
     background-color: rgb(139, 137, 137);
 }
 
-.helpful {
-    border-right: 1px solid rgb(148, 146, 146);
-    padding-right: 10px;
-}
-
 .helpfulResponse {
     text-decoration: underline;
+    cursor: pointer;
 }
 
-.report {
-    padding-left: 10px;
-}
 
 #reviewButtons {
     height: fit-content;
@@ -162,23 +182,141 @@
 
 #addReviewModal {
     position: fixed;
-    z-index: 1;
+    z-index: 25;
     height: 60%;
     width: 40%;
     bottom: 25%;
     left: 35%;
     border: 1px solid rgb(148, 146, 146);
-    padding: 20px;
+    padding: 30px;
     background-color: white;
+    overflow-y: auto;
 }
 
+#formContent {
+    width: 70%;
+}
+
+#addReviewHeader {
+    width: 100%;
+}
+
+.formSection {
+    height: fit-content;
+    width: 100%;
+    margin: 15px 0;
+    display: flex;
+    flex-direction: column;
+}
+
+.formSectionTitle {
+    display: block;
+    font-size: 16px;
+    margin-bottom: 12px;
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+.formCharacteristic {
+    width: 100%;
+    height: fit-content;
+    margin: 15px 0;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+
+.formCharacteristicName {
+    width: fit-content;
+    margin: 0 5px 10px 0;
+    text-decoration: underline;
+}
+
+
+.formChosenCharacteristicDescriprtion {
+    color: darkgreen;
+    
+}
+
+.formCharacteristicBtnContainer {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 5px 10px 5px;
+}
+
+.formCharacteristicDescriptionBar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+}
+
+
 #closeReviewModalBtn {
-    height: 10px;
-    width: 10px;
-    float: right;
+    height: 40px;
+    width: 40px;
     cursor: pointer;
+    float: right;
 }
 
 #sortOptions {
     border: none;
+    margin-bottom: 15px;
+}
+
+#reviewSummaryInput {
+    width: 100%;
+}
+
+#reviewBodyInput {
+    width: 100%;
+    height: 100px;
+}
+
+#imgInputBtn {
+    display: none;
+}
+
+#imgAddVisibleBtn {
+    height: 40px;
+    width: 140px;
+    border-radius: 0;
+    background-color: white;
+    border: 1px solid rgb(148, 146, 146);
+}
+
+#thumbnailDisplay {
+    margin: 5% 0;
+    height: fit-content;
+}
+
+.imgThumbnail {
+    height: 75px;
+    width: 75px;
+}
+
+#recommendedSection {
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#recommendedTitle {
+    width: 100%;
+}
+
+#invalidReviewInputSection {
+    display: block
+}
+
+#invalidReviewInputSection ul {
+    padding-left: 15px;
+    color: red;
+}
+
+#submitBtn {
+    height: 40px;
+    width: 140px;
+    border-radius: 0;
+    background-color: white;
+    border: 1px solid rgb(148, 146, 146);
 }
