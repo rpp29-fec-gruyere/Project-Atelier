@@ -44,9 +44,9 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
                       // checks if "displayed" product's feature is included or not
                       for (let i = 0; i < itemFeature.length; i++) {
                         if (itemFeature[i].value === feat.value) {
-                          return <div className="check">check</div>
+                          return (<div className="check">check</div>);
                         } else if (i === itemFeature.length - 1) {
-                          return <div className="not-check"></div>
+                          return (<div className="not-check"></div>);
                         }
                       }
                     })
@@ -74,9 +74,9 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
                       // checks if "related" product's feature is included or not
                       for (let i = 0; i < modalFeature.length; i++) {
                         if (modalFeature[i].value === feat.value) {
-                          return <div className="check">check</div>
+                          return (<div className="check">check</div>);
                         } else if (i === modalFeature.length - 1) {
-                          return <div className="not-check"></div>
+                          return (<div className="not-check"></div>);
                         }
                       }
                     })
