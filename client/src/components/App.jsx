@@ -177,8 +177,12 @@ class App extends React.Component {
             </React.Fragment>) :
             (<React.Fragment>
               <ProductOverview item={this.state.item} reviews={this.state.reviews} post={this.post} />
-              <AdditionalProducts />
-              {/* <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/> */}
+              <AdditionalProducts
+                relatedItems={this.state.relatedItems}
+                fetch={this.fetch}
+                loadPage={this.loadPage}
+                item={this.state.item}
+              />
               <ReviewSection
                 reviewData={this.state.reviews}
                 itemInfo={this.state.item}
