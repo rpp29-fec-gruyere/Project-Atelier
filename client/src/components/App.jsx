@@ -26,6 +26,7 @@ class App extends React.Component {
     };
 
     this.loadPage = this.loadPage.bind(this);
+    this.nextPage = this.nextPage.bind(this);
     this.registerClick = this.registerClick.bind(this);
   }
 
@@ -128,7 +129,9 @@ class App extends React.Component {
     this.post({endpoint: 'interactions', params: params});
   }
 
-
+  nextPage() {
+    this.loadPage(this.state.item.id + 1);
+  }
 
   componentDidMount() {
     this.loadPage(36307);
@@ -137,37 +140,57 @@ class App extends React.Component {
   render() {
     if (JSON.stringify(this.state.item) !== '{}') {
       $(document).prop('title', this.state.item.name);
+    } else {
+      return (
+        <div className="app" data-testid="app" onClick={this.registerClick}>
+          <header>
+            <div id="mainHeader">
+              <span id="headerTitle">Atelier</span>
+              <img id="search-icon" src="./assets/search.png" alt="Search Atelier" onClick={this.nextPage}></img>
+            </div>
+            <div id="promo">
+              <span>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT <strong>OFFER</strong> - <a>NEW PRODUCT HIGHLIGHT</a></span>
+            </div>
+          </header>
+          <div id="page-loading-container">
+            <img id="app-loading" src="./assets/loading.gif" alt="Atelier is currently loading"></img>
+          </div>
+        </div>
+      );
     }
     return (
       <div className="app" data-testid="app" onClick={this.registerClick}>
         <header>
           <div id="mainHeader">
             <span id="headerTitle">Atelier</span>
-            <div id="headerSearchBar">
-              <input type="text"></input>
-              <button>
-                <span className="glyphicon glyphicon-search"></span>
-              </button>
-            </div>
+            <img id="search-icon" src="./assets/search.png" alt="Search Atelier" onClick={this.nextPage}></img>
           </div>
           <div id="promo">
             <span>SITE-WIDE ANNOUNCEMENT MESSAGE! - SALE / DISCOUNT <strong>OFFER</strong> - <a>NEW PRODUCT HIGHLIGHT</a></span>
           </div>
         </header>
-        <ProductOverview item={this.state.item} reviews={this.state.reviews} />
-        <AdditionalProducts
-          relatedItems={this.state.relatedItems}
-          fetch={this.fetch}
-          loadPage={this.loadPage}
-          item={this.state.item}
-        />
-        <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
-        <ReviewSection
-          reviewData={this.state.reviews}
-          itemInfo={this.state.item}
-          handlePost={this.post.bind(this)}
-          handlePut={this.put.bind(this)}
-          handleFetch={this.fetch.bind(this)}/>
+        {
+          this.state.item.styles.length < 1 ?
+            (<React.Fragment>
+              <div id="bad-data-consulation">We're sorry, this item is no longer available.</div>
+              <button id="link-to-valid-product" onClick={this.nextPage}>Click here to see all the great items still up for grabs!</button>
+            </React.Fragment>) :
+            (<React.Fragment>
+              <ProductOverview item={this.state.item} reviews={this.state.reviews} post={this.post} />
+              <AdditionalProducts
+                relatedItems={this.state.relatedItems}
+                fetch={this.fetch}
+                loadPage={this.loadPage}
+                item={this.state.item}
+              />
+              <ReviewSection
+                reviewData={this.state.reviews}
+                itemInfo={this.state.item}
+                handlePost={this.post.bind(this)}
+                handlePut={this.put.bind(this)}
+                handleFetch={this.fetch.bind(this)}/>
+            </React.Fragment>)
+        }
       </div>
     );
   }
