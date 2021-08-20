@@ -8,6 +8,9 @@ const ReviewSection = props => {
   const [reviews, setReviews] = useState([]);
   const [reviewsMetaData, setReviewsMetaData] = useState({});
   const [sortOption, setSortOption] = useState('relevant');
+  const [filters, setFilters] = useState({});
+
+  const [filteredReviews, setFilteredReviews] = useState([]);
 
 
   const showAddReviewModal = () => {
@@ -20,6 +23,14 @@ const ReviewSection = props => {
 
   const handleSortChange = (sortOption) => {
     setSortOption(sortOption);
+  };
+
+  const handleFilterChange = (target) => {
+    let rating = target.innerHTML[0];
+    let updatedFilters = filters;
+    updatedFilters[rating] ? delete updatedFilters[rating] : updatedFilters[rating] = true;
+    setFilters({ ...filters, ...updatedFilters});
+    console.log('Filters', filters);
   };
 
   // Function to retrieve review metaData for product from API via the server
@@ -69,6 +80,19 @@ const ReviewSection = props => {
     }
   }, [sortOption]);
 
+  // Updated filtered review list 
+  useEffect(() => {
+    console.log('useEffect triggered');
+    let newFilteredReviews = [];
+    reviews.forEach(review => {
+      if (filters[review.rating]) {
+        newFilteredReviews.push(review);
+      }
+    });
+    console.log('Filtered Reviews', newFilteredReviews);
+    setFilteredReviews(newFilteredReviews);
+  }, [filters]);
+
 
   return (
     <div data-testid="reviewSection" className="reviewSection" id="reviewSection">
@@ -82,9 +106,9 @@ const ReviewSection = props => {
         ></AddReviewModal> : null}
       <span className="widgetHeader">Ratings &#38; Reviews</span>
       <div id="mainReviewSection">
-        <RatingsBreakdown metaData={Object.keys(reviewsMetaData).length > 0 ? reviewsMetaData : undefined}/>
+        <RatingsBreakdown metaData={Object.keys(reviewsMetaData).length > 0 ? reviewsMetaData : undefined} handleFilterChange={handleFilterChange}/>
         <ReviewList 
-          reviews={reviews.length > 0 ? reviews : undefined}
+          reviews={reviews.length > 0 ? (Object.keys(filters) > 0 ? filteredReviews : reviews) : undefined}
           handleSortChange={handleSortChange}
           showAddReviewModal={showAddReviewModal} 
           handlePut={props.handlePut}
