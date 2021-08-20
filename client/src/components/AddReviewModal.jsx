@@ -126,7 +126,7 @@ class AddReviewModal extends React.Component {
             'characteristics': this.state.characteristics
           };
           this.props.handlePost({endpoint: 'reviews', params: reviewData});
-          setTimeout(() => this.props.updateReviews(), 1000);
+          setTimeout(() => this.props.updateReviews(), 50);
           this.handleClose();
         }
       });

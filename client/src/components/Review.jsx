@@ -21,7 +21,7 @@ const Review = props => {
 
   let markAsHelpful = () => {
     props.handlePut({'endpoint': `reviews/${props.reviewInfo.review_id}/helpful`, params: {'review_id': props.reviewInfo.review_id}});
-    props.fetchReviews(false);
+    setTimeout(() => { props.fetchReviews(false); }, 50);
   };
 
   return (
