@@ -1,5 +1,7 @@
 import React from 'react';
+import $ from 'jquery';
 import Stars from './Stars.jsx';
+import PhotoCarousel from './PhotoCarousel.jsx';
 
 //HELPER FUNCTIONS
 const ratingParser = (ratingsObj) => {
@@ -17,11 +19,11 @@ const sizeOptionsGenerator = (skus) => {
   for (let sku in skus) {
     let size = skus[sku];
     if (size.quantity < 1) {
-      options.push(<option className="size-option" key={sku} >{`${size.size.toUpperCase()} (SOLD OUT)`}</option>);
+      options.push(<option className="size-option" key={sku} >{`${String(size.size).toUpperCase()} (SOLD OUT)`}</option>);
     } else if (size.quantity <= 10) {
-      options.push(<option className="size-option" key={sku} value={sku}>{`${size.size.toUpperCase()} (ALMOST GONE)`}</option>);
+      options.push(<option className="size-option" key={sku} value={sku}>{`${String(size.size).toUpperCase()} (ALMOST GONE)`}</option>);
     } else {
-      options.push(<option className="size-option" key={sku} value={sku}>{size.size.toUpperCase()}</option>);
+      options.push(<option className="size-option" key={sku} value={sku}>{String(size.size).toUpperCase()}</option>);
     }
   }
   return options;
@@ -52,6 +54,8 @@ class ProductOverview extends React.Component {
 
     this.selectStyle = this.selectStyle.bind(this);
     this.selectSize = this.selectSize.bind(this);
+    this.addToCart = this.addToCart.bind(this);
+    this.post = props.post.bind(this);
   }
 
   static getDerivedStateFromProps(props, state) {
@@ -79,6 +83,7 @@ class ProductOverview extends React.Component {
       let currentSelectedSize = state.item.styles[state.styleIndex].skus[state.sku].size;
       let newState = state;
       newState.styleIndex = Number(event.target.id.slice(event.target.id.indexOf('-') + 1));
+      newState.currentPhoto = 0;
       let skuFound = false;
       for (let sku in state.item.styles[newState.styleIndex].skus) {
         if (state.item.styles[newState.styleIndex].skus[sku].size === currentSelectedSize) {
@@ -90,14 +95,29 @@ class ProductOverview extends React.Component {
       if (!skuFound) {
         newState.sku = Object.keys(state.item.styles[state.styleIndex].skus)[0];
       }
-      console.log('next state: ', state);
-      return state;
+      // console.log('next state: ', state);
+      return newState;
     };
     this.setState(stateUpdate);
   }
 
   selectSize(event) {
     this.setState({sku: event.target.value, sizeSelected: true});
+  }
+
+  addToCart(event) {
+    if (this.state.sizeSelected) {
+      console.log('[overview] initiating add to cart');
+      this.post({endpoint: 'cart', params: {'sku_id': this.state.sku}});
+    } else {
+      let warning = $('#please-select-size');
+      warning.css({opacity: '100%'});
+      let revert = () => {
+        console.log('revert activated');
+        warning.css({opacity: '0%'});
+      };
+      setTimeout(revert, 1500);
+    }
   }
 
   render() {
@@ -116,25 +136,11 @@ class ProductOverview extends React.Component {
       let price = styles[styleIndex].original_price;
       return (<div data-testid="ProductOverview" id="overview" className="product-overview">
         <div id="overview-main">
-          <div id="overview-carousel">
-            <div id="image-display">
-              <div id="alignment-helper"></div>
-              <img id="spotlight-image" src={styles[styleIndex].photos[currentPhoto].url}></img>
-            </div>
-            <div id="carousel-controls-outer">
-              <div id="carousel-controls-inner">
-                <div className="arrow-container" key="left-arrow-container">
 
-                </div>
-                <div id="photo-catalog-container">
+          {/* OVERVIEW CAROUSEL */}
+          <PhotoCarousel photos={styles[styleIndex].photos} description={`${String(styles[styleIndex].name)} ${name}`} />
 
-                </div>
-                <div className="arrow-container" key="right-arrow-container">
-
-                </div>
-              </div>
-            </div>
-          </div>
+          {/* OVERVIEW CONTROLS (STYLE, SIZE, & QUANTITY SELECTION) */}
           <div id="controls">
             {
               numberOfReviews === 0 ? '' :
@@ -147,65 +153,95 @@ class ProductOverview extends React.Component {
                   </a>
                 </div>)
             }
-            <br></br>
-            <div id="overview-category">{category.toUpperCase()}</div>
-            <div id="overview-product-title">{name}</div>
-            <br></br>
+            <div id="product-info">
+              <div id="overview-category">{String(category).toUpperCase()}</div>
+              <div id="overview-product-title">{name}</div>
+            </div>
             <div id="overview-price">${styles[styleIndex].original_price}</div>
-            <br></br>
-            <div id="style-indicator">
-              <div id="overview-style">STYLE:</div>
-              <div id="selected-style">{styles[styleIndex].name.toUpperCase()}</div>
+            <div id="style-section">
+              <div id="style-indicator">
+                <div id="overview-style">STYLE:</div>
+                <div id="selected-style">{String(styles[styleIndex].name).toUpperCase()}</div>
+              </div>
+              <div id="style-selector">
+                {
+                  styles.map((style, i) => {
+                    return (
+                      <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
+                        <img className="style-icon"
+                          id={`style-${i}`}
+                          key={`style-${i}`}
+                          src={style.photos[0].thumbnail_url}
+                          alt={`${styles[styleIndex].name} style`}
+                          onClick={this.selectStyle}>
+                        </img>
+                        {
+                          styleIndex !== i ? '' : (<img
+                            className="style-checkmark"
+                            key={`style-checkmark-${i}`}
+                            src="./assets/checkmark.png"
+                            alt={`${styles[styleIndex].name} style selected`}>
+                          </img>)
+                        }
+                      </div>
+                    );
+                  })
+                }
+              </div>
             </div>
-            <br></br>
-            <div id="style-selector">
+            <div id="order-controls">
+              <div id="control-line-1">
+                <select id="size-selector" name="size" value={sizeSelected ? sku : ''} onChange={this.selectSize}>
+                  <option value="" disabled hidden>SELECT SIZE</option>
+                  {
+                    sizeOptionsGenerator(styles[styleIndex].skus)
+                  }
+                </select>
+                <select id="quantity-selector" name="quantity" defaultValue="1">
+                  <option className="quantity-option" key="quantity1" value="1">1</option>
+                  {
+                    quantityOptionsGenerator(Number(styles[styleIndex].skus[sku].quantity))
+                  }
+                </select>
+              </div>
               {
-                styles.map((style, i) => {
-                  return (
-                    <div className={`style-outline${styleIndex === i ? ' current-style' : ''}`} id={`style-${i}`} key={`style-${i}`}>
-                      <img className="style-icon" id={`style-${i}`} key={`style-${i}`} src={style.photos[0].thumbnail_url} onClick={this.selectStyle}></img>
-                      {
-                        styleIndex !== i ? '' : (<img className="style-checkmark" key={`style-checkmark-${i}`} src="./assets/checkmark.png"></img>)
-                      }
-                    </div>
-                  );
-                })
+                Number(styles[styleIndex].skus[sku].quantity) ?
+                  <button id="add-to-cart" onClick={this.addToCart}>ADD TO CART</button> :
+                  <button id="sold-out">SOLD OUT</button>
               }
+              <div id="please-select-size" style={{userSelect: 'none'}}>PLEASE SELECT SIZE</div>
             </div>
-            <br></br>
-            <div id="control-line-1">
-              <select id="size-selector" name="size" value={sizeSelected ? sku : ''} onChange={this.selectSize}>
-                <option value="" disabled hidden>SELECT SIZE</option>
-                {
-                  sizeOptionsGenerator(styles[styleIndex].skus)
-                }
-              </select>
-              <select id="quantity-selector" name="quantity" defaultValue="1">
-                <option className="quantity-option" key="quantity1" value="1">1</option>
-                {
-                  quantityOptionsGenerator(styles[styleIndex].skus[sku].quantity)
-                }
-              </select>
-            </div>
-            <button id="add-to-cart">ADD TO CART</button>
           </div>
         </div>
+
+        {/* OVERVIEW DESCRIPTION */}
         <div id="overview-details">
           <div id="overview-description">
             <div id="product-tagline">{slogan}</div>
             <br></br>
             <div id="description-body">{description}</div>
           </div>
-          <div id="details-divide"></div>
-          <div id="overview-features">
-            {
-              // features.slice(0, 5).map((feature) => (
-              //   <div className="product-feature">
-
-              //   </div>
-              // ))
-            }
-          </div>
+          {
+            features.length > 0 ?
+              (<React.Fragment>
+                <div id="details-divide-container">
+                  <div id="details-divide"></div>
+                </div>
+                <div id="overview-features">
+                  <ul id="features-list">
+                    <div className="filler" key="top"></div>
+                    {
+                      features.slice(0, 5).map((feature, i) => (
+                        <li className="product-feature" key={feature.feature}>
+                          <strong>{feature.feature}:</strong>{`  ${feature.value}`}
+                        </li>
+                      ))
+                    }
+                    <div className="filler" key='bottom'></div>
+                  </ul>
+                </div>
+              </React.Fragment>) : ''
+          }
         </div>
       </div>);
     }

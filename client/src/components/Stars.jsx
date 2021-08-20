@@ -20,6 +20,7 @@ const Stars = (props) => {
       data-testid={`${starId}-star${i + 1}`}
       id={`${starId}-star${i + 1}`}
       src={starSource}
+      alt={`Star Rating: ${String(rating).slice(0, 3)}`}
       onMouseEnter={props.handleMouseEnter ? () => props.handleMouseEnter(i) : null}
       onMouseLeave={props.handleMouseEnter ? () => props.handleMouseLeave() : null }
       onClick={props.handleClick ? () => props.handleClick() : null}
