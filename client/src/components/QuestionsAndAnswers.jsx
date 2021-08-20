@@ -39,7 +39,7 @@ class QuestionsAndAnswers extends React.Component {
   }
 
   static getDerivedStateFromProps(props, state) {
-    console.log('props', props.questionsAndAnswers);
+    // console.log('props', props.questionsAndAnswers);
     if (props.questionsAndAnswers !== state.questionsAndAnswers) {
       let newState = {
         questionsAndAnswers: [],
@@ -52,8 +52,8 @@ class QuestionsAndAnswers extends React.Component {
           newState.questionsAndAnswersDisplay.push(newState.questionsAndAnswers[i]);
         }
       }
-      console.log('newstate:', newState);
-      console.log('newstateDisplay:', newState.questionsAndAnswersDisplay);
+      // console.log('newstate:', newState);
+      // console.log('newstateDisplay:', newState.questionsAndAnswersDisplay);
       return newState;
     } else {
       return null;

@@ -130,10 +130,10 @@ class App extends React.Component {
 
   componentDidMount() {
     let initialFetchAttempts = 0;
-    this.fetch({endpoint: 'products', params: {count: 5}},
+    this.fetch({endpoint: 'products', params: {count: 1}},
       (data) => {
         console.log('[App] data recieved: ', data);
-        this.loadPage(data[2].id);
+        this.loadPage(data[0].id);
       },
       (error) => {
         throw error;
@@ -170,13 +170,9 @@ class App extends React.Component {
           fetch={this.fetch}
           loadPage={this.loadPage}
           item={this.state.item}
-          review={this.state.reviews}
         />
         <QuestionsAndAnswers questionsAndAnswers={this.state.questionsAndAnswers}/>
         <ReviewSection reviewData={this.state.reviews} itemInfo={this.state.item}/>
-        {
-          console.log($('.app'))
-        }
       </div>
     );
   }

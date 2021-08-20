@@ -1,50 +1,13 @@
 import React, { useState, useEffect } from 'react';
-import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 import Stars from './Stars.jsx';
-import $ from 'jquery';
+import { FaAngleLeft, FaAngleRight } from 'react-icons/fa';
 
-const RelatedCarousel = (props) => {
+
+const RelatedOutfits = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   let length = props.items ? props.items.length : 0;
   const { toggleModal, changeModalIndex } = props;
   const [ratings, setRatings] = useState(false);
-
-  const getRatingsOnProducts = (items) => {
-
-    if (ratings === false && items[0].ratings === undefined) {
-      items.map(item => {
-        if (!item.ratings) {
-          const productId = item.id;
-          props.fetch({endpoint: 'reviews/meta', params: {product_id: productId}},
-            (data) => {
-              const { ratings } = data;
-              let cumulativeStars = 0;
-              let numberOfRatings = 0;
-              for (let key in ratings) {
-                cumulativeStars += Number(key) * Number(ratings[key]);
-                numberOfRatings += Number(ratings[key]);
-              }
-              const reviewScore = cumulativeStars / numberOfRatings;
-              item.ratings = (reviewScore.toString() === 'NaN' ? 0 : Math.round(reviewScore * 2) / 2);
-              console.log(item.id, item.name, item.ratings)
-            },
-            (error) => {
-              console.log(error);
-            });
-        }
-      });
-    } else {
-      return;
-    }
-  };
-
-  // update each related products ratings
-  if (props.items.length > 0) {
-    getRatingsOnProducts(props.items);
-    setTimeout(() => {
-      setRatings(() => true)
-    }, 2000);
-  }
 
   // carousel slides to right
   const next = () => {
@@ -126,8 +89,8 @@ const RelatedCarousel = (props) => {
         </div>
       }
     </div>
-
   );
 };
 
-export default RelatedCarousel;
+
+export default RelatedOutfits;
