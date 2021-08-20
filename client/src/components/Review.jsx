@@ -1,9 +1,11 @@
 import React from 'react';
 import Stars from './Stars.jsx';
+import $ from 'jquery';
 
 const Review = props => {
   let reviewDate = new Date(props.reviewInfo.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   let response = undefined;
+
   if (props.reviewInfo.response) {
     response = 
       <div className="response">
@@ -36,7 +38,6 @@ const Review = props => {
       {response ? response : null}
       <div className="feedback">
         <span className="helpful">Helpful? <span className="helpfulResponse" onClick={() => markAsHelpful()}>Yes</span> ({props.reviewInfo.helpfulness})</span>
-        <span className="report">Report</span>
       </div>
     </div>
   );

@@ -160,19 +160,11 @@
     background-color: rgb(139, 137, 137);
 }
 
-.helpful {
-    border-right: 1px solid rgb(148, 146, 146);
-    padding-right: 10px;
-}
-
 .helpfulResponse {
     text-decoration: underline;
     cursor: pointer;
 }
 
-.report {
-    padding-left: 10px;
-}
 
 #reviewButtons {
     height: fit-content;
@@ -327,4 +319,13 @@
     border-radius: 0;
     background-color: white;
     border: 1px solid rgb(148, 146, 146);
+}
+
+#imgModal {
+    position: absolute;
+    display: none;
+}
+
+#imgModalImg {
+
 }
