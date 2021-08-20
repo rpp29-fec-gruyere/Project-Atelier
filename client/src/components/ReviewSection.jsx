@@ -30,7 +30,6 @@ const ReviewSection = props => {
     let updatedFilters = filters;
     updatedFilters[rating] ? delete updatedFilters[rating] : updatedFilters[rating] = true;
     setFilters({ ...filters, ...updatedFilters});
-    console.log('Filters', filters);
   };
 
   // Function to retrieve review metaData for product from API via the server
@@ -42,7 +41,6 @@ const ReviewSection = props => {
       }
     },
     data => {
-      console.log('In MetaData:', reviews);
       setReviewsMetaData(data);
     });
   };
@@ -58,7 +56,6 @@ const ReviewSection = props => {
       }
     },
     data => {
-      console.log('In Fetch:', data.results);
       setReviews(data.results);
       if (needMetaData) {
         fetchReviewsMetaData();
@@ -82,14 +79,12 @@ const ReviewSection = props => {
 
   // Updated filtered review list 
   useEffect(() => {
-    console.log('useEffect triggered');
     let newFilteredReviews = [];
     reviews.forEach(review => {
       if (filters[review.rating]) {
         newFilteredReviews.push(review);
       }
     });
-    console.log('Filtered Reviews', newFilteredReviews);
     setFilteredReviews(newFilteredReviews);
   }, [filters]);
 
