@@ -73,6 +73,7 @@ class ProductOverview extends React.Component {
       if (state.sku === null || state.item.id !== newState.item.id) {
         newState.sku = Object.keys(newState.item.styles[0].skus)[0];
         newState.styleIndex = 0;
+        newState.sizeSelected = false;
       }
     }
     return newState;
@@ -109,6 +110,14 @@ class ProductOverview extends React.Component {
     if (this.state.sizeSelected) {
       console.log('[overview] initiating add to cart');
       this.post({endpoint: 'cart', params: {'sku_id': this.state.sku}});
+      let confirmation = $('#please-select-size');
+      confirmation.text('ITEM HAS BEEN ADDED');
+      confirmation.css({opacity: '100%', color: 'green'});
+      let revert = () => {
+        console.log('revert activated');
+        confirmation.css({opacity: '0%'});
+      };
+      setTimeout(revert, 1500);
     } else {
       let warning = $('#please-select-size');
       warning.css({opacity: '100%'});

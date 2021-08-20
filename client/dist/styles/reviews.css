@@ -3,8 +3,9 @@
 }
 
 .widgetHeader {
-    font-size: 3vh;
-    font-weight: bold;
+    font-size: 2.5vh;
+    margin-bottom: 2.2vh;
+    font-weight: 600;
 }
 
 
@@ -149,11 +150,24 @@
     margin: 5% 0;
     height: fit-content;
     width: fit-content;
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+    padding-left: 20px;
+    cursor: pointer;
 }
 
 .reviewPhoto {
     height: 75px;
     width: 75px;
+    object-fit: cover;
+    border: 2px solid black;
+    transition: 300ms;
+}
+
+.reviewPhoto:hover {
+    transform: scale(1.5);
+    z-index: 30;
 }
 
 .response {
@@ -173,11 +187,20 @@
 }
 
 .reviewBtn {
-    height: 60px;
-    width: 140px;
+    height: 5vh;
+    width: auto;
     background-color: white;
     border-radius: 0%;
-    border: 1px solid rgb(148, 146, 146);
+    border: 2px solid black;
+    font-size: 1.7vh;
+    margin-right: 2vw;
+    padding: 0 1.2vh;
+    transition: 300ms;
+}
+
+.reviewBtn:hover {
+    background-color: black;
+    color: white;
 }
 
 #addReviewModal {
@@ -235,7 +258,7 @@
 
 .formChosenCharacteristicDescriprtion {
     color: darkgreen;
-    
+
 }
 
 .formCharacteristicBtnContainer {

@@ -62,7 +62,7 @@ const ReviewSection = props => {
       }
     });
   };
-  
+
   // Initializes ReviewList & Review metadata
   useEffect(() => {
     if (props.itemInfo.id) {
@@ -77,7 +77,7 @@ const ReviewSection = props => {
     }
   }, [sortOption]);
 
-  // Updated filtered review list 
+  // Updated filtered review list
   useEffect(() => {
     let newFilteredReviews = [];
     reviews.forEach(review => {
@@ -91,21 +91,21 @@ const ReviewSection = props => {
 
   return (
     <div data-testid="reviewSection" className="reviewSection" id="reviewSection">
-      {reviewModalDisplay ? 
-        <AddReviewModal 
+      {reviewModalDisplay ?
+        <AddReviewModal
           itemInfo={props.itemInfo}
           characteristics={reviewsMetaData.characteristics}
           handleClose={closeAddReviewModal}
           handlePost={props.handlePost}
           updateReviews={fetchReviews}
         ></AddReviewModal> : null}
-      <span className="widgetHeader">Ratings &#38; Reviews</span>
+      <span className="widgetHeader">RATINGS &#38; REVIEWS</span>
       <div id="mainReviewSection">
         <RatingsBreakdown metaData={Object.keys(reviewsMetaData).length > 0 ? reviewsMetaData : undefined} handleFilterChange={handleFilterChange}/>
-        <ReviewList 
+        <ReviewList
           reviews={reviews.length > 0 ? (Object.keys(filters) > 0 ? filteredReviews : reviews) : undefined}
           handleSortChange={handleSortChange}
-          showAddReviewModal={showAddReviewModal} 
+          showAddReviewModal={showAddReviewModal}
           handlePut={props.handlePut}
           fetchReviews={fetchReviews}/>
       </div>

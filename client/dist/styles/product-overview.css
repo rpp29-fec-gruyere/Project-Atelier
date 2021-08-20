@@ -335,8 +335,9 @@
         width: 100%;
       }
         #control-line-1 {
-          display: grid;
-          grid-template-columns: 15.75vw 5.625vw;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-between;
           column-gap: 1.125vw;
         }
           #control-line-1 select {
@@ -349,6 +350,9 @@
             background-color: white;
             cursor: pointer;
             overflow: auto;
+          }
+          #size-selector {
+            min-width: 70%;
           }
         #add-to-cart {
           margin-top: 1.125vw;

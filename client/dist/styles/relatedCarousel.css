@@ -100,11 +100,11 @@ a {
 }
 
 .left {
-  left: -1em;
+  left: 0px;
 }
 
 .right {
-  right: -1em;
+  right: 0px;
 }
 
 .left-btn, .right-btn {

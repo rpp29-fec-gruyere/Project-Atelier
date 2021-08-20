@@ -186,10 +186,13 @@ class PhotoCarousel extends React.Component {
               </div>
             </div>
           </div>
-          <div className="arrow-container" key="right-arrow-container">
-            <div className="alignment-helper"></div>
-            <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel right"></img>
-          </div>
+          {
+            currentPhoto === photos.length - 1 ? '' :
+              <div className="arrow-container" key="right-arrow-container">
+                <div className="alignment-helper"></div>
+                <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel right"></img>
+              </div>
+          }
         </div>
       </div>
     </div>);

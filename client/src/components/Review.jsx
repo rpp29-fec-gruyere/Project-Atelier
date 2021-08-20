@@ -7,7 +7,7 @@ const Review = props => {
   let response = undefined;
 
   if (props.reviewInfo.response) {
-    response = 
+    response =
       <div className="response">
         <span>Response:</span>
         <p>{props.reviewInfo.response}</p>
@@ -16,7 +16,7 @@ const Review = props => {
 
   let imgs = [];
   props.reviewInfo.photos.forEach(photo => {
-    imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto"/>);
+    imgs.push(<img src={photo.url} key={photo.id} className="reviewPhoto" onClick={() => { window.open(photo.url); }} />);
   });
 
   let markAsHelpful = () => {
