@@ -67,25 +67,18 @@
         max-height: 100%;
         text-align: center;
         z-index: 11;
-      }
-      .zoomed #image-display {
         overflow: hidden;
       }
-        .not-zoomed #spotlight-image {
+        #spotlight-image {
           max-height: 99%;
           max-width: 99%;
           object-fit: cover;
           margin-left: auto;
           margin-right: auto;
           vertical-align: middle;
+          transition: 300ms;
         }
         .zoomed #spotlight-image {
-          max-height: 99%;
-          max-width: 99%;
-          object-fit: cover;
-          margin-left: auto;
-          margin-right: auto;
-          vertical-align: middle;
           transform: scale(2.5);
         }
       #carousel-controls-outer {

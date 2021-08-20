@@ -1,27 +1,5 @@
 import React from 'react';
 
-//the coordinates of the mouse relative to the carousel
-// let mouseX = 0;
-// let mouseY = 0;
-
-// //updates the above mouseX and mouseY coordinates
-// const mouseCoordinateTracker = function(event = window.event) {
-//   let rawMouseX = 0;
-//   let rawMouseY = 0;
-//   let rawCarouselX = 0;
-//   let rawCarouselY = 0;
-
-//   if (event.pageX || event.pageY) {
-//     rawMouseX = event.pageX;
-//     rawMouseY = event.pageY;
-//   } else if (event.clietX || event.clientY) {
-//     rawMouseX = event.clientX + document.body.scrollLeft + document.documentElement.scrollLeft;
-//     rawMouseY = event.clientY + document.body.scrollTop + document.documentElement.scrollTop;
-//   }
-
-
-// };
-
 class PhotoCarousel extends React.Component {
   constructor(props) {
     super(props);
