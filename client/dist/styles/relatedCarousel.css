@@ -70,12 +70,11 @@ a {
 
 .category {
   position: relative;
-  color: rgba(0,0,0,0.7);
-  font-weight: 200;
+  color: rgba(0,0,0,0.5);
 }
 
 .price {
-  color: rgba(0,0,0,0.7);
+  color: rgba(0,0,0,0.5);
   font-weight: 600;
   font-size: 1.1rem;
   letter-spacing: 0.5px;
