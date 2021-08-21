@@ -9,3 +9,4 @@ client/dist/.DS_Store
 spec/testData.js
 bundle.js.br
 bundle.js.gz
+bundle.js.LICENSE.txt

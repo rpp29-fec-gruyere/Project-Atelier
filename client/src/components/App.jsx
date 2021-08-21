@@ -89,12 +89,10 @@ class App extends React.Component {
   // productId: [integer] the id of the new page's main product
   loadPage(productId) {
     let pageDataRetrievalAttempts = 0;
-    console.log('[App] initiating retrieval of all page data');
     $.ajax({
       url: `/page-data/?id=${productId}`,
       type: 'GET',
       success: (pageData) => {
-        console.log('[App] page data retrieval successful', pageData);
         this.setState(pageData);
       },
       error: (error) => {

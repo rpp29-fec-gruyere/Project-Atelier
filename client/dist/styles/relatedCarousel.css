@@ -68,7 +68,7 @@ a {
   padding-right: 8px;
 }
 
-.product-detail span {
+.category {
   position: relative;
   color: rgba(26,26,26,0.5);
 }
@@ -87,8 +87,8 @@ a {
   display: flex;
   justify-content: center;
   align-items: center;
+  cursor: pointer
 }
-
 
 .left, .right {
   position: absolute;
@@ -100,11 +100,11 @@ a {
 }
 
 .left {
-  left: -1em;
+  left: 0.5em;
 }
 
 .right {
-  right: -1em;
+  right: 0.5em;
 }
 
 .left-btn, .right-btn {
@@ -118,7 +118,6 @@ a {
   width: 3em;
   height: 3em;
   color: black;
-  margin
 }
 
 .left-btn {
@@ -189,6 +188,7 @@ a {
   padding: 5px;
   margin: 5px;
   background: rgba(255, 255, 255, 0.995);
+  cursor: pointer
 }
 
 .star-icon:hover {

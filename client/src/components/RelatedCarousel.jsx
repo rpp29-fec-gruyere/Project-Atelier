@@ -26,7 +26,6 @@ const RelatedCarousel = (props) => {
               }
               const reviewScore = cumulativeStars / numberOfRatings;
               item.ratings = (reviewScore.toString() === 'NaN' ? 0 : Math.round(reviewScore * 2) / 2);
-              console.log(item.id, item.name, item.ratings)
             },
             (error) => {
               console.log(error);
@@ -72,7 +71,7 @@ const RelatedCarousel = (props) => {
       <div className="left-box">
         <div className="left">
           {/* left button */}
-          <a href="javascript:void(0);" className="left-btn" onClick={prev}>
+          <a className="left-btn" onClick={prev}>
             <FaAngleLeft size="32" />
           </a>
         </div>
@@ -89,22 +88,22 @@ const RelatedCarousel = (props) => {
           return (
             <div className="carousel-wrapper" key={index}>
               <div className="carousel-img">
-                <img src={img} alt={`img${index}`} />
+                <img src={img} alt={`img${index}`} loading="lazy"/>
                 <div className="carousel-overlay">
                   {/* star icon that opens up modal for comparison */}
-                  <a href="javascript:void(0);"
+                  <a
                     id='star'
                     className="star-icon"
                     onClick={() => { toggleModal(); changeModalIndex(index); }}
                   >
-                    <img className="compare-btn" src="./assets/stars/star0.png" alt="" />
+                    <img className="compare-btn" src="./assets/stars/star0.png" alt="" loading="lazy"/>
                   </a>
                   <a href="#" className="buy-btn" onClick={() => renderProduct(id)}>Buy Now</a>
                 </div>
               </div>
               <div className="carousel-detail">
                 <div className="product-detail">
-                  <span>{category}</span>
+                  <span className="category">{category}</span>
                   <a href="#" onClick={() => renderProduct(id)}>{name}</a>
                   <div className="price">${default_price}</div>
                   <Stars rating={ratings ? ratings : 0}/>
@@ -119,7 +118,7 @@ const RelatedCarousel = (props) => {
         <div className="right-box">
           <div className="right">
             {/* right button */}
-            <a href="javascript:void(0);" className="right-btn" onClick={next}>
+            <a className="right-btn" onClick={next}>
               <FaAngleRight size="32" />
             </a>
           </div>
