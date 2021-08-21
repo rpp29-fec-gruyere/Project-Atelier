@@ -72,7 +72,7 @@ const RelatedCarousel = (props) => {
       <div className="left-box">
         <div className="left">
           {/* left button */}
-          <a href="javascript:void(0);" className="left-btn" onClick={prev}>
+          <a className="left-btn" onClick={prev}>
             <FaAngleLeft size="32" />
           </a>
         </div>
@@ -104,7 +104,7 @@ const RelatedCarousel = (props) => {
               </div>
               <div className="carousel-detail">
                 <div className="product-detail">
-                  <span>{category}</span>
+                  <span className="category">{category}</span>
                   <a href="#" onClick={() => renderProduct(id)}>{name}</a>
                   <div className="price">${default_price}</div>
                   <Stars rating={ratings ? ratings : 0}/>
@@ -119,7 +119,7 @@ const RelatedCarousel = (props) => {
         <div className="right-box">
           <div className="right">
             {/* right button */}
-            <a href="javascript:void(0);" className="right-btn" onClick={next}>
+            <a className="right-btn" onClick={next}>
               <FaAngleRight size="32" />
             </a>
           </div>
