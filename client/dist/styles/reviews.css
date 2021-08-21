@@ -137,6 +137,7 @@
     width: 97%;
     padding: 15px 0;
     border-bottom: 1px solid rgb(148, 146, 146);
+    transition: 300ms;
 }
 
 .reviewHeader {
@@ -153,6 +154,10 @@
 
 .reviewSummary {
     font-weight: 550;
+}
+
+.reviewBody {
+    transition: 300ms;
 }
 
 .reviewPhotoContainer {
@@ -177,6 +182,7 @@
 .reviewPhoto:hover {
     transform: scale(1.5);
     z-index: 24;
+    background-color: white;
 }
 
 .response {
