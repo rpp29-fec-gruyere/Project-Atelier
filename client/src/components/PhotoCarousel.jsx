@@ -77,7 +77,6 @@ class PhotoCarousel extends React.Component {
       return newState;
     };
     if (event.target.id === 'photo-catalog-outer-container' || event.target.id === 'minimize-carousel') {
-      console.log('expansion click registered\nevent: ', event);
       this.setState(changeExpansionInState);
     }
   }

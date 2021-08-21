@@ -22,7 +22,7 @@ const RelatedModal = ({ isVisible, hideModal, modalItem, item }) => {
 
   return isVisible
     ? createPortal(
-      <div id="modal-overlay">
+      <div id="modal-overlay" className="modal-marker">
         <div id="modal-box">
           {/* close button on top-right */}
           <span className="close" onClick={hideModal}>&times;</span>

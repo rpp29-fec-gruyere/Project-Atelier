@@ -108,21 +108,23 @@ class ProductOverview extends React.Component {
 
   addToCart(event) {
     if (this.state.sizeSelected) {
-      console.log('[overview] initiating add to cart');
       this.post({endpoint: 'cart', params: {'sku_id': this.state.sku}});
       let confirmation = $('#please-select-size');
       confirmation.text('ITEM HAS BEEN ADDED');
       confirmation.css({opacity: '100%', color: 'green'});
       let revert = () => {
-        console.log('revert activated');
         confirmation.css({opacity: '0%'});
+        let textRevert = () => {
+          confirmation.text('PLEASE SELECT SIZE');
+          confirmation.css({color: 'red'});
+        };
+        setTimeout(textRevert, 1000);
       };
       setTimeout(revert, 1500);
     } else {
       let warning = $('#please-select-size');
       warning.css({opacity: '100%'});
       let revert = () => {
-        console.log('revert activated');
         warning.css({opacity: '0%'});
       };
       setTimeout(revert, 1500);
@@ -139,7 +141,6 @@ class ProductOverview extends React.Component {
         </div>
       );
     } else {
-      console.log('state recieved in render: ', this.state);
       let {category, name, slogan, description, features, styles} = this.state.item;
       let {styleIndex, rating, numberOfReviews, sku, sizeSelected, currentPhoto} = this.state;
       let price = styles[styleIndex].original_price;

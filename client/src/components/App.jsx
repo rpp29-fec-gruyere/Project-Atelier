@@ -9,7 +9,8 @@ let widgetNamesByClass = {
   'product-overview': 'Product Overview',
   'additional-products': 'Additional Products',
   'q-and-a-container': 'Questions and Answers',
-  'reviewSection': 'Reviews'
+  'reviewSection': 'Reviews',
+  'modal-marker': 'Additional Products'
 };
 
 let widgetClassnames = Object.keys(widgetNamesByClass);
@@ -36,7 +37,7 @@ class App extends React.Component {
   //     endpoint: [string] api url endpoint (i.e. 'products', 'reviews', etc.),
   //     params: [object] api uri parameters (i.e. {page: 2, count: 5})
   //   }
-  fetch(requestInfo, successCB = (data) => { console.log('[App] data recieved: ', data); }, errorCB = (error) => { throw error; }) {
+  fetch(requestInfo, successCB = (data) => { /*console.log('[App] data recieved: ', data);*/ }, errorCB = (error) => { throw error; }) {
     let query = requestInfo.params === undefined ? {} : requestInfo.params;
     query.endpoint = requestInfo.endpoint;
     const queryString = Object.keys(query)
@@ -57,7 +58,7 @@ class App extends React.Component {
   //     endpoint: [string] api url endpoint (i.e. 'cart'),
   //     params: [object] api uri parameters (i.e. {sku_id: 941214})
   //   }
-  post(requestInfo, successCB = (data) => { console.log('[App] post successful.', data); }, errorCB = (error) => { throw error; }) {
+  post(requestInfo, successCB = (data) => { /*console.log('[App] post successful.', data);*/ }, errorCB = (error) => { throw error; }) {
     $.ajax({
       url: '/post-data',
       type: 'POST',
@@ -74,7 +75,7 @@ class App extends React.Component {
   //     endpoint: [string] api url endpoint (i.e. 'qa/questions/[QUESTION_ID]/helpful'),
   //     params: [object] api uri parameters (i.e. {question_id: 290539})
   //   }
-  put(requestInfo, successCB = (data) => { console.log('[App] put successful.', data); }, errorCB = (error) => { throw error; }) {
+  put(requestInfo, successCB = (data) => { /*console.log('[App] put successful.', data);*/ }, errorCB = (error) => { throw error; }) {
     $.ajax({
       url: '/put-data',
       type: 'PUT',
@@ -107,7 +108,7 @@ class App extends React.Component {
 
   //Registers click events and sends relevant data to the API via POST request
   registerClick(event) {
-    console.log('[app] click registered: ', event);
+    // console.log('[app] click registered: ', event);
     let element = event.target;
     let params = {};
     params.element = element.id !== '' ? element.id : element.classList.length > 0 ? element.classList[0] : 'unnamed element';
