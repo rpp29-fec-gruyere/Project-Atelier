@@ -98,7 +98,11 @@ class PhotoCarousel extends React.Component {
     return (<div className={zoomed ? 'zoomed' : 'not-zoomed'} id={expanded ? 'overview-carousel-expanded' : 'overview-carousel'}>
       <div id="image-display">
         <div className="alignment-helper"></div>
-        <img id="spotlight-image" src={photos[currentPhoto].url} alt={`Photo of ${description}`}></img>
+        <img
+          id="spotlight-image"
+          src={photos[currentPhoto].url}
+          alt={`Photo of ${description}`}
+          loading="lazy"></img>
       </div>
       <div id="carousel-controls-outer" onClick={!expanded ? this.toggleExpansion : this.toggleZoom}>
         {
@@ -114,7 +118,14 @@ class PhotoCarousel extends React.Component {
             currentPhoto === 0 ? (<div className="filler"></div>) :
               <div className="arrow-container" key="left-arrow-container">
                 <div className="alignment-helper"></div>
-                <img className="arrow-button" id="left-arrow-button" src="./assets/leftarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel left"></img>
+                <img
+                  className="arrow-button"
+                  id="left-arrow-button"
+                  src="./assets/leftarrow.png"
+                  onClick={this.rotatePhotos}
+                  alt="Cycle carousel left"
+                  loading="lazy"
+                ></img>
               </div>
           }
           <div id="photo-catalog-outer-container">
@@ -139,7 +150,8 @@ class PhotoCarousel extends React.Component {
                         key="left"
                         src="./assets/leftarrow.png"
                         alt='Cycle photo catalog left'
-                        onClick={this.rotateCatalog}>
+                        onClick={this.rotateCatalog}
+                        loading="lazy">
                       </img>
                       {
                         photos.slice(catalogStartingIndex, catalogStartingIndex + 7).map((photo, i) => (
@@ -148,7 +160,8 @@ class PhotoCarousel extends React.Component {
                             id={`photo-catalog-item-${i + catalogStartingIndex}`}
                             src={photo.thumbnail_url}
                             alt={`${description} photo thumbnail ${i + (catalogStartingIndex * 7) + 1}`}
-                            onClick={this.selectPhoto}>
+                            onClick={this.selectPhoto}
+                            loading="lazy">
                           </img>
                         ))
                       }
@@ -157,20 +170,25 @@ class PhotoCarousel extends React.Component {
                         key="right"
                         src="./assets/rightarrow.png"
                         alt='Cycle photo catalog right'
-                        onClick={this.rotateCatalog}>
+                        onClick={this.rotateCatalog}
+                        loading="lazy">
                       </img>
                     </React.Fragment>)
                 }
               </div>
             </div>
           </div>
-          {
-            currentPhoto === photos.length - 1 ? '' :
-              <div className="arrow-container" key="right-arrow-container">
-                <div className="alignment-helper"></div>
-                <img className="arrow-button" id="right-arrow-button" src="./assets/rightarrow.png" onClick={this.rotatePhotos} alt="Cycle carousel right"></img>
-              </div>
-          }
+          <div className="arrow-container" key="right-arrow-container">
+            <div className="alignment-helper"></div>
+            <img
+              className="arrow-button"
+              id="right-arrow-button"
+              src="./assets/rightarrow.png"
+              onClick={this.rotatePhotos}
+              alt="Cycle carousel right"
+              loading="lazy"
+            ></img>
+          </div>
         </div>
       </div>
     </div>);

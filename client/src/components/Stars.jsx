@@ -24,6 +24,9 @@ const Stars = (props) => {
       onMouseEnter={props.handleMouseEnter ? () => props.handleMouseEnter(i) : null}
       onMouseLeave={props.handleMouseEnter ? () => props.handleMouseLeave() : null }
       onClick={props.handleClick ? () => props.handleClick() : null}
+      loading="lazy"
+      width="20"
+      height="20"
     ></img>);
 
     starsToBeRendered.push(star);

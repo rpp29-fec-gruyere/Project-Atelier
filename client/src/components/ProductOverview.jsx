@@ -182,14 +182,16 @@ class ProductOverview extends React.Component {
                           key={`style-${i}`}
                           src={style.photos[0].thumbnail_url}
                           alt={`${styles[styleIndex].name} style`}
-                          onClick={this.selectStyle}>
+                          onClick={this.selectStyle}
+                          loading="lazy">
                         </img>
                         {
                           styleIndex !== i ? '' : (<img
                             className="style-checkmark"
                             key={`style-checkmark-${i}`}
                             src="./assets/checkmark.png"
-                            alt={`${styles[styleIndex].name} style selected`}>
+                            alt={`${styles[styleIndex].name} style selected`}
+                            loading="lazy">
                           </img>)
                         }
                       </div>
