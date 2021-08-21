@@ -180,6 +180,7 @@ class App extends React.Component {
                 fetch={this.fetch}
                 loadPage={this.loadPage}
                 item={this.state.item}
+                reviews={this.state.reviews}
               />
               <ReviewSection
                 reviewData={this.state.reviews}

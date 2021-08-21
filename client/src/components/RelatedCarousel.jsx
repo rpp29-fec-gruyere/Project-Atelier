@@ -7,43 +7,43 @@ const RelatedCarousel = (props) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   let length = props.items ? props.items.length : 0;
   const { toggleModal, changeModalIndex } = props;
-  const [ratings, setRatings] = useState(false);
+  // const [ratings, setRatings] = useState(false);
 
-  const getRatingsOnProducts = (items) => {
+  // const getRatingsOnProducts = (items) => {
 
-    if (ratings === false && items[0].ratings === undefined) {
-      items.map(item => {
-        if (!item.ratings) {
-          const productId = item.id;
-          props.fetch({endpoint: 'reviews/meta', params: {product_id: productId}},
-            (data) => {
-              const { ratings } = data;
-              let cumulativeStars = 0;
-              let numberOfRatings = 0;
-              for (let key in ratings) {
-                cumulativeStars += Number(key) * Number(ratings[key]);
-                numberOfRatings += Number(ratings[key]);
-              }
-              const reviewScore = cumulativeStars / numberOfRatings;
-              item.ratings = (reviewScore.toString() === 'NaN' ? 0 : Math.round(reviewScore * 2) / 2);
-            },
-            (error) => {
-              console.log(error);
-            });
-        }
-      });
-    } else {
-      return;
-    }
-  };
+  //   if (ratings === false && items[0].ratings === undefined) {
+  //     items.map(item => {
+  //       if (!item.ratings) {
+  //         const productId = item.id;
+  //         props.fetch({endpoint: 'reviews/meta', params: {product_id: productId}},
+  //           (data) => {
+  //             const { ratings } = data;
+  //             let cumulativeStars = 0;
+  //             let numberOfRatings = 0;
+  //             for (let key in ratings) {
+  //               cumulativeStars += Number(key) * Number(ratings[key]);
+  //               numberOfRatings += Number(ratings[key]);
+  //             }
+  //             const reviewScore = cumulativeStars / numberOfRatings;
+  //             item.ratings = (reviewScore.toString() === 'NaN' ? 0 : Math.round(reviewScore * 2) / 2);
+  //           },
+  //           (error) => {
+  //             console.log(error);
+  //           });
+  //       }
+  //     });
+  //   } else {
+  //     return;
+  //   }
+  // };
 
   // update each related products ratings
-  if (props.items.length > 0) {
-    getRatingsOnProducts(props.items);
-    setTimeout(() => {
-      setRatings(() => true)
-    }, 2000);
-  }
+  // if (props.items.length > 0) {
+  //   getRatingsOnProducts(props.items);
+  //   setTimeout(() => {
+  //     setRatings(() => true)
+  //   }, 2000);
+  // }
 
   // carousel slides to right
   const next = () => {
@@ -61,7 +61,7 @@ const RelatedCarousel = (props) => {
   const renderProduct = (id) => {
     //reset carousel index and render product
     setCurrentIndex(() => 0);
-    setRatings(() => false);
+    props.setRatings(() => false);
     props.loadPage(id);
   };
 
