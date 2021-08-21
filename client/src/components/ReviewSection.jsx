@@ -9,7 +9,6 @@ const ReviewSection = props => {
   const [reviewsMetaData, setReviewsMetaData] = useState({});
   const [sortOption, setSortOption] = useState('relevant');
   const [filters, setFilters] = useState({});
-
   const [filteredReviews, setFilteredReviews] = useState([]);
 
 
