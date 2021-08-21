@@ -5,7 +5,7 @@ const Review = props => {
   let reviewDate = new Date(props.reviewInfo.date).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' });
   let response = undefined;
 
-  const [showFullReviewBody, setShowFullReviewBody] = useState(false);
+  const [showFullReviewBody, setShowFullReviewBody] = useState(true);
   const [showImgModal, setShowImgModal] = useState(false);
   const [selectedImg, setSelectedImg] = useState('');
   const [foundHelpful, setFoundHelpul] = useState(false);
@@ -43,7 +43,9 @@ const Review = props => {
   let markAsHelpful = ({target}) => {
     if (!foundHelpful) {
       setFoundHelpul(true);
-      target.style.fontWeight = 'bold';
+      target.style.fontWeight = '550';
+      target.style.textDecoration = 'none';
+      target.style.cursor = 'default';
       props.handlePut({'endpoint': `reviews/${props.reviewInfo.review_id}/helpful`, params: {'review_id': props.reviewInfo.review_id}});
       setTimeout(() => { props.fetchReviews(false); }, 50);
     }
@@ -53,7 +55,17 @@ const Review = props => {
     setShowFullReviewBody(true);
   };
 
-  let reviewBodyShowMoreBtn = <span id="reviewBodyShowMoreBtn" onClick={() => handleShowMoreBtnClick()}>Show more</span>;
+  let minimizedReviewBody = (
+    <p>
+      {props.reviewInfo.body.slice(0, 251) + '... '}
+      <span id="reviewBodyShowMoreBtn" onClick={() => handleShowMoreBtnClick()}>Show more</span>
+    </p>);
+
+  useEffect(() => {
+    if (props.reviewInfo.body.length > 250) {
+      setShowFullReviewBody(false);
+    }
+  }, [props.reviewInfo.body.length]);
 
   return (
     <div className="review">
@@ -62,21 +74,20 @@ const Review = props => {
         <Stars rating={props.reviewInfo.rating}/>
         <div className="reviewUser">{props.reviewInfo.reviewer_name}, {reviewDate}</div>
       </div>
-      <span>{props.reviewInfo.summary}</span>
-      <p>{showFullReviewBody ? 
-        props.reviewInfo.body : 
-        props.reviewInfo.body.slice(0, 251) + '...' + reviewBodyShowMoreBtn}</p>
+      <span className="reviewSummary">{props.reviewInfo.summary}</span>
+      {showFullReviewBody ? 
+        <p>{props.reviewInfo.body}</p> :
+        minimizedReviewBody
+      }
       {imgs.length > 0 ? <div className="reviewPhotoContainer">
         {imgs}
       </div> : undefined}
       {response ? response : null}
       <div className="feedback">
         <span className="helpful">Helpful? <span className="helpfulResponse" onClick={(e) => markAsHelpful(e)}>Yes</span> ({props.reviewInfo.helpfulness})</span>
-        <span>{props.reviewInfo.recommend ? 
-          <div>
-            <span>I recommend this product</span> 
-            <img src="./assets/checkmark.png" alt="" />
-          </div> : null}</span>
+        {props.reviewInfo.recommend ? 
+          <span className="reviewRecommendedSection">I recommend this product <img src="./assets/checkmark.svg" alt="" className="recommendedCheck"/></span>
+          : null}
       </div>
     </div>
   );
