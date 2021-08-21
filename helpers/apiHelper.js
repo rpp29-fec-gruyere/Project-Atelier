@@ -150,11 +150,6 @@ const fetchAllData = (productId) => {
     })
     .then((reviewMetaData) => {
       fullDataSet.reviews.meta = reviewMetaData.data;
-      query.url = `${STATIC_PATH}/qa/questions/?product_id=${productId}&count=1000000000`;
-      return axios(query);
-    })
-    .then((questions) => {
-      fullDataSet.questionsAndAnswers = questions.data.results;
       query.url = `${STATIC_PATH}/cart`;
       return axios(query);
     })

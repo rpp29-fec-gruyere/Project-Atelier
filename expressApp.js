@@ -14,6 +14,7 @@ const app = express();
 app.use('/', expressStaticGzip(path.join(__dirname, './client/dist'), {
   enableBrotli: true
 }));
+
 app.use(postBodyParser);
 app.use(getBodyParser);
 
