@@ -39,7 +39,7 @@ The Ratings & Reviews section, created by [Ryan Lott](https://www.linkedin.com/i
 ## Development Git Workflow ##
 To contribute to Project Atelier, follow the instructions below. 
 > 1. Clone the repo to your local machine.
-> 2. Create a branch off of `main` for the neww feature to be added.
+> 2. Create a branch off of `main` for the new feature to be added.
 > 3. Whenever a new merge is made on the remote `main` branch, switch to your local `main` branch and pull down from the remote. Then switch back to your feature branch and merge with your now-updated local `main`.
 > 4. When your feature is complete, ensure that there's nothing being flagged by the linter. Then make your final commit.
 > 5. Push your commit to the (potentially-new) corresponding feature branch on the remote.
