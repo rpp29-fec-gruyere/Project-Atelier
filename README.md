@@ -2,7 +2,7 @@
 
 ![Visual overview of Project Atelier](https://drive.google.com/uc?export=view&id=1w_BFELjJmzZgKwtNrfSuX23gQaJZYsfn)
 
-Project Atelier is a scalable single-page web-application built by [Layla Grace](www.linkedin.com/in/thegraceoflayla), [Ryan Lott](https://www.linkedin.com/in/ryan-c-lott/), [Sung Jae Yoo](https://www.linkedin.com/in/sungu93/) for the purpose of displaying clothing products. The page consists of three main sections (outlined below) that collectively allow the user to peruse, compare, select, and reviews products.
+Project Atelier is a scalable single-page web-application built by [Layla Grace](www.linkedin.com/in/thegraceoflayla), [Sung Jae Yoo](https://www.linkedin.com/in/sungu93/), and [Ryan Lott](https://www.linkedin.com/in/ryan-c-lott/) for the purpose of displaying clothing products. The page consists of three main sections (outlined below) that collectively allow the user to peruse, compare, select, and reviews products.
 
 #### Tech Stack
 The front end of Project Atelier primarily uses a combination of React 17 and bespoke CSS. It is served by a Node-based Express server that relies on an external database to populate the product page and uses a combination of Webpack, Babel, Brotli, and Gzip for transpilation and packaging,  
